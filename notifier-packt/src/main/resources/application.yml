@@ -1,0 +1,34 @@
+# Property encryption configuration
+jasypt:
+  encryptor:
+    password: ${NOTIFIER_PACKT_MASTER_PASSWORD}
+
+# Mailing configuration - SimpleJavaMail
+# http://www.simplejavamail.org/#/configuration
+simplejavamail:
+  transportstrategy: SMTP_TLS
+  smtp:
+    host: smtp.gmail.com
+    port: 587
+    username: mevengar@gmail.com
+    password: ENC(lOVT4xoN7FMYvDuz0jAuJz/bRUGmcEPCetxLLQQyRTQ=)
+  defaults:
+    from: 
+      name: Packt Notifier
+      address: mevengar@gmail.com
+    to:
+      # Additional addresses can be added using semicolon (;)
+      address: mevengar@gmail.com
+   
+    
+# Service confguration
+service:
+  cron: 0 0 4 * * ?
+  offer-url: https://www.packtpub.com/packt/offers/free-learning
+  css-selector:
+    title: h1
+    image-url: .bookimage
+    book-url: .dotd-main-book-image > a
+
+
+

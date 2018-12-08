@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+	<style>
+		#container {
+		 	width: 600px;
+		 	font-family: Arial, sans-serif;
+		}
+		
+		#content {
+			display: table;
+			padding-left: 25px;
+			margin-left: 25px;
+		}
+		
+		h2 {
+			font-size: 1.4em;
+			margin-top: 0;
+			color: white;
+			background: #D92238;
+			text-align: center;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			padding-left: 20px;
+			padding-right: 20px;
+			width: 100%;
+			
+		}
+		
+		img {
+			float: left;
+			padding-right: 25px;
+		}
+		
+		li {
+			padding-left: 25px;
+			display: table;
+			
+		}
+		
+
+		.button {
+			font-size: 1.2em;
+			text-decoration: none;
+			background: #5594DB;
+			padding: 10px 15px 10px 15px;
+
+		}
+		
+		.mr {
+			margin-right: 15px;
+		}
+		
+		a {
+			color: white;
+			font-weight: bold;
+			display: inline-block;
+		}
+		
+		a:hover {
+			text-decoration: underline;
+			background: #366ca5;
+		}
+		
+		
+	</style>
+</head>
+
+<body>
+	<div id="container">
+		<img th:src="${offer.imageUrl}" src="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/dotd_main_image/B06096.png" />
+		
+		<div id="content">
+			<!-- <h2 class="title" th:text="#{mail.heading}">Oferta del día en Packt</h2> -->
+			
+			<a class="button mr" style="color: white" href="https://www.packtpub.com/networking-and-servers/mastering-windows-powershell-scripting-second-edition" th:text="#{mail.link.details}">Detalles del libro</a>
+			<a class="button" style="color: white" href="https://www.packtpub.com/packt/offers/free-learning" th:text="#{mail.link.claim}">Reclamar</a>
+		</div>
+	</div>
+</body>
+</html>
