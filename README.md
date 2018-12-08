@@ -30,13 +30,16 @@ First, you will need to download the Jaspyt encrypt command line tool:
 * http://www.jasypt.org/download.html
 
 
-Using this tool, you can encrypt a password using a master password.
-```bat
-encrypt.bat input=<password_to_encrypt> password=<master_password_for_encryption>
-```
+Encrypt your email password using the command line tool
+
 ```bash
+# For windows:
+encrypt.bat input=<password_to_encrypt> password=<master_password_for_encryption>
+
+# For unix:
 ./encrypt.sh input=<password_to_encrypt> password=<master_password_for_encryption>
 ```
+
 
 Now add the master password to the external configuration file:
 ```yaml
@@ -52,7 +55,7 @@ jasypt:
     password: ${MASTER_PASSWORD_ENVIRONMENT_VARIABLE}
 ```
 
-And finally, add the encrypted password at the SimpleJavaMail configuration inside ENC():
+And finally, add the encrypted password to the SimpleJavaMail configuration inside ENC():
 
 ```yaml
 simplejavamail:
