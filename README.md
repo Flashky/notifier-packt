@@ -4,40 +4,36 @@ Spring Boot scheduled  service to check for free packt daily offers.
 # Download
 Download the latest version of the notifier-pack application:
 
+PENDING
+
+After you download it, you will see two files:
+- The notifier-pack jar file.
+- The application.yml configuration file.
 
 # Customizing configuration
-Notifier Packt is fully configurable using either a YAML or an external properties file.
-
-The properties file must be named as application and the extension:
-* application.yml
-* application.properties
-
-And it must be placed in the same folder as the jar file.
+Notifier Packt is fully configurable by editing the external application.yaml file.
 
 ## Customizing SimpleJavaMail configuration
-
 Notifier Packt uses SimpleJavaMail for sending the email notifications.
 
-You can fully modify any of the SimpleJavaMail properties as you need:
+You can modify any of the SimpleJavaMail properties as you need:
 
 http://www.simplejavamail.org/#section-available-properties
 
 
-
 ## Customize encryption configuration
 
-As adding passwords is unsecure, Notifier Packt provides an encryption mechanism using Jaspyt.
+As exposing passwords in a properties file is unsecure, Notifier Packt provides an optional encryption mechanism using Jaspyt.
 
-First, you would need to encrypt a password using the Jaspyt command line tools and a master password:
+First, you will need to download the Jaspyt encrypt command line tool:
 * http://www.jasypt.org/cli.html
 * http://www.jasypt.org/download.html
 
-Command line (Windows):
+
+Using this tool, you can encrypt a password using a master password.
 ```bat
 encrypt.bat input=<password_to_encrypt> password=<master_password_for_encryption>
 ```
-
-Command line (Unix):
 ```bash
 ./encrypt.sh input=<password_to_encrypt> password=<master_password_for_encryption>
 ```
