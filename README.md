@@ -19,44 +19,10 @@ And it must be placed in the same folder as the jar file.
 Notifier Packt uses SimpleJavaMail for sending the email notifications.
 
 You can fully modify any of the SimpleJavaMail properties as you need:
+
 http://www.simplejavamail.org/#section-available-properties
 
 
-```yaml
-simplejavamail:
-  transportstrategy: SMTP_TLS
-  smtp:
-    host: <your_smtp_host>
-    port: <your_smtp_port>
-    username: <your_mail_address>
-    password: <your_mail_password>
-  defaults:
-    from: 
-      name: <displayed_sender_name>
-      address: <your_mail_address>
-    to:
-      # Additional addresses can be added using semicolon (;):
-      address: <destination_mail_1>;<destination_mail_2>
-```
-
-Gmail example:
-
-```yaml
-simplejavamail:
-  transportstrategy: SMTP_TLS
-  smtp:
-    host: smtp.gmail.com
-    port: 587
-    username: my_gmail_account@gmail.com
-    password: my_gmail_password
-  defaults:
-    from: 
-      name: Packt Notifier
-      address: my_gmail_account@gmail.com
-    to:
-      # Additional addresses can be added using semicolon (;)
-      address: destination_1@gmail.com;destination_2@hotmail.com
-```
 
 ## Customize encryption configuration
 
@@ -83,7 +49,7 @@ jasypt:
     password: master_password_for_encryption
 ```
 
-You could also add it as an environment variable, and just refer to that environment variable:
+You could also add it as an environment variable, and just refer to it:
 ```yaml
 jasypt:
   encryptor:
@@ -122,14 +88,14 @@ java -jar notifier-packt.jar
 ## Docker execution
 A Dockerfile is provided to run Notifier Packt as a Docker container.
 
-In order to build and start the container, just modify and execute the following commands:
+In order to build and execute the container, just modify and execute the following commands:
 
+Build:
 ```sh
 docker image build -t flashk/notifier-packt:<version> .
+```
+
+Run:
+```sh
 docker container run -d flashk/notifier-packt:<version>
 ```  
-
-
-
-
-And that's it, the container should be running.
