@@ -56,8 +56,10 @@ public class PacktCheckTask {
 				previousOffer = offer;
 			}
 			
+			
 		} catch (IOException e) {
-			// TODO following update: up to three retries.
+			// TODO in a future, add three retries.
+			// TODO at the third error, print the cause of the error.
 			LOGGER.warn(messageHelper.getMessage("warn.could-not-retrieve"));
 		}
 	}
@@ -106,7 +108,6 @@ public class PacktCheckTask {
 		
 		Object[] messageParameters = new Object[] { offer.getTitle() };	
 		LOGGER.info(messageHelper.getMessage("info.offer-detected", messageParameters));
-		
 		for(NotificationListener listener : listeners) {
 			listener.notify(offer);
 		}
