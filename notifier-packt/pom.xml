@@ -6,7 +6,7 @@
 	
 	<groupId>brv.notifier</groupId>
 	<artifactId>notifier-packt</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.3</version>
 	<packaging>jar</packaging>
 	<name>notifier-packt</name>
 	<description>JSoup based notifier for Packt free ofers</description>
