@@ -1,8 +1,9 @@
 # Property encryption configuration
 jasypt:
   encryptor:
-    password: ${NOTIFIER_PACKT_MASTER_PASSWORD}
+    password: ${ENCRYPT_MASTER_PASSWORD}
 
+#lOVT4xoN7FMYvDuz0jAuJz/bRUGmcEPCetxLLQQyRTQ=
 # Mailing configuration - SimpleJavaMail
 # http://www.simplejavamail.org/#/configuration
 simplejavamail:
@@ -11,7 +12,7 @@ simplejavamail:
     host: smtp.gmail.com
     port: 587
     username: mevengar@gmail.com
-    password: ENC(lOVT4xoN7FMYvDuz0jAuJz/bRUGmcEPCetxLLQQyRTQ=)
+    password: ${MAIL_PASSWORD}
   defaults:
     from: 
       name: Packt Notifier
