@@ -3,7 +3,6 @@ jasypt:
   encryptor:
     password: ${ENCRYPT_MASTER_PASSWORD}
 
-#lOVT4xoN7FMYvDuz0jAuJz/bRUGmcEPCetxLLQQyRTQ=
 # Mailing configuration - SimpleJavaMail
 # http://www.simplejavamail.org/#/configuration
 simplejavamail:
