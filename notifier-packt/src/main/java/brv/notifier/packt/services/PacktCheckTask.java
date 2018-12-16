@@ -40,28 +40,20 @@ public class PacktCheckTask {
 	
 	private List<NotificationListener> listeners = new LinkedList<>();
 	
-	@Scheduled(cron = "${service.cron}")
-	//@Scheduled(fixedRate = 5000)
-	public void checkPacktDailyOffer() {
+	//@Scheduled(cron = "${service.cron}")
+	@Scheduled(fixedRateString = "5000")
+	public void checkPacktDailyOffer() throws IOException {
 
 		Document htmlPage;
+
+		htmlPage = Jsoup.connect(packtProperties.getOfferUrl()).get();
+		PacktOffer offer = createPacktOffer(htmlPage);
 		
-		try {
-			
-			htmlPage = Jsoup.connect(packtProperties.getOfferUrl()).get();
-			PacktOffer offer = createPacktOffer(htmlPage);
-			
-			if(!offer.equals(previousOffer)) {
-				notifyListeners(offer);
-				previousOffer = offer;
-			}
-			
-			
-		} catch (IOException e) {
-			// TODO in a future, add three retries.
-			// TODO at the third error, print the cause of the error.
-			LOGGER.warn(messageHelper.getMessage("warn.could-not-retrieve"));
+		if(!offer.equals(previousOffer)) {
+			notifyListeners(offer);
+			previousOffer = offer;
 		}
+
 	}
 	
 	/**
