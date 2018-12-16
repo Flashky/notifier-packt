@@ -76,8 +76,8 @@
 		<div id="content">
 			<!-- <h2 class="title" th:text="#{mail.heading}">Oferta del día en Packt</h2> -->
 			
-			<a class="button mr" style="color: white" href="https://www.packtpub.com/networking-and-servers/mastering-windows-powershell-scripting-second-edition" th:text="#{mail.link.details}">Detalles del libro</a>
-			<a class="button" style="color: white" href="https://www.packtpub.com/packt/offers/free-learning" th:text="#{mail.link.claim}">Reclamar</a>
+			<a class="button mr" 	style="color: white" th:ref="@{offer.bookUrl}" th:text="#{mail.link.details}">Detalles del libro</a>
+			<a class="button" 		style="color: white" th:href="@{offer.offerUrl}" th:text="#{mail.link.claim}">Reclamar</a>
 		</div>
 	</div>
 </body>
