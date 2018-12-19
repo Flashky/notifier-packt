@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import brv.notifier.packt.model.PacktOffer;
+import brv.notifier.packt.model.PacktSummary;
 import brv.notifier.packt.util.MessageHelper;
 
 @Service
@@ -35,7 +35,7 @@ public class EmailService implements NotificationListener {
 	private static final Logger LOGGER = LogManager.getLogger(EmailService.class.getName());
 	
 	@Override
-	public void notify(PacktOffer offerData) {
+	public void notify(PacktSummary offerData) {
 		
 		String emailBody = applyTemplate(offerData);
 		
@@ -59,7 +59,7 @@ public class EmailService implements NotificationListener {
 	 * @param offerData - the data to be substituted
 	 * @return html string with any variables substituted.
 	 */
-	private String applyTemplate(PacktOffer offerData) {
+	private String applyTemplate(PacktSummary offerData) {
 	
 		String html = "";
 		

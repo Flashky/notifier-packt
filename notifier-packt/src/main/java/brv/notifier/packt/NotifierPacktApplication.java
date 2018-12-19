@@ -15,6 +15,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 import brv.notifier.packt.properties.PacktProperties;
+import brv.notifier.packt.services.ApiCheckoutService;
+import brv.notifier.packt.services.CheckoutService;
 import brv.notifier.packt.services.EmailService;
 import brv.notifier.packt.services.NotificationListener;
 import brv.notifier.packt.services.PacktCheckTask;
@@ -75,4 +77,5 @@ public class NotifierPacktApplication {
 		return new MessageHelper(messageSource, locale);
 	}
 	
+
 }
