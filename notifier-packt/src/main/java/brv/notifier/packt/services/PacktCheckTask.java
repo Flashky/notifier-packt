@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import brv.notifier.packt.model.PacktFreeOffer;
 import brv.notifier.packt.model.PacktSummary;
 import brv.notifier.packt.properties.PacktProperties;
 import brv.notifier.packt.services.checking.CheckoutService;
@@ -39,7 +40,7 @@ public class PacktCheckTask {
 	 * </p>
 	 */
 
-	private PacktSummary previousOffer;
+	private PacktFreeOffer previousOffer;
 	
 	private List<NotificationListener> listeners = new LinkedList<>();
 	
@@ -49,7 +50,7 @@ public class PacktCheckTask {
 
 		
 
-		PacktSummary offer = checkoutService.getPacktOffer();
+		PacktFreeOffer offer = checkoutService.getPacktOffer();
 		
 		if((offer != null) && (!offer.equals(previousOffer))) {
 			notifyListeners(offer);
@@ -63,7 +64,7 @@ public class PacktCheckTask {
 	 * @param offer - the data to be notified.
 	 */
 
-	private void notifyListeners(PacktSummary offer) {
+	private void notifyListeners(PacktFreeOffer offer) {
 		
 		Object[] messageParameters = new Object[] { offer.getTitle() };	
 		LOGGER.info(messageHelper.getMessage("info.offer-detected", messageParameters));
