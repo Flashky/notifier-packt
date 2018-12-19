@@ -14,15 +14,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import brv.notifier.packt.model.PacktOffer;
+import brv.notifier.packt.model.PacktFreeOffer;
+import brv.notifier.packt.model.api.JsonSummary;
 import brv.notifier.packt.properties.PacktProperties;
+import brv.notifier.packt.services.checking.CheckoutService;
+import brv.notifier.packt.services.notifiers.NotificationListener;
 import brv.notifier.packt.util.MessageHelper;
 
 @Service
 public class PacktCheckTask {
 
 	@Autowired
-	private PacktProperties packtProperties;
+	private CheckoutService checkoutService;
 
 	@Autowired
 	@Qualifier("messages-app")
@@ -36,20 +39,18 @@ public class PacktCheckTask {
 	 * Used to prevent duplicated notifications, any offer should be notified just once.
 	 * </p>
 	 */
-	private PacktOffer previousOffer;
+	private PacktFreeOffer previousOffer;
 	
 	private List<NotificationListener> listeners = new LinkedList<>();
 	
 	//@Scheduled(cron = "${service.cron}")
 	@Scheduled(fixedRateString = "5000")
-	public void checkPacktDailyOffer() throws IOException {
+	public void checkPacktDailyOffer() {
 
-		Document htmlPage;
-
-		htmlPage = Jsoup.connect(packtProperties.getOfferUrl()).get();
-		PacktOffer offer = createPacktOffer(htmlPage);
 		
-		if(!offer.equals(previousOffer)) {
+		PacktFreeOffer offer = checkoutService.getPacktOffer();
+		
+		if((offer != null) && (!offer.equals(previousOffer))) {
 			notifyListeners(offer);
 			previousOffer = offer;
 		}
@@ -57,46 +58,10 @@ public class PacktCheckTask {
 	}
 	
 	/**
-	 * Creates a PacktOffer object using the retrieved html data.
-	 * @param htmlPage - a Document object containing the webpage to retrieve the data from.
-	 * @return <code>PacktOffer</code> - the offer details.
-	 */
-	private PacktOffer createPacktOffer(Document htmlPage) {
-		
-		PacktOffer offer = new PacktOffer();
-		
-		// Book title
-		Element htmlTitle = htmlPage.selectFirst(packtProperties.getCssSelector().getTitle());
-		
-		if(htmlTitle != null) {
-			offer.setTitle(htmlTitle.text());
-		}
-		
-		// Book details page
-		Element htmlBookUrl = htmlPage.selectFirst(packtProperties.getCssSelector().getBookUrl());
-		
-		if(htmlBookUrl != null) {
-			offer.setBookUrl(htmlBookUrl.absUrl("href"));
-		}
-		
-		// Book cover image
-		Element htmlImage = htmlPage.selectFirst(packtProperties.getCssSelector().getImageUrl());
-		
-		if(htmlImage != null) {
-			offer.setImageUrl(htmlImage.absUrl("src"));
-		}
-		
-		// Offer url
-		offer.setOfferUrl(packtProperties.getOfferUrl());
-		
-		return offer;
-	}
-	
-	/**
 	 * Notifies every listener that a new Packt offer has been detected.
 	 * @param offer - the data to be notified.
 	 */
-	private void notifyListeners(PacktOffer offer) {
+	private void notifyListeners(PacktFreeOffer offer) {
 		
 		Object[] messageParameters = new Object[] { offer.getTitle() };	
 		LOGGER.info(messageHelper.getMessage("info.offer-detected", messageParameters));

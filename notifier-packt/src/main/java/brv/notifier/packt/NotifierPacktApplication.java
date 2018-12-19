@@ -15,9 +15,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 import brv.notifier.packt.properties.PacktProperties;
-import brv.notifier.packt.services.EmailService;
-import brv.notifier.packt.services.NotificationListener;
 import brv.notifier.packt.services.PacktCheckTask;
+import brv.notifier.packt.services.checking.CheckoutService;
+import brv.notifier.packt.services.checking.api.ApiCheckoutService;
+import brv.notifier.packt.services.notifiers.EmailService;
+import brv.notifier.packt.services.notifiers.NotificationListener;
 import brv.notifier.packt.util.MessageHelper;
 
 @SpringBootApplication
@@ -34,7 +36,7 @@ public class NotifierPacktApplication {
 	public EmailService getEmailService(PacktCheckTask service) {
 		
 		NotificationListener listener = new EmailService();
-		service.addNotificationListener(listener);
+		//service.addNotificationListener(listener);
 		
 		return (EmailService) listener;
 	}
@@ -75,4 +77,5 @@ public class NotifierPacktApplication {
 		return new MessageHelper(messageSource, locale);
 	}
 	
+
 }
