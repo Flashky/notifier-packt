@@ -24,11 +24,13 @@ simplejavamail:
 # Service confguration
 service:
   cron: 0 0 4 * * ?
-
   #proxy:
     # Do not add with 'http://' at the beginning!
     #host:
     #port:
 
-
+endpoint:
+  offers: https://services.packtpub.com/free-learning-v1/offers?dateFrom={0}&dateTo={1}
+  summary: https://services.packtpub.com/free-learning-v1/offers?dateFrom={0}&dateTo={1}
+     
 

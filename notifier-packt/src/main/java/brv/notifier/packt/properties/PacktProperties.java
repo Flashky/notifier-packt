@@ -18,6 +18,8 @@ public class PacktProperties {
 		this.cron = cron;
 	}
 
+
+
 	public ProxyProperty getProxy() {
 		return proxy;
 	}
@@ -25,9 +27,5 @@ public class PacktProperties {
 	public void setProxy(ProxyProperty proxy) {
 		this.proxy = proxy;
 	}
-
-	
-	
-	
 	
 }

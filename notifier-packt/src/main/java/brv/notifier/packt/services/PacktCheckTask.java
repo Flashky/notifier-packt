@@ -14,8 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import brv.notifier.packt.model.PacktFreeOffer;
-import brv.notifier.packt.model.api.JsonSummary;
+import brv.notifier.packt.model.PacktSummary;
 import brv.notifier.packt.properties.PacktProperties;
 import brv.notifier.packt.services.checking.CheckoutService;
 import brv.notifier.packt.services.notifiers.NotificationListener;
@@ -39,7 +38,8 @@ public class PacktCheckTask {
 	 * Used to prevent duplicated notifications, any offer should be notified just once.
 	 * </p>
 	 */
-	private PacktFreeOffer previousOffer;
+
+	private PacktSummary previousOffer;
 	
 	private List<NotificationListener> listeners = new LinkedList<>();
 	
@@ -48,7 +48,8 @@ public class PacktCheckTask {
 	public void checkPacktDailyOffer() {
 
 		
-		PacktFreeOffer offer = checkoutService.getPacktOffer();
+
+		PacktSummary offer = checkoutService.getPacktOffer();
 		
 		if((offer != null) && (!offer.equals(previousOffer))) {
 			notifyListeners(offer);
@@ -61,7 +62,8 @@ public class PacktCheckTask {
 	 * Notifies every listener that a new Packt offer has been detected.
 	 * @param offer - the data to be notified.
 	 */
-	private void notifyListeners(PacktFreeOffer offer) {
+
+	private void notifyListeners(PacktSummary offer) {
 		
 		Object[] messageParameters = new Object[] { offer.getTitle() };	
 		LOGGER.info(messageHelper.getMessage("info.offer-detected", messageParameters));
