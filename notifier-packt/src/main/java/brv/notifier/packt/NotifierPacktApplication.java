@@ -1,7 +1,10 @@
 package brv.notifier.packt;
 
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,11 +13,14 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.client.RestTemplate;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 import brv.notifier.packt.properties.PacktProperties;
+import brv.notifier.packt.properties.ProxyProperty;
 import brv.notifier.packt.services.NotificationListener;
 import brv.notifier.packt.services.PacktCheckTask;
 import brv.notifier.packt.services.mailing.EmailService;
@@ -26,6 +32,10 @@ import brv.notifier.packt.util.MessageHelper;
 @EnableConfigurationProperties(PacktProperties.class)
 public class NotifierPacktApplication {
 
+
+	@Autowired
+	private PacktProperties packtProperties;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(NotifierPacktApplication.class, args);
 	}
@@ -76,4 +86,24 @@ public class NotifierPacktApplication {
 	}
 	
 
+	@Bean
+	public RestTemplate getRestTemplate() {
+	
+		RestTemplate restTemplate = new RestTemplate();
+		
+		// Behind a proxy
+		ProxyProperty proxyProps = packtProperties.getProxy();
+		if(proxyProps != null) {
+			SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+			
+			// TODO verify both 'host' and 'port' need to be initialized if 'proxy' property exist.
+	        InetSocketAddress address = new InetSocketAddress(proxyProps.getHost(),proxyProps.getPort());
+	        Proxy proxy = new Proxy(Proxy.Type.HTTP,address);
+	        factory.setProxy(proxy);
+	        
+	        restTemplate.setRequestFactory(factory);
+		}
+		
+		return restTemplate;
+	}
 }

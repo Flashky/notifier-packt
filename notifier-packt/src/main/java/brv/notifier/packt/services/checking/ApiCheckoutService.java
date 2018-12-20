@@ -29,14 +29,14 @@ import brv.notifier.packt.services.CheckoutService;
 @Service
 public class ApiCheckoutService implements CheckoutService {
 
+	
 	@Autowired
-	private PacktProperties packtProperties;
+	private RestTemplate restTemplate;
 	
 	@Override
 	public PacktFreeOffer getPacktOffer() {
 
 		PacktFreeOffer offer = null;
-		RestTemplate restTemplate = prepareRestTemplate();
 		
 		String endpointUrl = getOfferListEndpoint();
 		JsonOffers offerList = restTemplate.getForObject(endpointUrl, JsonOffers.class);
@@ -58,32 +58,9 @@ public class ApiCheckoutService implements CheckoutService {
 	@Override
 	public List<PacktFreeOffer> getPacktOfferList(LocalDate start, int numberOfDays) {
 		
-		RestTemplate restTemplate = prepareRestTemplate();
 		
 		// TODO hacer en un futuro
 		return null;
-	}
-	
-	// TODO move to Spring context?
-	// Is it something that will only be executed once per day, does it worth the extra memory?
-	private RestTemplate prepareRestTemplate() {
-		
-		RestTemplate restTemplate = new RestTemplate();
-		
-		// Behind a proxy
-		ProxyProperty proxyProps = packtProperties.getProxy();
-		if(proxyProps != null) {
-			SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-			
-			// TODO verify both 'host' and 'port' need to be initialized if 'proxy' property exist.
-	        InetSocketAddress address = new InetSocketAddress(proxyProps.getHost(),proxyProps.getPort());
-	        Proxy proxy = new Proxy(Proxy.Type.HTTP,address);
-	        factory.setProxy(proxy);
-	        
-	        restTemplate.setRequestFactory(factory);
-		}
-		
-		return restTemplate;
 	}
 	
 	private PacktFreeOffer mapToDto(JsonSummary offerSummary) {
