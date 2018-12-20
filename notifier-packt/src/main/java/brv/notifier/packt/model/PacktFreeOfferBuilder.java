@@ -1,7 +1,5 @@
 package brv.notifier.packt.model;
 
-import org.springframework.web.util.UriComponentsBuilder;
-
 public class PacktFreeOfferBuilder {
 
 	protected String title;
@@ -10,12 +8,7 @@ public class PacktFreeOfferBuilder {
 	protected String shopUrl = "";
 	protected String readUrl = "";
 	
-	private UriComponentsBuilder offerUrlBuilder 	= UriComponentsBuilder.newInstance();
-	private UriComponentsBuilder shopUrlBuilder		= UriComponentsBuilder.newInstance();
-	private UriComponentsBuilder readUrlBuilder		= UriComponentsBuilder.newInstance();
-	
 	public PacktFreeOfferBuilder(String title) {
-		// TODO validar al menos title no null
 		this.title = title;
 	}
 
@@ -27,61 +20,32 @@ public class PacktFreeOfferBuilder {
 		return this;
 	}
 	
-	public PacktFreeOfferBuilder withOfferUrl(String absolutePath) {
+	public PacktFreeOfferBuilder withOfferUrl(String url) {
 		
-		if(absolutePath != null)
-			this.offerUrlBuilder = UriComponentsBuilder.fromPath(absolutePath);
-		
-		return this;
-	}
-	
-	public PacktFreeOfferBuilder withOfferUrl(String basePath, String offerPath) {
-		
-		if(basePath != null && offerPath != null)
-			this.offerUrlBuilder = UriComponentsBuilder.fromPath(basePath).path(offerPath);
+		if(url != null)
+			this.offerUrl = url;
 		
 		return this;
 	}
 	
-	
-	public PacktFreeOfferBuilder withShopUrl(String absolutePath) {
+	public PacktFreeOfferBuilder withShopUrl(String url) {
 		
-		if(absolutePath != null)
-			this.shopUrlBuilder = UriComponentsBuilder.fromPath(absolutePath);
-		
-		return this;
-	}
-	
-	
-	public PacktFreeOfferBuilder withShopUrl(String basePath, String relativeBookPath) {
-		
-		if(basePath != null && relativeBookPath != null)
-			this.shopUrlBuilder = UriComponentsBuilder.fromPath(basePath).path(relativeBookPath);
+		if(url != null)
+			this.shopUrl = url;
 		
 		return this;
 	}
 	
-	public PacktFreeOfferBuilder withReadUrl(String absolutePath) {
+	public PacktFreeOfferBuilder withReadUrl(String url) {
 		
-		if(absolutePath != null)
-			this.readUrlBuilder = UriComponentsBuilder.fromPath(absolutePath);
-		
-		return this;
-	}
-	
-	public PacktFreeOfferBuilder withReadUrl(String basePath, String relativeBookPath) {
-		
-		if(basePath != null && relativeBookPath != null)
-			this.readUrlBuilder = UriComponentsBuilder.fromPath(basePath).path(relativeBookPath);
+		if(url != null)
+			this.readUrl = url;
 		
 		return this;
 	}
 
 	public PacktFreeOffer build() {
 		
-		this.offerUrl = this.offerUrlBuilder.build().toUriString();
-		this.shopUrl = this.shopUrlBuilder.build().toUriString();
-		this.readUrl = this.readUrlBuilder.build().toUriString();
 		return new PacktFreeOffer(this);
 	}
 }
