@@ -3,9 +3,7 @@ package brv.notifier.packt.services.checking.api;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
@@ -15,10 +13,10 @@ import org.springframework.web.client.RestTemplate;
 import brv.notifier.packt.model.PacktFreeOffer;
 import brv.notifier.packt.model.PacktFreeOfferBuilder;
 import brv.notifier.packt.model.Url;
-import brv.notifier.packt.model.UrlWebpage;
+import brv.notifier.packt.model.WebPath;
+import brv.notifier.packt.model.api.ApiPath;
 import brv.notifier.packt.model.api.JsonOffers;
 import brv.notifier.packt.model.api.JsonSummary;
-import brv.notifier.packt.model.api.UrlEndpoint;
 import brv.notifier.packt.properties.PacktProperties;
 import brv.notifier.packt.properties.ProxyProperty;
 import brv.notifier.packt.services.checking.CheckoutService;
@@ -92,9 +90,9 @@ public class ApiCheckoutService implements CheckoutService {
 		
 		PacktFreeOfferBuilder builder = new PacktFreeOfferBuilder(offerSummary.getTitle())
 				.withCoverImage(offerSummary.getCoverImage())
-				.withOfferUrl(UrlWebpage.FREE_OFFER.getAbsolutePath())
-				.withShopUrl(Url.SHOP.getBasepath(),offerSummary.getShopUrl())
-				.withReadUrl(Url.SUBSCRIBE.getBasepath(),offerSummary.getReadUrl());
+				.withOfferUrl(Url.SHOP.path(WebPath.FREE_OFFER.getPath()))
+				.withShopUrl(Url.SHOP.path(offerSummary.getShopUrl()))
+				.withReadUrl(Url.SUBSCRIBE.path(offerSummary.getReadUrl()));
 		
 		return builder.build();
 	}
@@ -105,20 +103,18 @@ public class ApiCheckoutService implements CheckoutService {
 		LocalDate startDate = LocalDate.now();
 		LocalDate endDate = LocalDate.now().plusDays(1);
 		
-		Map<String,String> queryValues = new HashMap<>();
-		queryValues.put("dateFrom", startDate.toString());
-		queryValues.put("dateTo", endDate.toString());
-		
-		return UrlEndpoint.OFFERS
-				.getUriComponentsBuilder()
-				.buildAndExpand(queryValues).toString();
+		return Url.SERVICES.getUriComponentsBuilder()
+				.path(ApiPath.OFFERS.getPath())
+				.queryParam("dateFrom", startDate.toString())
+				.queryParam("dateTo", endDate.toString())
+				.build().toString();
 	}
 
 	// TODO move to properties / utility class
 	private String getSummaryEndpoint(Long productId) {
 		
-		return UrlEndpoint.SUMMARY
-				.getUriComponentsBuilder()
+		return Url.STATIC.getUriComponentsBuilder()
+				.path(ApiPath.SUMMARY.getPath())
 				.buildAndExpand(productId).toString();
 		
 	}

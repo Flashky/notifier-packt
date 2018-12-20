@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import brv.notifier.packt.model.PacktFreeOffer;
-import brv.notifier.packt.model.api.JsonSummary;
 
 public interface CheckoutService {
 
