@@ -44,7 +44,7 @@ public class NotifierPacktApplication {
 	public EmailService getEmailService(PacktCheckTask service) {
 		
 		NotificationListener listener = new EmailService();
-		//service.addNotificationListener(listener);
+		service.addNotificationListener(listener);
 		
 		return (EmailService) listener;
 	}
