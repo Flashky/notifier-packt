@@ -1,12 +1,10 @@
 package brv.notifier.packt.services.checking;
 
-import java.net.InetSocketAddress;
-import java.net.Proxy;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,8 +15,6 @@ import brv.notifier.packt.model.enums.Url;
 import brv.notifier.packt.model.enums.WebPath;
 import brv.notifier.packt.model.json.JsonOffers;
 import brv.notifier.packt.model.json.JsonSummary;
-import brv.notifier.packt.properties.PacktProperties;
-import brv.notifier.packt.properties.ProxyProperty;
 import brv.notifier.packt.services.CheckoutService;
 
 /**
@@ -49,7 +45,6 @@ public class ApiCheckoutService implements CheckoutService {
 			JsonSummary offerSummary = restTemplate.getForObject(endpointUrl, JsonSummary.class);
 			
 			offer = mapToDto(offerSummary);
-			System.out.println(offer);
 		}
 
 		return offer;
@@ -60,7 +55,7 @@ public class ApiCheckoutService implements CheckoutService {
 		
 		
 		// TODO hacer en un futuro
-		return null;
+		return new ArrayList<>();
 	}
 	
 	private PacktFreeOffer mapToDto(JsonSummary offerSummary) {
