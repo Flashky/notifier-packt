@@ -1,4 +1,4 @@
-package brv.notifier.packt.model.api;
+package brv.notifier.packt.model.json;
 
 import java.io.Serializable;
 import java.time.LocalDate;

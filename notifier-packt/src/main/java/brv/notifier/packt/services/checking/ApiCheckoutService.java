@@ -1,4 +1,4 @@
-package brv.notifier.packt.services.checking.api;
+package brv.notifier.packt.services.checking;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -12,14 +12,14 @@ import org.springframework.web.client.RestTemplate;
 
 import brv.notifier.packt.model.PacktFreeOffer;
 import brv.notifier.packt.model.PacktFreeOfferBuilder;
-import brv.notifier.packt.model.Url;
-import brv.notifier.packt.model.WebPath;
-import brv.notifier.packt.model.api.ApiPath;
-import brv.notifier.packt.model.api.JsonOffers;
-import brv.notifier.packt.model.api.JsonSummary;
+import brv.notifier.packt.model.enums.ApiPath;
+import brv.notifier.packt.model.enums.Url;
+import brv.notifier.packt.model.enums.WebPath;
+import brv.notifier.packt.model.json.JsonOffers;
+import brv.notifier.packt.model.json.JsonSummary;
 import brv.notifier.packt.properties.PacktProperties;
 import brv.notifier.packt.properties.ProxyProperty;
-import brv.notifier.packt.services.checking.CheckoutService;
+import brv.notifier.packt.services.CheckoutService;
 
 /**
  * Implementation of CheckoutService which obtains the Packt offer data through an API.

@@ -1,6 +1,4 @@
-package brv.notifier.packt.model.api;
-
-import brv.notifier.packt.model.Url;
+package brv.notifier.packt.model.enums;
 
 /**
  * Enumeration of useful API paths.

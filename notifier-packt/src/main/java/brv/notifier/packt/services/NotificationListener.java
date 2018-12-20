@@ -1,4 +1,4 @@
-package brv.notifier.packt.services.notifiers;
+package brv.notifier.packt.services;
 
 import brv.notifier.packt.model.PacktFreeOffer;
 

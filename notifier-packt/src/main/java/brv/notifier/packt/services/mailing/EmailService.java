@@ -1,4 +1,4 @@
-package brv.notifier.packt.services.notifiers;
+package brv.notifier.packt.services.mailing;
 
 import java.util.Locale;
 
@@ -16,7 +16,8 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import brv.notifier.packt.model.PacktFreeOffer;
-import brv.notifier.packt.model.api.JsonSummary;
+import brv.notifier.packt.model.json.JsonSummary;
+import brv.notifier.packt.services.NotificationListener;
 import brv.notifier.packt.util.MessageHelper;
 
 @Service

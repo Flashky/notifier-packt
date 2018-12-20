@@ -1,4 +1,4 @@
-package brv.notifier.packt.model;
+package brv.notifier.packt.model.enums;
 
 import org.springframework.web.util.UriComponentsBuilder;
 

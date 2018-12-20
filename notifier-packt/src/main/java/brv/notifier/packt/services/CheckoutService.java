@@ -1,4 +1,4 @@
-package brv.notifier.packt.services.checking;
+package brv.notifier.packt.services;
 
 import java.time.LocalDate;
 import java.util.List;

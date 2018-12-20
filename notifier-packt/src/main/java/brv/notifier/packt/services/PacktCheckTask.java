@@ -1,24 +1,16 @@
 package brv.notifier.packt.services;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import brv.notifier.packt.model.PacktFreeOffer;
-import brv.notifier.packt.model.PacktSummary;
-import brv.notifier.packt.properties.PacktProperties;
-import brv.notifier.packt.services.checking.CheckoutService;
-import brv.notifier.packt.services.notifiers.NotificationListener;
 import brv.notifier.packt.util.MessageHelper;
 
 @Service
