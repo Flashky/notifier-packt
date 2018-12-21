@@ -98,6 +98,7 @@ public enum Url {
 	public UriComponentsBuilder getUriComponentsBuilder() {
 		return UriComponentsBuilder
 				.newInstance()
+				.encode()
 				.scheme(protocol.getScheme())
 				.host(host);
 	}

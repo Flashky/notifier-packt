@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import brv.notifier.packt.model.PacktFreeOffer;
 import brv.notifier.packt.model.PacktFreeOfferBuilder;
@@ -61,7 +62,11 @@ public class ApiCheckoutService implements CheckoutService {
 	private PacktFreeOffer mapToDto(JsonSummary offerSummary) {
 		
 		PacktFreeOfferBuilder builder = new PacktFreeOfferBuilder(offerSummary.getTitle())
-				.withCoverImage(offerSummary.getCoverImage())
+				// Adds the retrieved image and encodes it to prevent special characters..
+				.withCoverImage(UriComponentsBuilder.fromHttpUrl(offerSummary.getCoverImage())
+						.encode()
+						.build()
+						.toString())
 				.withOfferUrl(Url.SHOP.path(WebPath.FREE_OFFER.getPath()))
 				.withShopUrl(Url.SHOP.path(offerSummary.getShopUrl()))
 				.withReadUrl(Url.SUBSCRIBE.path(offerSummary.getReadUrl()));
