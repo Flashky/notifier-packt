@@ -1,4 +1,4 @@
-package brv.notifier.packt.services;
+package brv.notifier.packt.services.mailing;
 
 import java.util.Locale;
 
@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import brv.notifier.packt.model.PacktOffer;
+import brv.notifier.packt.model.PacktFreeOffer;
+import brv.notifier.packt.model.json.JsonSummary;
+import brv.notifier.packt.services.NotificationListener;
 import brv.notifier.packt.util.MessageHelper;
 
 @Service
@@ -35,7 +37,7 @@ public class EmailService implements NotificationListener {
 	private static final Logger LOGGER = LogManager.getLogger(EmailService.class.getName());
 	
 	@Override
-	public void notify(PacktOffer offerData) {
+	public void notify(PacktFreeOffer offerData) {
 		
 		String emailBody = applyTemplate(offerData);
 		
@@ -59,7 +61,7 @@ public class EmailService implements NotificationListener {
 	 * @param offerData - the data to be substituted
 	 * @return html string with any variables substituted.
 	 */
-	private String applyTemplate(PacktOffer offerData) {
+	private String applyTemplate(PacktFreeOffer offerData) {
 	
 		String html = "";
 		

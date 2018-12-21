@@ -24,11 +24,10 @@ simplejavamail:
 # Service confguration
 service:
   cron: 0 0 4 * * ?
-  offer-url: https://www.packtpub.com/packt/offers/free-learning
-  css-selector:
-    title: h1
-    image-url: .bookimage
-    book-url: .dotd-main-book-image > a
-
-
+  #cron: 0 22 19 ? * * # For testing purposes
+  #proxy:
+    # Do not add with 'http://' at the beginning!
+    #host:
+    #port:
+     
 
