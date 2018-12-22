@@ -1,86 +1,94 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Insert title here</title>
+	
+		<style>
 
-	<style>
-		#container {
-		 	width: 600px;
-		 	font-family: Arial, sans-serif;
-		}
-		
-		#content {
-			display: table;
-			padding-left: 25px;
-			margin-left: 25px;
-		}
-		
-		h2 {
-			font-size: 1.4em;
-			margin-top: 0;
-			color: white;
-			background: #D92238;
-			text-align: center;
-			padding-top: 10px;
-			padding-bottom: 10px;
-			padding-left: 20px;
-			padding-right: 20px;
-			width: 100%;
+			body {
+				font-size: 24px;
+			}
 			
-		}
+			img {
+				max-width: 600px;
+				display: block;
+				margin: 0;
+				margin-top: 15px;
+				margin-bottom: 15px;
 		
-		img {
-			float: left;
-			padding-right: 25px;
-			width: 250px;
-		}
-		
-		li {
-			padding-left: 25px;
-			display: table;
+			}
 			
-		}
-		
-
-		.button {
-			font-size: 1.2em;
-			text-decoration: none;
-			background: #5594DB;
-			padding: 10px 15px 10px 15px;
-
-		}
-		
-		.mr {
-			margin-right: 15px;
-		}
-		
-		a {
-			color: white;
-			font-weight: bold;
-			display: inline-block;
-		}
-		
-		a:hover {
-			text-decoration: underline;
-			background: #366ca5;
-		}
-		
-		
-	</style>
-</head>
-
-<body>
-	<div id="container">
-		<img th:src="${offer.coverImage}" src="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/dotd_main_image/B06096.png" />
-		
-		<div id="content">
-			<!-- <h2 class="title" th:text="#{mail.heading}">Oferta del día en Packt</h2> -->
+			h2 {
+				font-size: 28px;
+				color: white;
+				background: #D92238;
+				text-align: center;
+				width: 100%;
+				margin: 0;
+				padding-top: 10px;
+				padding-bottom: 10px;
+			}
 			
-			<a class="button mr" style="color: white" 	th:href="${offer.shopUrl}" 	th:text="#{mail.link.details}" >Detalles del libro</a>
-			<a class="button mr" style="color: white" 	th:href="${offer.readUrl}" 	th:text="#{mail.link.preview}" >Preview</a>
-			<a class="button" style="color: white" 		th:href="${offer.offerUrl}" th:text="#{mail.link.claim}">Reclamar</a>
-		</div>
-	</div>
-</body>
+			a {
+				background: #5594DB;
+				font-weight: bold;
+				display: inline-block;
+				padding: 10px 25px 10px 25px;
+				font-size: 20px !important;
+				text-decoration: none;
+			}
+				
+			a.secondary  {
+				background: white;
+				
+			}
+			
+			.btn-grp {
+				background: #98C0EA;
+				padding-top: 10px;
+				padding-bottom: 10px;
+			}
+			
+			@media only screen and (max-width: 768px) {
+			
+				h2 {
+					font-size: 32px !important;
+				}
+				
+				a {
+					font-size: 28px !important;
+				}
+			}
+			
+		</style>
+		
+	</head>
+
+	<body style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+		<table width="100%" border="0" cellspacing="10" cellpadding="0" class="wrapper">
+			<tr>
+				<td  align="center" valign="top" style="text-align:center;">
+					<table border="0" cellspacing="0" cellpadding="10" class="main" style="text-align: center; margin-left: auto; margin-right: auto; background: #E5EAEE; min-width: 600px;"  > <!-- width="600" -->
+						
+							<!-- email contents go here -->
+							<h2 th:text="#{mail.heading}">Oferta del día en Packt</h2>
+
+							<img th:src="${offer.coverImage}" src="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/dotd_main_image/B06096.png" />
+							
+							<table width="100%" style="text-align: center" class="btn-grp">
+								<tr>
+									<td><a style="color: #5594DB; border-radius: 4px" th:href="${offer.readUrl}" 	th:text="#{mail.link.preview}" class="secondary">Preview</a></td>
+									<td><a style="color: white; border-radius: 4px" th:href="${offer.offerUrl}" th:text="#{mail.link.claim}">Reclamar</a></td>
+									<td><a style="color: #5594DB; border-radius: 4px" th:href="${offer.shopUrl}" 	th:text="#{mail.link.details}" class="secondary">Detalles del libro</a></td>
+								</tr>
+							</table>
+							<!-- end of email content -->
+
+					</table>
+
+				</td>
+			</tr>
+		</table>
+	</body>
 </html>
