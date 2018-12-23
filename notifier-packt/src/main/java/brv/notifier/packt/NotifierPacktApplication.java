@@ -31,7 +31,6 @@ import brv.notifier.packt.util.MessageHelper;
 @EnableScheduling
 @EnableEncryptableProperties
 @EnableConfigurationProperties(PacktProperties.class)
-@SpringBootTest(classes = NotifierPacktApplication.class)
 public class NotifierPacktApplication {
 
 
