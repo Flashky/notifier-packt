@@ -29,7 +29,7 @@ pipeline {
 		
 		stage('Docker image build') {
 			steps {
-				# Note: Requires Pipeline 'Utility Steps' to be installed
+				// Note: Requires Pipeline 'Utility Steps' to be installed
 				def pom = readMavenPom file: 'notifier-packt/pom.xml'
 				VERSION = pom.version
 
