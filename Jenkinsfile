@@ -42,9 +42,9 @@ pipeline {
 				VERSION = readMavenPom().getVersion()
 			}
 			steps {
-
+				echo "${IMAGE}"
 				echo "${VERSION}"
-				//sh 'docker build -t flashk/notify-watchers:0.0.1 .'
+                docker build -t flashk/${IMAGE}:${VERSION} .
 			}
 		}
 	}
