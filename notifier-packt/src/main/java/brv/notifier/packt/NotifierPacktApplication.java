@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -30,6 +31,7 @@ import brv.notifier.packt.util.MessageHelper;
 @EnableScheduling
 @EnableEncryptableProperties
 @EnableConfigurationProperties(PacktProperties.class)
+@SpringBootTest(classes = NotifierPacktApplication.class)
 public class NotifierPacktApplication {
 
 
