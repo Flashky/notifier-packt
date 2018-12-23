@@ -29,10 +29,10 @@ pipeline {
 		
 		stage('Docker image build') {
 			steps {
-				script {
-					def pom = readMavenPom file: 'notifier-packt/pom.xml'
-					VERSION = pom.version
-				}
+				# Note: Requires Pipeline 'Utility Steps' to be installed
+				def pom = readMavenPom file: 'notifier-packt/pom.xml'
+				VERSION = pom.version
+
 				echo "${VERSION}"
 				//sh 'docker build -t flashk/notify-watchers:0.0.1 .'
 			}
