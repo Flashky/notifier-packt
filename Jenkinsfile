@@ -18,6 +18,7 @@ pipeline {
 				sh 'mvn -f notifier-packt/pom.xml install -DskipTests'
 				// TODO figure out how to call readMavenPom() without needing to copy to parent directory.
 				sh 'cp notifier-packt/pom.xml .'
+				sh 'cp notifier-packt/target/notifier-packt*.jar .'
 			}
 		}
 		
@@ -44,7 +45,7 @@ pipeline {
 			steps {
 				echo "${IMAGE}"
 				echo "${VERSION}"
-                sh "docker build -t ${IMAGE}:${VERSION} ."
+                sh "docker build -t flashk/${IMAGE}:${VERSION} ."
 			}
 		}
 	}
