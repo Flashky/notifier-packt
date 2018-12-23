@@ -29,7 +29,10 @@ pipeline {
 		
 		stage('Docker image build') {
 			steps {
-				sh 'echo $POM_VERSION'
+				pom = readMavenPom file: 'notifier-packt/pom.xml'
+	
+				sh 'echo $pom.version'
+				pom.version
 				//sh 'docker build -t flashk/notify-watchers:0.0.1 .'
 			}
 		}
