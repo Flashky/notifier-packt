@@ -44,7 +44,7 @@ pipeline {
 			steps {
 				echo "${IMAGE}"
 				echo "${VERSION}"
-                docker build -t "${IMAGE}:${VERSION}" .
+                docker build -t "${IMAGE}":"${VERSION}" .
 			}
 		}
 	}
