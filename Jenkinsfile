@@ -12,8 +12,10 @@ pipeline {
 			}
 			post {
 				sucess {
-					IMAGE = readMavenPom().getArtifactId()    //Use Pipeline Utility Steps
-					VERSION = readMavenPom().getVersion()
+					environment {
+						IMAGE = readMavenPom().getArtifactId()    //Use Pipeline Utility Steps
+						VERSION = readMavenPom().getVersion()
+					}
 				}
 			}
 
