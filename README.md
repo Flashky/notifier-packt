@@ -98,3 +98,5 @@ Run:
 ```sh
 docker container run -d flashk/notifier-packt:<version>
 ```  
+# Licenses
+Icons by Icons8 (https://icons8.com | https://icons8.com/license)
