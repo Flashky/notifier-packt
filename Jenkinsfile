@@ -10,14 +10,6 @@ pipeline {
 				// Get some code from a GitHub repository
 				git 'https://github.com/Flashky/notifier-packt.git'
 			}
-			post {
-				success {
-					environment {
-						IMAGE = readMavenPom().getArtifactId()    //Use Pipeline Utility Steps
-						VERSION = readMavenPom().getVersion()
-					}
-				}
-			}
 
 		}
 
@@ -36,6 +28,10 @@ pipeline {
 		//}
 		
 		stage('Docker image build') {
+			environment {
+				IMAGE = readMavenPom().getArtifactId()    //Use Pipeline Utility Steps
+				VERSION = readMavenPom().getVersion()
+			}
 			steps {
 
 				echo "${VERSION}"
