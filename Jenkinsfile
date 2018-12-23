@@ -30,9 +30,8 @@ pipeline {
 		stage('Docker image build') {
 			steps {
 				// Note: Requires Pipeline 'Utility Steps' to be installed
-				def pom
 				script {
-					pom = readMavenPom file: 'notifier-packt/pom.xml'
+					def pom = readMavenPom file: 'notifier-packt/pom.xml'
 				}
 				VERSION = pom.version
 				echo "${VERSION}"
