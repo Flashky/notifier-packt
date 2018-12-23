@@ -30,7 +30,7 @@ pipeline {
 		stage('Docker image build') {
 			steps {
 				def pom = readMavenPom file: 'notifier-packt/pom.xml'
-				echo "${pom}
+				echo "${pom}"
 				//sh 'docker build -t flashk/notify-watchers:0.0.1 .'
 			}
 		}
