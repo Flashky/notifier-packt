@@ -30,8 +30,8 @@ pipeline {
 		stage('Docker image build') {
 			environment {
 				pom = readMavenPom file: 'notifier-packt/pom.xml'
-				IMAGE = pom.artifactId
-				VERSION = pom.version
+				IMAGE = ${pom.artifactId}
+				VERSION = ${pom.version}
 				//IMAGE = readMavenPom().getArtifactId()    //Use Pipeline Utility Steps
 				//VERSION = readMavenPom().getVersion()
 			}
