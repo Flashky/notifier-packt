@@ -11,7 +11,7 @@ pipeline {
 				git 'https://github.com/Flashky/notifier-packt.git'
 			}
 			post {
-				sucess {
+				success {
 					environment {
 						IMAGE = readMavenPom().getArtifactId()    //Use Pipeline Utility Steps
 						VERSION = readMavenPom().getVersion()
