@@ -15,7 +15,7 @@ pipeline {
 
 		stage('Build') {
 			steps {
-				sh 'mvn -f notifier-packt/pom.xml install'
+				sh 'mvn -f notifier-packt/pom.xml install -DskipTests'
 			}
 		}
 		
