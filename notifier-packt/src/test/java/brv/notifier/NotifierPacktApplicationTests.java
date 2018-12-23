@@ -18,5 +18,10 @@ public class NotifierPacktApplicationTests {
 	public void contextLoads() {
 		assertTrue(true);
 	}*/
+	
+	@Test
+	public void testDummy() {
+		assertTrue(true);
+	}
 
 }
