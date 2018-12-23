@@ -16,7 +16,7 @@ pipeline {
 		stage('Build') {
 			steps {
 				sh 'mvn -f notifier-packt/pom.xml install -DskipTests'
-				sh 'cp notifier-packt/pom.xml .'
+				//sh 'cp notifier-packt/pom.xml .'
 			}
 		}
 		
@@ -33,8 +33,8 @@ pipeline {
 				//pom = readMavenPom file: 'notifier-packt/pom.xml'
 				//IMAGE = ${pom.artifactId}
 				//VERSION = ${pom.version}
-				IMAGE = readMavenPom().getArtifactId()    //Use Pipeline Utility Steps
-				VERSION = readMavenPom().getVersion()
+				IMAGE = readMavenPom('notifier-packt/pom.xml').getArtifactId()    //Use Pipeline Utility Steps
+				VERSION = readMavenPom('notifier-packt/pom.xml').getVersion()
 			}
 			steps {
 
