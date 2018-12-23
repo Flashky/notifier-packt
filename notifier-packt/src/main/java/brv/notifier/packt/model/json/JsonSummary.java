@@ -2,6 +2,10 @@ package brv.notifier.packt.model.json;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class JsonSummary implements Serializable {
 
 	/**
@@ -9,7 +13,9 @@ public class JsonSummary implements Serializable {
 	 */
 	private static final long serialVersionUID = -2608866765763128611L;
 	
-	
+	/**
+	 * Unique product identifier.
+	 */
 	private Long productId;
 	
 	/**
@@ -18,7 +24,9 @@ public class JsonSummary implements Serializable {
 	 */
 	private String title;
 
-	
+	/**
+	 * Cover image url for the book.
+	 */
 	private String coverImage;
 
 	/** 
@@ -30,6 +38,27 @@ public class JsonSummary implements Serializable {
 	 * Book url which points to the book read page.
 	 */
 	private String readUrl;
+	
+	/**
+	 * Book quick description in one line.
+	 */
+	private String oneLiner;
+	
+	/**
+	 * Book full description.
+	 */
+	private String about;
+	
+	/**
+	 * Skills you will learn when reading this book.
+	 */
+	private String learn;
+	
+	
+	/**
+	 * Main topics related to the book.
+	 */
+	private String features;
 	
 	public Long getProductId() {
 		return productId;
@@ -71,59 +100,104 @@ public class JsonSummary implements Serializable {
 		this.readUrl = readUrl;
 	}
 
+	
+	public String getOneLiner() {
+		return oneLiner;
+	}
+
+	public void setOneLiner(String oneLiner) {
+		this.oneLiner = oneLiner;
+	}
+
+	public String getAbout() {
+		return about;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
+	public String getLearn() {
+		return learn;
+	}
+
+	public void setLearn(String learn) {
+		this.learn = learn;
+	}
+
+	public String getFeatures() {
+		return features;
+	}
+
+	public void setFeatures(String features) {
+		this.features = features;
+	}
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((coverImage == null) ? 0 : coverImage.hashCode());
-		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
-		result = prime * result + ((readUrl == null) ? 0 : readUrl.hashCode());
-		result = prime * result + ((shopUrl == null) ? 0 : shopUrl.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
+		
+		HashCodeBuilder builder = new HashCodeBuilder();
+		
+		builder.append(productId)
+		.append(coverImage)
+		.append(title)
+		.append(readUrl)
+		.append(shopUrl)
+		.append(readUrl)
+		.append(oneLiner)
+		.append(about)
+		.append(learn)
+		.append(features);
+		
+		return builder.toHashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
+		
+		// TODO this section of code could be moved to an utility class:
+		// I could use instanceof, but this code fragment is much more generic
+		// and reusable, as it is class agnostic.
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		JsonSummary other = (JsonSummary) obj;
-		if (coverImage == null) {
-			if (other.coverImage != null)
-				return false;
-		} else if (!coverImage.equals(other.coverImage))
-			return false;
-		if (productId == null) {
-			if (other.productId != null)
-				return false;
-		} else if (!productId.equals(other.productId))
-			return false;
-		if (readUrl == null) {
-			if (other.readUrl != null)
-				return false;
-		} else if (!readUrl.equals(other.readUrl))
-			return false;
-		if (shopUrl == null) {
-			if (other.shopUrl != null)
-				return false;
-		} else if (!shopUrl.equals(other.shopUrl))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
+		
+		final JsonSummary other = (JsonSummary) obj;
+		EqualsBuilder builder = new EqualsBuilder();
+		
+		builder.append(productId, other.productId)
+		.append(coverImage, other.coverImage)
+		.append(title, other.title)
+		.append(readUrl, other.readUrl)
+		.append(shopUrl,  other.shopUrl)
+		.append(oneLiner, other.oneLiner)
+		.append(about, other.about)
+		.append(learn, other.learn)
+		.append(features, other.features);
+		
+		return builder.isEquals();
 	}
 
 	@Override
 	public String toString() {
-		return "JsonSummary [productId=" + productId + ", title=" + title + ", coverImage=" + coverImage + ", shopUrl="
-				+ shopUrl + ", readUrl=" + readUrl + "]";
+		
+		ToStringBuilder builder = new ToStringBuilder(this);
+		
+		builder.append(productId)
+		.append(coverImage)
+		.append(title)
+		.append(readUrl)
+		.append(shopUrl)
+		.append(readUrl)
+		.append(oneLiner)
+		.append(about)
+		.append(learn)
+		.append(features);
+		
+		return builder.toString();
 	}
 	
 	
