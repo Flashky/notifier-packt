@@ -3,16 +3,16 @@ pipeline {
 	tools {
 		maven 'M3_Jenkins' 
 	}
-	environment {
-        IMAGE = readMavenPom().getArtifactId()    //Use Pipeline Utility Steps
-        VERSION = readMavenPom().getVersion()
-    }
 	stages {
 		
 		stage('Clone Repository') {
 			steps {
 				// Get some code from a GitHub repository
 				git 'https://github.com/Flashky/notifier-packt.git'
+			}
+			post {
+			    IMAGE = readMavenPom().getArtifactId()    //Use Pipeline Utility Steps
+				VERSION = readMavenPom().getVersion()
 			}
 
 		}
