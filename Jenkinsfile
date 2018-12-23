@@ -29,15 +29,15 @@ pipeline {
 		
 		stage('Docker image build') {
 			environment {
-				pom = readMavenPom file: 'notifier-packt/pom.xml'
+				//pom = readMavenPom file: 'notifier-packt/pom.xml'
 				//IMAGE = ${pom.artifactId}
 				//VERSION = ${pom.version}
-				//IMAGE = readMavenPom().getArtifactId()    //Use Pipeline Utility Steps
-				//VERSION = readMavenPom().getVersion()
+				IMAGE = readMavenPom('notifier-packt/pom.xml').getArtifactId()    //Use Pipeline Utility Steps
+				VERSION = readMavenPom('notifier-packt/pom.xml').getVersion()
 			}
 			steps {
 
-				echo "${pom.version}"
+				echo "${VERSION}"
 				//sh 'docker build -t flashk/notify-watchers:0.0.1 .'
 			}
 		}
