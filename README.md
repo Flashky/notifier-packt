@@ -1,7 +1,7 @@
 # notifier-packt
 Spring Boot scheduled  service to check for free packt daily offers.
 
-# Download
+## Download
 Download the latest version of the notifier-pack application:
 
 PENDING
@@ -10,10 +10,10 @@ After you download it, you will see two files:
 - The notifier-pack jar file.
 - The application.yml configuration file.
 
-# Customizing configuration
+## Customizing configuration
 Notifier Packt is fully configurable by editing the external application.yaml file.
 
-## Customizing SimpleJavaMail configuration
+### Customizing SimpleJavaMail configuration
 Notifier Packt uses SimpleJavaMail for sending the email notifications.
 
 You can modify any of the SimpleJavaMail properties as you need:
@@ -21,7 +21,7 @@ You can modify any of the SimpleJavaMail properties as you need:
 http://www.simplejavamail.org/#section-available-properties
 
 
-## Customize encryption configuration
+#### Customize encryption configuration
 
 As exposing passwords in a properties file is unsecure, Notifier Packt provides an optional encryption mechanism using Jaspyt.
 
@@ -65,7 +65,7 @@ simplejavamail:
     password: ENC(your_encrypted_password)
     ...
 ```
-## Customize crontab
+### Customize crontab
 
 Finally, you can customize at which time should the process be executed, just add the following property:
 
@@ -74,9 +74,9 @@ service:
   cron: 0 0 4 * * ?
 ```
 
-# How to execute
+## How to execute
 
-## Java execution
+### Java execution
 After you have configured any properties and environment variables, just launch it as:
 
 ```sh
@@ -84,7 +84,7 @@ java -jar notifier-packt.jar
 ```
 
 
-## Docker execution
+### Docker execution
 A Dockerfile is provided to run Notifier Packt as a Docker container.
 
 In order to build and execute the container, just modify and execute the following commands:
