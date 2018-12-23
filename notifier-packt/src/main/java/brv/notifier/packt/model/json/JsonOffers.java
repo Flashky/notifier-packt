@@ -3,6 +3,10 @@ package brv.notifier.packt.model.json;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class JsonOffers implements Serializable {
 
 	/**
@@ -22,32 +26,41 @@ public class JsonOffers implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((data == null) ? 0 : data.hashCode());
-		return result;
+		HashCodeBuilder builder = new HashCodeBuilder();
+		
+		builder.append(data);
+		
+		return builder.hashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
+		
+		// TODO this section of code could be moved to an utility class:
+		// I could use instanceof, but this code fragment is much more generic
+		// and reusable, as it is class agnostic.
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		JsonOffers other = (JsonOffers) obj;
-		if (data == null) {
-			if (other.data != null)
-				return false;
-		} else if (!data.equals(other.data))
-			return false;
-		return true;
+		
+		final JsonOffers other = (JsonOffers) obj;
+		EqualsBuilder builder = new EqualsBuilder();
+		
+		builder.append(data, other.data);
+		
+		return builder.isEquals();
 	}
 
 	@Override
 	public String toString() {
-		return "PacktOfferList [data=" + data + "]";
+		ToStringBuilder builder = new ToStringBuilder(this);
+		
+		builder.append(data);
+		
+		return builder.toString();
 	}
 	
 	

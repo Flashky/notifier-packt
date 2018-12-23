@@ -59,6 +59,7 @@ public class ApiCheckoutService implements CheckoutService {
 		return new ArrayList<>();
 	}
 	
+	// TODO move to Mapper class
 	private PacktFreeOffer mapToDto(JsonSummary offerSummary) {
 		
 		PacktFreeOfferBuilder builder = new PacktFreeOfferBuilder(offerSummary.getTitle())
@@ -69,7 +70,11 @@ public class ApiCheckoutService implements CheckoutService {
 						.toString())
 				.withOfferUrl(Url.SHOP.path(WebPath.FREE_OFFER.getPath()))
 				.withShopUrl(Url.SHOP.path(offerSummary.getShopUrl()))
-				.withReadUrl(Url.SUBSCRIBE.path(offerSummary.getReadUrl()));
+				.withReadUrl(Url.SUBSCRIBE.path(offerSummary.getReadUrl()))
+				.withOneLiner(offerSummary.getOneLiner())
+				.withAbout(offerSummary.getAbout())
+				.withLearn(offerSummary.getLearn())
+				.withFeatures(offerSummary.getFeatures());
 		
 		return builder.build();
 	}

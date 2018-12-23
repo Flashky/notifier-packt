@@ -2,6 +2,10 @@ package brv.notifier.packt.model;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class PacktFreeOffer implements Serializable {
 
 	/**
@@ -14,6 +18,24 @@ public class PacktFreeOffer implements Serializable {
 	private String offerUrl;
 	private String shopUrl;
 	private String readUrl;
+	private String oneLiner;
+	
+	
+	/**
+	 * Book full description.
+	 */
+	private String about;
+	
+	/**
+	 * Skills you will learn when reading this book.
+	 */
+	private String learn;
+	
+	
+	/**
+	 * Main topics related to the book.
+	 */
+	private String features;
 	
 	protected PacktFreeOffer(PacktFreeOfferBuilder builder) {
 		
@@ -22,6 +44,10 @@ public class PacktFreeOffer implements Serializable {
 		this.offerUrl	= builder.offerUrl;
 		this.shopUrl 	= builder.shopUrl;
 		this.readUrl 	= builder.readUrl;
+		this.oneLiner 	= builder.oneLiner;
+		this.about		= builder.about;
+		this.learn		= builder.learn;
+		this.features	= builder.features;
 		
 	}
 	
@@ -41,59 +67,84 @@ public class PacktFreeOffer implements Serializable {
 		return readUrl;
 	}
 
+	public String getOneLiner() {
+		return oneLiner;
+	}
+
+	public String getAbout() {
+		return about;
+	}
+
+	public String getLearn() {
+		return learn;
+	}
+
+	public String getFeatures() {
+		return features;
+	}
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((coverImage == null) ? 0 : coverImage.hashCode());
-		result = prime * result + ((offerUrl == null) ? 0 : offerUrl.hashCode());
-		result = prime * result + ((readUrl == null) ? 0 : readUrl.hashCode());
-		result = prime * result + ((shopUrl == null) ? 0 : shopUrl.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
+		
+		HashCodeBuilder builder = new HashCodeBuilder();
+		
+		builder.append(coverImage)
+		.append(title)
+		.append(readUrl)
+		.append(shopUrl)
+		.append(readUrl)
+		.append(oneLiner)
+		.append(about)
+		.append(learn)
+		.append(features);
+		
+		return builder.toHashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
+		
+		// TODO this section of code could be moved to an utility class:
+		// I could use instanceof, but this code fragment is much more generic
+		// and reusable, as it is class agnostic.
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PacktFreeOffer other = (PacktFreeOffer) obj;
-		if (coverImage == null) {
-			if (other.coverImage != null)
-				return false;
-		} else if (!coverImage.equals(other.coverImage))
-			return false;
-		if (offerUrl == null) {
-			if (other.offerUrl != null)
-				return false;
-		} else if (!offerUrl.equals(other.offerUrl))
-			return false;
-		if (readUrl == null) {
-			if (other.readUrl != null)
-				return false;
-		} else if (!readUrl.equals(other.readUrl))
-			return false;
-		if (shopUrl == null) {
-			if (other.shopUrl != null)
-				return false;
-		} else if (!shopUrl.equals(other.shopUrl))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
+		
+		final PacktFreeOffer other = (PacktFreeOffer) obj;
+		EqualsBuilder builder = new EqualsBuilder();
+		
+		builder.append(coverImage, other.coverImage)
+		.append(title, other.title)
+		.append(readUrl, other.readUrl)
+		.append(shopUrl,  other.shopUrl)
+		.append(oneLiner, other.oneLiner)
+		.append(about, other.about)
+		.append(learn, other.learn)
+		.append(features, other.features);
+		
+		return builder.isEquals();
 	}
 
 	@Override
 	public String toString() {
-		return "PacktFreeOffer [title=" + title + ", coverImage=" + coverImage + ", offerUrl=" + offerUrl + ", shopUrl="
-				+ shopUrl + ", readUrl=" + readUrl + "]";
+		
+		ToStringBuilder builder = new ToStringBuilder(this);
+		
+		builder.append(coverImage)
+		.append(title)
+		.append(readUrl)
+		.append(shopUrl)
+		.append(readUrl)
+		.append(oneLiner)
+		.append(about)
+		.append(learn)
+		.append(features);
+		
+		return builder.toString();
 	}
 	
 	

@@ -3,6 +3,10 @@ package brv.notifier.packt.model.json;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class JsonOffer implements Serializable {
 	/**
 	 * 
@@ -34,44 +38,45 @@ public class JsonOffer implements Serializable {
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((availableFrom == null) ? 0 : availableFrom.hashCode());
-		result = prime * result + ((expiresAt == null) ? 0 : expiresAt.hashCode());
-		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
-		return result;
+		HashCodeBuilder builder = new HashCodeBuilder();
+		
+		builder.append(productId)
+		.append(availableFrom)
+		.append(expiresAt);
+		
+		return builder.toHashCode();
 	}
 	@Override
 	public boolean equals(Object obj) {
+		// TODO this section of code could be moved to an utility class:
+		// I could use instanceof, but this code fragment is much more generic
+		// and reusable, as it is class agnostic.
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		JsonOffer other = (JsonOffer) obj;
-		if (availableFrom == null) {
-			if (other.availableFrom != null)
-				return false;
-		} else if (!availableFrom.equals(other.availableFrom))
-			return false;
-		if (expiresAt == null) {
-			if (other.expiresAt != null)
-				return false;
-		} else if (!expiresAt.equals(other.expiresAt))
-			return false;
-		if (productId == null) {
-			if (other.productId != null)
-				return false;
-		} else if (!productId.equals(other.productId))
-			return false;
-		return true;
+		
+		final JsonOffer other = (JsonOffer) obj;
+		EqualsBuilder builder = new EqualsBuilder();
+		
+		builder.append(productId, other.productId)
+		.append(availableFrom, other.availableFrom)
+		.append(expiresAt, other.expiresAt);
+		
+		return builder.isEquals();
 	}
 	
 	@Override
 	public String toString() {
-		return "PacktOffer [productId=" + productId + ", availableFrom=" + availableFrom + ", expiresAt=" + expiresAt
-				+ "]";
+		ToStringBuilder builder = new ToStringBuilder(this);
+		
+		builder.append(productId)
+		.append(availableFrom)
+		.append(expiresAt);
+		
+		return builder.toString();
 	}
 	
 	
