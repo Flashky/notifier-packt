@@ -16,7 +16,8 @@ pipeline {
 		stage('Build') {
 			steps {
 				sh 'mvn -f notifier-packt/pom.xml install -DskipTests'
-				//sh 'cp notifier-packt/pom.xml .'
+				// TODO figure out how to call readMavenPom() without needing to copy to parent directory.
+				sh 'cp notifier-packt/pom.xml .'
 			}
 		}
 		
@@ -33,8 +34,12 @@ pipeline {
 				//pom = readMavenPom file: 'notifier-packt/pom.xml'
 				//IMAGE = ${pom.artifactId}
 				//VERSION = ${pom.version}
-				IMAGE = readMavenPom('notifier-packt/pom.xml').getArtifactId()    //Use Pipeline Utility Steps
-				VERSION = readMavenPom('notifier-packt/pom.xml').getVersion()
+				
+				// Use Pipeline Utility Steps
+				// Also, approve the scripts: 
+				// Manage Jenkins > In-process Script Approval
+				IMAGE = readMavenPom().getArtifactId()    //Use Pipeline Utility Steps
+				VERSION = readMavenPom().getVersion()
 			}
 			steps {
 
