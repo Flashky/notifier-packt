@@ -3,6 +3,10 @@ pipeline {
 	tools {
 		maven 'M3_Jenkins' 
 	}
+	environment {
+        IMAGE = readMavenPom().getArtifactId()    //Use Pipeline Utility Steps
+        VERSION = readMavenPom().getVersion()
+    }
 	stages {
 		
 		stage('Clone Repository') {
@@ -29,11 +33,8 @@ pipeline {
 		
 		stage('Docker image build') {
 			steps {
-				// Note: Requires Pipeline 'Utility Steps' to be installed
-				script {
-					def pom = readMavenPom file: 'notifier-packt/pom.xml'
-				}
-				echo "${pom.version}"
+
+				echo "${VERSION}"
 				//sh 'docker build -t flashk/notify-watchers:0.0.1 .'
 			}
 		}
