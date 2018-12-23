@@ -30,6 +30,11 @@
 				padding-bottom: 10px;
 			}
 			
+			h3 {
+				background: #edf4fc;
+				padding: 10px;
+			}
+			
 			a {
 				background: #5594DB;
 				font-weight: bold;
@@ -50,6 +55,17 @@
 				padding-bottom: 10px;
 			}
 			
+			.text {
+				text-align: justify;
+				background: white/*#edf4fc*/;
+				padding: 20px;
+			}
+			
+			ul {
+				padding-inline-start: 20px;
+				padding-inline-end: 20px;
+			}
+			
 			@media only screen and (max-width: 768px) {
 			
 				h2 {
@@ -58,6 +74,10 @@
 				
 				a {
 					font-size: 28px !important;
+				}
+				
+				.text {
+					font-size: 22px !important;
 				}
 			}
 			
@@ -69,7 +89,7 @@
 		<table width="100%" border="0" cellspacing="10" cellpadding="0" class="wrapper">
 			<tr>
 				<td  align="center" valign="top" style="text-align:center;">
-					<table border="0" cellspacing="0" cellpadding="10" class="main" style="text-align: center; margin-left: auto; margin-right: auto; background: #E5EAEE; min-width: 600px;"  > <!-- width="600" -->
+					<table border="0" cellspacing="0" cellpadding="10" class="main" style="text-align: center; margin-left: auto; margin-right: auto; background: #E5EAEE; width: 600px"  > <!-- width="600" -->
 						
 							<!-- email contents go here -->
 							<h2 th:text="#{mail.heading}">Oferta del día en Packt</h2>
@@ -83,6 +103,41 @@
 									<td><a style="color: #5594DB; border-radius: 4px" th:href="${offer.shopUrl}" 	th:text="#{mail.link.details}" class="secondary">Detalles del libro</a></td>
 								</tr>
 							</table>
+							<div class="text">
+								<h3>About</h3>
+								<p>Become an expert in implementing advanced, network-related tasks with Python.</p>
+								<p>This book begins with a review of the TCP/ IP protocol suite and a refresher of the core elements of the Python language. 
+								Next, you will start using Python and supported libraries to automate network tasks from the current major network vendors. 
+								We will look at automating traditional network devices based on the command-line interface, as well as newer devices with API support, with hands-on labs. 
+								We will then learn the concepts and practical use cases of the Ansible framework in order to achieve your network goals.</p>
+								
+								<p>We will then move on to using Python for DevOps, starting with using open source tools to test, secure, and analyze your network. 
+								Then, we will focus on network monitoring and visualization. 
+								We will learn how to retrieve network information using a polling mechanism, flow-based monitoring, and visualizing the data programmatically. 
+								Next, we will learn how to use the Python framework to build your own customized network web services.</p>
+								
+								<p>In the last module, you will use Python for SDN, where you will use a Python-based controller with OpenFlow in a hands-on lab to learn its concepts and applications. 
+								We will compare and contrast OpenFlow, OpenStack, OpenDaylight, and NFV. 
+								Finally, you will use everything you've learned in the book to construct a migration plan to go from a legacy to a scalable SDN-based network.</p>
+								
+								<h3>Learn</h3>
+								<ul>
+									<li>Review all the fundamentals of Python and the TCP/IP suite</li>
+									<li>Use Python to execute commands when the device does not support the API or programmatic interaction with the device</li>
+									<li>Implement automation techniques by integrating Python with Cisco, Juniper, and Arista eAPI</li>
+									<li>Integrate Ansible using Python to control Cisco, Juniper, and Arista networks</li>
+									<li>Achieve network security with Python</li>
+									<li>Build Flask-based web-service APIs with Python</li>
+									<li>Construct a Python-based migration plan from a legacy to scalable SDN-based network.</li>
+								</ul>
+								
+								<h3>Features</h3>
+								<ul>
+									<li>Build the skills to perform all networking tasks using Python with ease</li>
+									<li>Use Python for network device automation, DevOps, and software-defined networking</li>
+									<li>Get practical guidance to networking with Python</li>
+								</ul>
+							</div>
 							<!-- end of email content -->
 
 					</table>
