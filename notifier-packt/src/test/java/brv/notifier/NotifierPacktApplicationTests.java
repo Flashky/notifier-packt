@@ -1,7 +1,5 @@
 package brv.notifier;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,11 +10,12 @@ import brv.notifier.packt.NotifierPacktApplication;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = NotifierPacktApplication.class)
 public class NotifierPacktApplicationTests {
-
-	/*
+	
 	@Test
 	public void contextLoads() {
-		assertTrue(true);
-	}*/
+		// In order to make the test work, you will need to add the following environment variables:
+		// - ENCRYPT_MASTER_PASSWORD
+		// - MAIL_PASSWORD
+	}
 
 }
