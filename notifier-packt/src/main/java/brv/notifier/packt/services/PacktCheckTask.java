@@ -36,8 +36,8 @@ public class PacktCheckTask {
 	
 	private List<NotificationListener> listeners = new LinkedList<>();
 	
-	//@Scheduled(cron = "${service.cron}")
-	@Scheduled(fixedRateString = "5000")
+	@Scheduled(cron = "${service.cron}")
+	//@Scheduled(fixedRateString = "5000")
 	public void checkPacktDailyOffer() {
 
 		
