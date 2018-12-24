@@ -7,8 +7,8 @@ Download the latest version of the notifier-pack application:
 PENDING
 
 After you download it, you will see two files:
-- The notifier-pack jar file.
-- The application.yml configuration file.
+-   The notifier-pack jar file.
+-   The application.yml configuration file.
 
 ## Customizing configuration
 Notifier Packt is fully configurable by editing the external application.yaml file.
