@@ -67,8 +67,8 @@ public class EndpointManager {
 	 */
 	public String getOfferListEndpoint(LocalDate startDate, int numberOfDays) {
 		
-		if(numberOfDays < MIN_NUMBER_DAYS)
-			throw new IllegalArgumentException("Number of days should be at least "+MIN_NUMBER_DAYS+".");
+		if((numberOfDays < MIN_NUMBER_DAYS) && (numberOfDays > maxNumberOfDays))
+			throw new IllegalArgumentException("Number of days should be between "+MIN_NUMBER_DAYS+" and "+maxNumberOfDays+" but it was "+numberOfDays+".");
 		
 		LocalDate endDate = startDate.plusDays(numberOfDays);
 		
