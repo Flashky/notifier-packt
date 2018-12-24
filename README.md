@@ -7,8 +7,8 @@ Download the latest version of the notifier-pack application:
 PENDING
 
 After you download it, you will see two files:
--  The notifier-pack jar file.
--  The application.yml configuration file.
+ -  The notifier-pack jar file.
+ -  The application.yml configuration file.
 
 ## Customizing configuration
 Notifier Packt is fully configurable by editing the external application.yaml file.
@@ -25,8 +25,8 @@ You can modify any of the SimpleJavaMail properties as you need:
 As exposing passwords in a properties file is unsecure, Notifier Packt provides an optional encryption mechanism using Jaspyt.
 
 First, you will need to download the Jaspyt encrypt command line tool:
--  <http://www.jasypt.org/cli.html>
--  <http://www.jasypt.org/download.html>
+ -  <http://www.jasypt.org/cli.html>
+ -  <http://www.jasypt.org/download.html>
 
 Encrypt your email password using the command line tool
 
