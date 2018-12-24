@@ -155,7 +155,6 @@ public class JsonSummary implements Serializable {
 	@Override
 	public boolean equals(Object obj) {
 		
-		// TODO this section of code could be moved to an utility class:
 		// I could use instanceof, but this code fragment is much more generic
 		// and reusable, as it is class agnostic.
 		if (this == obj)
