@@ -11,7 +11,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import brv.notifier.packt.model.PacktFreeOffer;
 import brv.notifier.packt.model.PacktFreeOfferBuilder;
-import brv.notifier.packt.model.enums.ApiPath;
 import brv.notifier.packt.model.enums.Url;
 import brv.notifier.packt.model.enums.WebPath;
 import brv.notifier.packt.model.json.JsonOffers;
@@ -30,19 +29,22 @@ public class ApiCheckoutService implements CheckoutService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	@Autowired
+	private EndpointManager endpointManager;
+	
 	@Override
 	public PacktFreeOffer getPacktOffer() {
 
 		PacktFreeOffer offer = null;
 		
-		String endpointUrl = getOfferListEndpoint();
+		String endpointUrl = endpointManager.getOfferListEndpoint(LocalDate.now());
 		JsonOffers offerList = restTemplate.getForObject(endpointUrl, JsonOffers.class);
 		
 		if((offerList != null) && (!offerList.getData().isEmpty())) {
 			
 			Long productId = offerList.getData().get(0).getProductId();
 			
-			endpointUrl = getSummaryEndpoint(productId);
+			endpointUrl = endpointManager.getSummaryEndpoint(productId);
 			JsonSummary offerSummary = restTemplate.getForObject(endpointUrl, JsonSummary.class);
 			
 			offer = mapToDto(offerSummary);
@@ -78,28 +80,5 @@ public class ApiCheckoutService implements CheckoutService {
 		
 		return builder.build();
 	}
-
-	// TODO move to properties / utility class
-	private String getOfferListEndpoint() {
-
-		LocalDate startDate = LocalDate.now();
-		LocalDate endDate = LocalDate.now().plusDays(1);
-		
-		return Url.SERVICES.getUriComponentsBuilder()
-				.path(ApiPath.OFFERS.getPath())
-				.queryParam("dateFrom", startDate.toString())
-				.queryParam("dateTo", endDate.toString())
-				.build().toString();
-	}
-
-	// TODO move to properties / utility class
-	private String getSummaryEndpoint(Long productId) {
-		
-		return Url.STATIC.getUriComponentsBuilder()
-				.path(ApiPath.SUMMARY.getPath())
-				.buildAndExpand(productId).toString();
-		
-	}
-
 
 }

@@ -29,5 +29,8 @@ service:
     # Do not add with 'http://' at the beginning!
     #host:
     #port:
-     
+    
+
+api-config:
+  max-number-days: 3
 
