@@ -7,12 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
+import brv.notifier.packt.mappers.Mapper;
 import brv.notifier.packt.model.PacktFreeOffer;
-import brv.notifier.packt.model.PacktFreeOfferBuilder;
-import brv.notifier.packt.model.enums.Url;
-import brv.notifier.packt.model.enums.WebPath;
 import brv.notifier.packt.model.json.JsonOffers;
 import brv.notifier.packt.model.json.JsonSummary;
 import brv.notifier.packt.services.CheckoutService;
@@ -47,7 +44,7 @@ public class ApiCheckoutService implements CheckoutService {
 			endpointUrl = endpointManager.getSummaryEndpoint(productId);
 			JsonSummary offerSummary = restTemplate.getForObject(endpointUrl, JsonSummary.class);
 			
-			offer = mapToDto(offerSummary);
+			offer = Mapper.jsonToModel(offerSummary);
 		}
 
 		return offer;
@@ -59,26 +56,6 @@ public class ApiCheckoutService implements CheckoutService {
 		
 		// TODO hacer en un futuro
 		return new ArrayList<>();
-	}
-	
-	// TODO move to Mapper class
-	private PacktFreeOffer mapToDto(JsonSummary offerSummary) {
-		
-		PacktFreeOfferBuilder builder = new PacktFreeOfferBuilder(offerSummary.getTitle())
-				// Adds the retrieved image and encodes it to prevent special characters..
-				.withCoverImage(UriComponentsBuilder.fromHttpUrl(offerSummary.getCoverImage())
-						.encode()
-						.build()
-						.toString())
-				.withOfferUrl(Url.SHOP.path(WebPath.FREE_OFFER.getPath()))
-				.withShopUrl(Url.SHOP.path(offerSummary.getShopUrl()))
-				.withReadUrl(Url.SUBSCRIBE.path(offerSummary.getReadUrl()))
-				.withOneLiner(offerSummary.getOneLiner())
-				.withAbout(offerSummary.getAbout())
-				.withLearn(offerSummary.getLearn())
-				.withFeatures(offerSummary.getFeatures());
-		
-		return builder.build();
 	}
 
 }
