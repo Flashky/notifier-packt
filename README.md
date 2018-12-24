@@ -25,8 +25,8 @@ You can modify any of the SimpleJavaMail properties as you need:
 As exposing passwords in a properties file is unsecure, Notifier Packt provides an optional encryption mechanism using Jaspyt.
 
 First, you will need to download the Jaspyt encrypt command line tool:
-- <http://www.jasypt.org/cli.html>
-- <http://www.jasypt.org/download.html>
+-  <http://www.jasypt.org/cli.html>
+ - <http://www.jasypt.org/download.html>
 
 Encrypt your email password using the command line tool
 
