@@ -90,14 +90,24 @@ public class NotifierPacktApplication {
 	public RestTemplate getRestTemplate() {
 	
 		RestTemplate restTemplate = new RestTemplate();
-		
-		// Behind a proxy
+				
 		ProxyProperty proxyProps = packtProperties.getProxy();
+		
 		if(proxyProps != null) {
+			
+			// Behind a proxy
+			String host = proxyProps.getHost();
+			Integer port = proxyProps.getPort();
+			
+			if((host == null) || (port == null))
+				throw new IllegalArgumentException("Invalid property: Please initialize 'proxy.host' and 'proxy.port' properties.");
+
+			if(port < 1)
+				throw new IllegalArgumentException("Invalid property: 'proxy.port' must be an integer greater than 0.");
+			
 			SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
 			
-			// TODO verify both 'host' and 'port' need to be initialized if 'proxy' property exist.
-	        InetSocketAddress address = new InetSocketAddress(proxyProps.getHost(),proxyProps.getPort());
+	        InetSocketAddress address = new InetSocketAddress(host,port);
 	        Proxy proxy = new Proxy(Proxy.Type.HTTP,address);
 	        factory.setProxy(proxy);
 	        
