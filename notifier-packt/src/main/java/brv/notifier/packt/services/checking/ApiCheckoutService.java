@@ -34,11 +34,13 @@ public class ApiCheckoutService implements CheckoutService {
 
 		PacktFreeOffer offer = null;
 		
+		// Obtain the list of offers for today so we can obtain the productId
 		String endpointUrl = endpointManager.getOfferListEndpoint(LocalDate.now());
 		JsonOffers offerList = restTemplate.getForObject(endpointUrl, JsonOffers.class);
 		
 		if((offerList != null) && (!offerList.getData().isEmpty())) {
 			
+			// Obtain the productId and retrieve the data for that ebook
 			Long productId = offerList.getData().get(0).getProductId();
 			
 			endpointUrl = endpointManager.getSummaryEndpoint(productId);
