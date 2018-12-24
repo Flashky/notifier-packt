@@ -1,4 +1,7 @@
 # notifier-packt
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4f44adffbcc347e4a50774dd89084a41)](https://app.codacy.com/app/Flashky/notifier-packt?utm_source=github.com&utm_medium=referral&utm_content=Flashky/notifier-packt&utm_campaign=Badge_Grade_Dashboard)
+
 Spring Boot scheduled  service to check for free packt daily offers.
 
 ## Download
