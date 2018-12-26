@@ -34,6 +34,12 @@
 				background: #edf4fc;
 				padding: 10px;
 				padding-right: 20px;
+				line-height: 40px;
+				font-size: 20px;
+			}
+			
+			h3 > img {
+				width: 40px;
 			}
 			
 			a.btn-link {
@@ -77,6 +83,15 @@
 					font-size: 32px !important;
 				}
 				
+				h3 {
+					line-height: 56px !important;
+					font-size: 28px !important;
+				}
+				
+				h3 > img {
+					width: 56px !important;
+				}
+								
 				a.btn-link {
 					font-size: 28px !important;
 				}
@@ -116,23 +131,23 @@
 							<div class="text">
 
 								<h3>
-									<img src="https://img.icons8.com/color/48/000000/book.png" style="margin: 0; width: 40px; display: inline-block" align="left">
-									<span class="heading-3" th:text="#{mail.heading.about}" style="padding-left: 10px; line-height: 40px; font-size: 20px"></span>
+									<img src="https://img.icons8.com/color/48/000000/book.png" style="margin: 0; display: inline-block" align="left">
+									<span class="heading-3" th:text="#{mail.heading.about}" style="padding-left: 10px;"></span>
 								</h3>
 								<p style="font-style: italic; font-weight:bold" th:text="${offer.oneLiner}"></p>
 								<div th:utext="${offer.about}"></div>
 								
 								
 								<h3>
-									<img src="https://img.icons8.com/color/48/000000/student-male.png" style="margin: 0; width: 40px; display: inline-block" align="left">
-									<span  th:text="#{mail.heading.learn}" style="padding-left: 10px; line-height: 40px; font-size: 20px"></span>
+									<img src="https://img.icons8.com/color/48/000000/student-male.png" style="margin: 0; display: inline-block" align="left">
+									<span  th:text="#{mail.heading.learn}" style="padding-left: 10px;"></span>
 								</h3>
 								<div th:utext="${offer.learn}"></div>
 								
 								
 								<h3>
-									<img src="https://img.icons8.com/color/48/000000/bulleted-list.png" style="margin: 0; width: 40px; display: inline-block" align="left">
-									<span  th:text="#{mail.heading.features}" style="padding-left: 10px; line-height: 40px; font-size: 20px"></span>
+									<img src="https://img.icons8.com/color/48/000000/bulleted-list.png" style="margin: 0; display: inline-block" align="left">
+									<span  th:text="#{mail.heading.features}" style="padding-left: 10px;"></span>
 								</h3>
 								<div th:utext="${offer.features}"></div>
 
