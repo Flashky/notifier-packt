@@ -1,7 +1,2 @@
-jasypt:
-  encryptor:
-    password: ${ENCRYPT_MASTER_PASSWORD}
-    
-simplejavamail:
-  smtp:
-    password: sbhhtzwfxsrxrasf
+service:
+  cron:  0 57 18 ? * *
