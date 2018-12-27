@@ -96,7 +96,10 @@ docker image build -t flashk/notifier-packt:<version> .
 Run:
 ```sh
 docker container run -d flashk/notifier-packt:<version>
-```  
-## Licenses
+``` 
+## License
+Notifier Packt is Open Source software released under the Apache 2.0 license.
+
+## Third Party Licenses
 -   Icons by Icons8 (<https://icons8.com> | [License](https://icons8.com/license))
 -   SimpleJavaMail (<http://www.simplejavamail.org> | [License](https://github.com/bbottema/simple-java-mail/blob/develop/LICENSE-2.0.txt) | [Notice](https://github.com/bbottema/simple-java-mail/blob/develop/NOTICE.txt))
