@@ -27,9 +27,9 @@ hs_err_pid*
 
 # Eclipse folders
 .classpath
-#.project
-#.settings
-#.mvn
+.project
+.settings
+.mvn
 .factorypath
 
 # Intellij folders
