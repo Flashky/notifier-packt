@@ -44,10 +44,15 @@ public class PacktCheckTask {
 
 		PacktFreeOffer offer = checkoutService.getPacktOffer();
 		
-		if((offer != null) && (!offer.equals(previousOffer))) {
+		if(offer == null) {
+			LOGGER.info(messageHelper.getMessage("offer.missing"));
+		} else if (offer.equals(previousOffer)){
+			LOGGER.info(messageHelper.getMessage("offer.repeated"));
+		}
+		else {
 			notifyListeners(offer);
 			previousOffer = offer;
-		}
+		} 
 
 	}
 	
@@ -59,7 +64,7 @@ public class PacktCheckTask {
 	private void notifyListeners(PacktFreeOffer offer) {
 		
 		Object[] messageParameters = new Object[] { offer.getTitle() };	
-		LOGGER.info(messageHelper.getMessage("info.offer-detected", messageParameters));
+		LOGGER.info(messageHelper.getMessage("offer.detected", messageParameters));
 		for(NotificationListener listener : listeners) {
 			listener.notify(offer);
 		}
