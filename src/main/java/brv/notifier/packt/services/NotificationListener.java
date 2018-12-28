@@ -1,8 +1,6 @@
 package brv.notifier.packt.services;
 
-import brv.notifier.packt.model.PacktFreeOffer;
+public interface NotificationListener<T> {
 
-public interface NotificationListener {
-
-	void notify(PacktFreeOffer offerData);
+	void notify(T data);
 }
