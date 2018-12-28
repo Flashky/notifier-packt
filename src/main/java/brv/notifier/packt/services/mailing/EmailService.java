@@ -40,7 +40,7 @@ public class EmailService implements NotificationListener {
 		
 		String emailBody = applyTemplate(offerData);
 		
-		LOGGER.info(messageHelper.getMessage("info.sending.mail"));
+		LOGGER.info(messageHelper.getMessage("mail.sending.start"));
 		
 		// Create a new email. 
 		// Most of the configuration is obtained through the application.yml
@@ -52,7 +52,7 @@ public class EmailService implements NotificationListener {
 		
 		mailer.sendMail(email);
 		
-		LOGGER.info(messageHelper.getMessage("info.successful.send"));
+		LOGGER.info(messageHelper.getMessage("mail.sending.sucessful"));
 	}
 	
 	/**
