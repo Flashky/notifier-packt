@@ -15,7 +15,7 @@ public class EndpointManager {
 	private static final String QUERY_DATE_FROM = "dateFrom";
 	private static final String QUERY_DATE_TO = "dateTo";
 	
-	@Value("${api-config.max-number-days:3}")
+	@Value("${api-config.max-number-days:7}")
 	private int maxNumberOfDays;
 	
 	
