@@ -3,7 +3,10 @@ package brv.notifier.packt.model.enums;
 public enum WebPath {
 
 	/**
-	 * /packt/offers/free-learning
+	 * Path: <pre>/packt/offers/free-learning</pre>
+	 * <p>
+	 * Ebook free offers are published in this Website path.
+	 * </p>
 	 */
 	FREE_OFFER("/packt/offers/free-learning");
 	

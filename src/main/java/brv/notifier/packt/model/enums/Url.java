@@ -12,16 +12,24 @@ import org.springframework.web.util.UriComponentsBuilder;
  */
 public enum Url {
 
-	/** Shop Url: <br> https://www.packtpub.com */
+	/** Url:  <pre>https://www.packtpub.com</pre> 
+	 * <p>Packt main Website.</p>
+	 */
 	SHOP(Protocol.HTTPS,		"www.packtpub.com"),
 	
-	/** Subscribe Url: <br> https://subscription.packtpub.com */
+	/** Url: <pre>https://subscription.packtpub.com</pre> 
+	 * <p>Packt subscription and ebook reading Website.</p>
+	 */
 	SUBSCRIBE(Protocol.HTTPS,	"subscription.packtpub.com"),
 	
-	/** Services Url: <br> https://services.packtpub.com */
+	/** Url: <pre>https://services.packtpub.com</pre> 
+	 * <p>Packt Services API.</p>
+	 * */
 	SERVICES(Protocol.HTTPS,	"services.packtpub.com"),
 	
-	/** Static Url: <br> https://static.packt-cdn.com */
+	/** Url: <pre>https://static.packt-cdn.com</pre> 
+	 * <p>Packt static content API.</p>
+	 */
 	STATIC(Protocol.HTTPS,		"static.packt-cdn.com");
 	
 	private Protocol protocol;
@@ -85,6 +93,7 @@ public enum Url {
 				.path(path)
 				.build().toString();
 	}
+
 	
 	/**
 	 * Initializes a {@link UriComponentsBuilder} using the enum values to build complexes URLs.
