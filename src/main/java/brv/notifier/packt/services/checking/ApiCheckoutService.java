@@ -55,12 +55,12 @@ public class ApiCheckoutService implements CheckoutService {
 	
 	
 	@Override
-	public List<PacktFreeOffer> getPacktOfferList(LocalDate start, int numberOfDays) {
+	public List<PacktFreeOffer> getPacktOfferList(LocalDate startDate, int numberOfDays) {
 		
 		List<PacktFreeOffer> result = new ArrayList<>();
 		
 		// Obtain the list of upcoming offers
-		String endpointUrl = endpointManager.getOfferListEndpoint(LocalDate.now(), numberOfDays);
+		String endpointUrl = endpointManager.getOfferListEndpoint(startDate, numberOfDays);
 		JsonOffers offerList = restTemplate.getForObject(endpointUrl, JsonOffers.class);
 		
 		if((offerList != null) && (!offerList.getData().isEmpty())) {

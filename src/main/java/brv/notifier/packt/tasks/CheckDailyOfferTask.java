@@ -33,8 +33,8 @@ public class CheckDailyOfferTask extends PacktCheckTask<PacktFreeOffer> {
 
 	private PacktFreeOffer previousOffer;
 
-	//@Scheduled(cron = "${task.cron.daily-offer}")
-	@Scheduled(fixedRateString = "5000")
+	@Scheduled(cron = "${task.cron.daily-offer}")
+	//@Scheduled(fixedRateString = "5000")
 	public void check() {
 
 		PacktFreeOffer offer = checkoutService.getPacktOffer();

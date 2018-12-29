@@ -19,6 +19,6 @@ public interface CheckoutService {
 	 * @param numberOfDays - the number of days after the first offer to retrieve any offers in that number of days.
 	 * @return a list of packt offers that will be offered between both dates. If there are no free offers, then it will return an empty list.
 	 */
-	List<PacktFreeOffer> getPacktOfferList(LocalDate start, int numberOfDays);
+	List<PacktFreeOffer> getPacktOfferList(LocalDate startDate, int numberOfDays);
 	
 }
