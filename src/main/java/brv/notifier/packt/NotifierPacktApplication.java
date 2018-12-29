@@ -20,29 +20,28 @@ import org.springframework.web.client.RestTemplate;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 import brv.notifier.packt.model.PacktFreeOffer;
-import brv.notifier.packt.properties.PacktProperties;
-import brv.notifier.packt.properties.ProxyProperty;
+import brv.notifier.packt.properties.ProxyProperties;
 import brv.notifier.packt.services.NotificationListener;
-import brv.notifier.packt.services.PacktCheckTask;
 import brv.notifier.packt.services.notifiers.DailyOfferEmailNotifier;
+import brv.notifier.packt.tasks.CheckDailyOfferTask;
 import brv.notifier.packt.util.MessageHelper;
 
 @SpringBootApplication
 @EnableScheduling
 @EnableEncryptableProperties
-@EnableConfigurationProperties(PacktProperties.class)
+@EnableConfigurationProperties(ProxyProperties.class)
 public class NotifierPacktApplication {
 
 
 	@Autowired
-	private PacktProperties packtProperties;
+	private ProxyProperties proxyProperties;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(NotifierPacktApplication.class, args);
 	}
 	
 	@Bean 
-	public DailyOfferEmailNotifier getDailyOfferEmailNotifier(PacktCheckTask service) {
+	public DailyOfferEmailNotifier getDailyOfferEmailNotifier(CheckDailyOfferTask service) {
 		
 		NotificationListener<PacktFreeOffer> listener = new DailyOfferEmailNotifier();
 		service.addNotificationListener(listener);
@@ -91,18 +90,14 @@ public class NotifierPacktApplication {
 	public RestTemplate getRestTemplate() {
 	
 		RestTemplate restTemplate = new RestTemplate();
-				
-		ProxyProperty proxyProps = packtProperties.getProxy();
-		
-		if(proxyProps != null) {
-			
-			// Behind a proxy
-			String host = proxyProps.getHost();
-			Integer port = proxyProps.getPort();
-			
-			if((host == null) || (port == null))
-				throw new IllegalArgumentException("Invalid property: Please initialize 'proxy.host' and 'proxy.port' properties.");
 
+		String host = proxyProperties.getHost();
+		Integer port = proxyProperties.getPort();
+		
+		if((host != null) && (port != null)) {
+			
+			// Behind a proxy - Adapt RestTemplate configuration to support this.
+			
 			if(port < 1)
 				throw new IllegalArgumentException("Invalid property: 'proxy.port' must be an integer greater than 0.");
 			

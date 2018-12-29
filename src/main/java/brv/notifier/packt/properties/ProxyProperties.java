@@ -2,7 +2,12 @@ package brv.notifier.packt.properties;
 
 import java.io.Serializable;
 
-public class ProxyProperty implements Serializable{
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@Component
+@ConfigurationProperties(prefix="proxy")
+public class ProxyProperties implements Serializable {
 
 	/**
 	 * 
