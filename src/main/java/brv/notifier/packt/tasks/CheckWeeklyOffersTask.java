@@ -2,6 +2,7 @@ package brv.notifier.packt.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -27,6 +28,8 @@ public class CheckWeeklyOffersTask extends PacktCheckTask<List<PacktFreeOffer>> 
 
 	private static final Logger LOGGER = LogManager.getLogger(CheckWeeklyOffersTask.class.getName());
 	
+	private List<PacktFreeOffer> previousOffers = new ArrayList<>();
+	
 	@Override
 	//@Scheduled(cron = "${task.cron.weekly-offers}")
 	@Scheduled(fixedRateString = "5000")
@@ -41,8 +44,9 @@ public class CheckWeeklyOffersTask extends PacktCheckTask<List<PacktFreeOffer>> 
 		List<PacktFreeOffer> offers = checkoutService.getPacktOfferList(startDate, 7);
 		
 		if(offers.isEmpty()) {
-			LOGGER.info(messageHelper.getMessage("offers.missing", messageParameters));
-			
+			LOGGER.info(messageHelper.getMessage("offers.missing", messageParameters));		
+		} else if (offers.equals(previousOffers)){
+			LOGGER.info(messageHelper.getMessage("offers.repeated"));
 		} else {
 			
 			// Write the offers in the log

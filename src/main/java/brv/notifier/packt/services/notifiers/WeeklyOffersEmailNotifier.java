@@ -28,8 +28,8 @@ public class WeeklyOffersEmailNotifier implements NotificationListener<List<Pack
 		// Adapter pattern to communicate with the EmailService.
 		// The input data is wrapped into an EmailData.
 		EmailData emailData = new EmailData();
-		emailData.setSubject(messageHelper.getMessage("mail.weekly-offer.subject"));
-		emailData.setTemplate("mail_weekly_offer.html");
+		emailData.setSubject(messageHelper.getMessage("mail.weekly-offers.subject"));
+		emailData.setTemplate("mail_weekly_offers.html");
 		emailData.getVariables().put("offers", data);		
 		
 		emailService.send(emailData);

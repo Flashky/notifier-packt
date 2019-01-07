@@ -2,6 +2,7 @@ package brv.notifier.packt;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,9 @@ import brv.notifier.packt.model.PacktFreeOffer;
 import brv.notifier.packt.properties.ProxyProperties;
 import brv.notifier.packt.services.NotificationListener;
 import brv.notifier.packt.services.notifiers.DailyOfferEmailNotifier;
+import brv.notifier.packt.services.notifiers.WeeklyOffersEmailNotifier;
 import brv.notifier.packt.tasks.CheckDailyOfferTask;
+import brv.notifier.packt.tasks.CheckWeeklyOffersTask;
 import brv.notifier.packt.util.MessageHelper;
 
 @SpringBootApplication
@@ -47,6 +50,15 @@ public class NotifierPacktApplication {
 		service.addNotificationListener(listener);
 		
 		return (DailyOfferEmailNotifier) listener;
+	}
+	
+	@Bean 
+	public WeeklyOffersEmailNotifier getWeeklyOffersEmailNotifier(CheckWeeklyOffersTask service) {
+		
+		NotificationListener<List<PacktFreeOffer>> listener = new WeeklyOffersEmailNotifier();
+		service.addNotificationListener(listener);
+		
+		return (WeeklyOffersEmailNotifier) listener;
 	}
 	
 	@Bean
