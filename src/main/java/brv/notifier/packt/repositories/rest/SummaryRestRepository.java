@@ -1,4 +1,4 @@
-package brv.notifier.packt.repositories;
+package brv.notifier.packt.repositories.rest;
 
 import java.util.Optional;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import brv.notifier.packt.model.json.JsonSummary;
+import brv.notifier.packt.repositories.SummaryRepository;
 
 @Repository
 public class SummaryRestRepository implements SummaryRepository {

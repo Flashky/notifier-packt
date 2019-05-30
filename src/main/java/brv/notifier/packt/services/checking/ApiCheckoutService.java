@@ -10,9 +10,9 @@ import brv.notifier.packt.dto.PacktFreeOffer;
 import brv.notifier.packt.mappers.PacktFreeOfferMapper;
 import brv.notifier.packt.model.json.JsonOffer;
 import brv.notifier.packt.model.json.JsonSummary;
-import brv.notifier.packt.repositories.EndpointManager;
 import brv.notifier.packt.repositories.OffersRepository;
 import brv.notifier.packt.repositories.SummaryRepository;
+import brv.notifier.packt.repositories.rest.EndpointManager;
 import brv.notifier.packt.services.CheckoutService;
 
 /**

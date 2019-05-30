@@ -1,4 +1,4 @@
-package brv.notifier.packt.repositories;
+package brv.notifier.packt.repositories.rest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import brv.notifier.packt.model.json.JsonOffer;
 import brv.notifier.packt.model.json.JsonOffers;
+import brv.notifier.packt.repositories.OffersRepository;
 
 @Repository
 public class OffersRestRepository implements OffersRepository {
