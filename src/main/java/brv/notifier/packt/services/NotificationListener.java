@@ -1,6 +1,6 @@
 package brv.notifier.packt.services;
 
-import brv.notifier.packt.model.PacktFreeOffer;
+import brv.notifier.packt.dto.PacktFreeOffer;
 
 public interface NotificationListener {
 

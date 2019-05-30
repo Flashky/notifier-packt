@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import brv.notifier.packt.model.PacktFreeOffer;
+import brv.notifier.packt.dto.PacktFreeOffer;
 import brv.notifier.packt.util.MessageHelper;
 
 @Service
@@ -36,8 +36,8 @@ public class PacktCheckTask {
 	
 	private List<NotificationListener> listeners = new LinkedList<>();
 	
-	@Scheduled(cron = "${service.cron}")
-	//@Scheduled(fixedRateString = "5000")
+	//@Scheduled(cron = "${service.cron}")
+	@Scheduled(fixedRateString = "5000")
 	public void checkPacktDailyOffer() {
 
 		PacktFreeOffer offer = checkoutService.getPacktOffer();

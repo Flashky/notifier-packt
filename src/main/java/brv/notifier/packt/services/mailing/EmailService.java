@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import brv.notifier.packt.model.PacktFreeOffer;
+import brv.notifier.packt.dto.PacktFreeOffer;
 import brv.notifier.packt.services.NotificationListener;
 import brv.notifier.packt.util.MessageHelper;
 

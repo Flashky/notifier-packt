@@ -1,4 +1,4 @@
-package brv.notifier.packt.model;
+package brv.notifier.packt.dto;
 
 import java.io.Serializable;
 
@@ -36,21 +36,6 @@ public class PacktFreeOffer implements Serializable {
 	 * Main topics related to the book.
 	 */
 	private String features;
-	
-	public PacktFreeOffer() {}
-	protected PacktFreeOffer(PacktFreeOfferBuilder builder) {
-		
-		this.title 		= builder.title;
-		this.coverImage = builder.coverImage;
-		this.offerUrl	= builder.offerUrl;
-		this.shopUrl 	= builder.shopUrl;
-		this.readUrl 	= builder.readUrl;
-		this.oneLiner 	= builder.oneLiner;
-		this.about		= builder.about;
-		this.learn		= builder.learn;
-		this.features	= builder.features;
-		
-	}
 	
 	public String getTitle() {
 		return title;
