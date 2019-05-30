@@ -1,22 +1,18 @@
 package brv.notifier.packt.services.checking;
 
-import java.time.LocalDate;
 import java.util.Optional;
-
-import javax.swing.text.html.Option;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import brv.notifier.packt.dto.PacktFreeOffer;
 import brv.notifier.packt.mappers.PacktFreeOfferMapper;
 import brv.notifier.packt.model.json.JsonOffer;
-import brv.notifier.packt.model.json.JsonOffers;
 import brv.notifier.packt.model.json.JsonSummary;
 import brv.notifier.packt.repositories.EndpointManager;
 import brv.notifier.packt.repositories.OffersRepository;
+import brv.notifier.packt.repositories.SummaryRepository;
 import brv.notifier.packt.services.CheckoutService;
 
 /**
@@ -26,16 +22,12 @@ import brv.notifier.packt.services.CheckoutService;
  */
 @Service
 public class ApiCheckoutService implements CheckoutService {
-
-	
-	@Autowired
-	private RestTemplate restTemplate;
-	
-	@Autowired
-	private EndpointManager endpointManager;
 	
 	@Autowired
 	private OffersRepository offersDao;
+	
+	@Autowired
+	private SummaryRepository summaryDao;
 	
 	@Autowired
 	private PacktFreeOfferMapper mapper;
@@ -43,31 +35,22 @@ public class ApiCheckoutService implements CheckoutService {
 	@Override
 	public PacktFreeOffer getPacktOffer() {
 
-		PacktFreeOffer offer = null;
+		PacktFreeOffer result = null;
 		
+		Optional<JsonOffer> offer = offersDao.getTodayOffer();
 		
-		Optional<JsonOffer> jsonOffer = offersDao.getTodayOffer();
-		
-		if(jsonOffer.isPresent()) {
+		if(offer.isPresent()) {
 			
 			// Obtain the productId and retrieve the data for that ebook
-			Long productId = jsonOffer.get().getProductId();
-			Optional<JsonSummary> offerSummary = getOfferSummary(productId);
-			 
-			if(offerSummary.isPresent()) {
-				offer = mapper.jsonToModel(offerSummary.get());
+			Optional<JsonSummary> summary = summaryDao.findById(offer.get().getProductId());
+					
+			if(summary.isPresent()) {
+				result = mapper.jsonToModel(summary.get());
 			}
 		}
 
-		return offer;
+		return result;
 	}
-	
-	private Optional<JsonSummary> getOfferSummary(Long productId) {
-		
-		String endpointUrl = endpointManager.getSummaryEndpoint(productId);
-		JsonSummary offerSummary = restTemplate.getForObject(endpointUrl, JsonSummary.class);
-		
-		return Optional.ofNullable(offerSummary);
-	}
+
 
 }
