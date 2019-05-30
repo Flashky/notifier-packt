@@ -1,3 +1,22 @@
+%YAML 1.2
+---
+
+url:
+  api:
+    offers:  'https://services.packtpub.com/free-learning-v1/offers'
+    summary: 'https://static.packt-cdn.com/products/{productId}/summary'
+  web:
+    shop: 'https://www.packtpub.com'
+    free-learning: 'https://www.packtpub.com/packt/offers/free-learning'
+    subscription: 'https://subscription.packtpub.com'
+
+packt:
+  hosts:
+    services:
+        host: 'https://services.packtpub.com'
+        offers: '/free-learning-v1/offers'
+        
+        
 # Property encryption configuration
 jasypt:
   encryptor:
