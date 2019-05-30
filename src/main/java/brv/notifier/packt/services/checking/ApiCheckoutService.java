@@ -51,13 +51,5 @@ public class ApiCheckoutService implements CheckoutService {
 
 		return offer;
 	}
-	
-	@Override
-	public List<PacktFreeOffer> getPacktOfferList(LocalDate start, int numberOfDays) {
-		
-		
-		// TODO hacer en un futuro
-		return new ArrayList<>();
-	}
 
 }
