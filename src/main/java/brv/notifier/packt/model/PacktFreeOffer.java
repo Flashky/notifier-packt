@@ -37,6 +37,7 @@ public class PacktFreeOffer implements Serializable {
 	 */
 	private String features;
 	
+	public PacktFreeOffer() {}
 	protected PacktFreeOffer(PacktFreeOfferBuilder builder) {
 		
 		this.title 		= builder.title;
@@ -60,6 +61,7 @@ public class PacktFreeOffer implements Serializable {
 	public String getOfferUrl() {
 		return offerUrl;
 	}
+	
 	public String getShopUrl() {
 		return shopUrl;
 	}
@@ -83,6 +85,33 @@ public class PacktFreeOffer implements Serializable {
 		return features;
 	}
 
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public void setCoverImage(String coverImage) {
+		this.coverImage = coverImage;
+	}
+	public void setOfferUrl(String offerUrl) {
+		this.offerUrl = offerUrl;
+	}
+	public void setShopUrl(String shopUrl) {
+		this.shopUrl = shopUrl;
+	}
+	public void setReadUrl(String readUrl) {
+		this.readUrl = readUrl;
+	}
+	public void setOneLiner(String oneLiner) {
+		this.oneLiner = oneLiner;
+	}
+	public void setAbout(String about) {
+		this.about = about;
+	}
+	public void setLearn(String learn) {
+		this.learn = learn;
+	}
+	public void setFeatures(String features) {
+		this.features = features;
+	}
 	@Override
 	public int hashCode() {
 		
