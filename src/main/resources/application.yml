@@ -43,7 +43,7 @@ simplejavamail:
 # Service confguration
 service:
   cron: 0 0 4 * * ?
-  #cron: 0 22 19 ? * * # For testing purposes
+  #cron: 0 * * * * * # For testing purposes
   #proxy:
     # Do not add with 'http://' at the beginning!
     #host:
