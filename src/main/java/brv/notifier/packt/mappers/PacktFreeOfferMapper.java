@@ -7,29 +7,20 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import brv.notifier.packt.dto.PacktFreeOffer;
 import brv.notifier.packt.model.enums.Url;
-import brv.notifier.packt.model.enums.WebPath;
 import brv.notifier.packt.model.json.JsonSummary;
 
 @Mapper(componentModel = "spring")
 public abstract class PacktFreeOfferMapper {
-
-	private static final String ENUM_PACKAGE = "brv.notifier.packt.model.enums.";
 
 	/**
 	 * Maps the input JsonSummary into a PacktFreeOffer object.
 	 * @param offerSummary the json object to map.
 	 * @return A PacktFreeOffer object.
 	 */
-
 	@Mapping(target = "shopUrl", 	qualifiedByName = "shopUrl")
 	@Mapping(target = "readUrl", 	qualifiedByName = "readUrl")
 	@Mapping(target = "coverImage", qualifiedByName = "coverImage")
 	public abstract PacktFreeOffer jsonToModel(JsonSummary offerSummary);
-	
-	@Named("offerUrl")
-	protected String mapOfferUrl(String offerUrl) {
-		return Url.SHOP.path(WebPath.FREE_OFFER.getPath());
-	}
 	
 	@Named("shopUrl")
 	protected String mapShopUrl(String shopUrl) {
