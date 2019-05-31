@@ -20,6 +20,43 @@ import brv.notifier.packt.services.offers.mappers.PacktFreeOfferMapper;
 @Service
 public class ApiOffersService implements OffersService {
 	
+	/* README */
+	
+	/* 
+	 * Idea para migrar esto a un microservicio aparte.
+	 * 
+	 * Habría dos mappings GET:
+	 * 
+	 * MAPPING 1: 
+	 * GET /offers?date=yyyy-mm-dd
+	 * Devuelve la oferta de la fecha especificada.
+	 * 
+	 * date: mandatory
+	 * 
+	 * MAPPING 2:
+	 * GET /offers?startDate=yyyy-mm-dd
+	 * GET /offers?startDate=yyyy-mm-dd&endDate=yyyy-mm-dd
+	 * Devuelve las ofertas desde la fecha de inicio en adelante sin límite o hasta la fecha final:
+	 * 
+	 * startDate: mandatory
+	 * endDate: optional
+	 * 
+	 * --- 
+	 * 
+	 * El diseño del servicio iría nuevamente en tres capas:
+	 * - Capa controladora, para validar los campos de entrada y mapear los resultados finales.
+	 * - Capa servicio: contendrá el servicio principal para orquestar las llamadas a las dos APIs de Packt y agregar los datos en el DTO de salida.
+	 * - Capa repositorio: contendrá las mismas clases de repositorio que se han generado en este proyecto.
+	 * 
+	 * Paquetes a migrar y valor renombrado:
+	 * (ninguno, paquete base)						-> brv.api.offers
+	 * (ninguno, nuevo paquete controlador)			-> brv.api.offers.controllers
+	 * brv.notifier.packt.services.offers.dto		-> brv.api.offers.controllers.dto
+	 * brv.notifier.packt.services.offers			-> brv.api.offers.services
+	 * brv.notifier.packt.services.offers.mappers 	-> brv.api.offers.services.mappers
+	 * brv.notifier.packt.repositories 				-> brv.api.offers.repositories
+	 * brv.notifier.packt.model.offers				-> brv.api.offers.repositories.models
+	 */
 	@Autowired
 	private OffersRepository offersDao;
 	

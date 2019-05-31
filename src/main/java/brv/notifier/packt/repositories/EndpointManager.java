@@ -1,4 +1,4 @@
-package brv.notifier.packt.repositories.rest;
+package brv.notifier.packt.repositories;
 
 import java.time.LocalDate;
 

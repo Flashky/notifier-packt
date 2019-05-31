@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
-import brv.notifier.packt.repositories.rest.EndpointManager;
+import brv.notifier.packt.repositories.EndpointManager;
 
 public class EndpointManagerTest {
  
