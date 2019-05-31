@@ -15,7 +15,6 @@ public class PacktFreeOffer implements Serializable {
 	
 	private String title;
 	private String coverImage;
-	private String offerUrl;
 	private String shopUrl;
 	private String readUrl;
 	private String oneLiner;
@@ -42,9 +41,6 @@ public class PacktFreeOffer implements Serializable {
 	}
 	public String getCoverImage() {
 		return coverImage;
-	}
-	public String getOfferUrl() {
-		return offerUrl;
 	}
 	
 	public String getShopUrl() {
@@ -76,9 +72,7 @@ public class PacktFreeOffer implements Serializable {
 	public void setCoverImage(String coverImage) {
 		this.coverImage = coverImage;
 	}
-	public void setOfferUrl(String offerUrl) {
-		this.offerUrl = offerUrl;
-	}
+
 	public void setShopUrl(String shopUrl) {
 		this.shopUrl = shopUrl;
 	}

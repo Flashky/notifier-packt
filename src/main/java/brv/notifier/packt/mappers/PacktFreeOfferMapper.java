@@ -2,8 +2,12 @@ package brv.notifier.packt.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import brv.notifier.packt.dto.PacktFreeOffer;
+import brv.notifier.packt.model.enums.Url;
+import brv.notifier.packt.model.enums.WebPath;
 import brv.notifier.packt.model.json.JsonSummary;
 
 @Mapper(componentModel = "spring")
@@ -16,9 +20,39 @@ public abstract class PacktFreeOfferMapper {
 	 * @param offerSummary the json object to map.
 	 * @return A PacktFreeOffer object.
 	 */
-	@Mapping(target = "offerUrl", expression = "java( "+ ENUM_PACKAGE + "Url.SHOP.path("+ ENUM_PACKAGE + "WebPath.FREE_OFFER.getPath()) )")
-	@Mapping(target = "shopUrl", expression = "java( "+ ENUM_PACKAGE + "Url.SHOP.path(offerSummary.getShopUrl()))")
-	@Mapping(target = "readUrl", expression = "java( "+ ENUM_PACKAGE + "Url.SUBSCRIBE.path(offerSummary.getReadUrl()) )")
+
+	@Mapping(target = "shopUrl", 	qualifiedByName = "shopUrl")
+	@Mapping(target = "readUrl", 	qualifiedByName = "readUrl")
+	@Mapping(target = "coverImage", qualifiedByName = "coverImage")
 	public abstract PacktFreeOffer jsonToModel(JsonSummary offerSummary);
+	
+	@Named("offerUrl")
+	protected String mapOfferUrl(String offerUrl) {
+		return Url.SHOP.path(WebPath.FREE_OFFER.getPath());
+	}
+	
+	@Named("shopUrl")
+	protected String mapShopUrl(String shopUrl) {
+		return Url.SHOP.path(shopUrl);
+	}
+	
+	@Named("readUrl")
+	protected String mapReadUrl(String path) {
+		return Url.SUBSCRIBE.path(path);
+	}
+	
+	
+	@Named("coverImage")
+	protected String mapCoverImage(String coverImage) {
+	
+		// Cover image URI is encoded to protect against whitespaces and other special characters
+		return UriComponentsBuilder.fromHttpUrl(coverImage)
+				.build()
+				.encode()
+				.toString();
+	
+	}
+	
+
 	
 }

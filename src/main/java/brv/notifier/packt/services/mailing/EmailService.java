@@ -16,6 +16,8 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import brv.notifier.packt.dto.PacktFreeOffer;
+import brv.notifier.packt.model.enums.Url;
+import brv.notifier.packt.model.enums.WebPath;
 import brv.notifier.packt.services.NotificationListener;
 import brv.notifier.packt.util.MessageHelper;
 
@@ -66,7 +68,7 @@ public class EmailService implements NotificationListener {
 		
 		Context ctx = new Context(new Locale("es","ES"));
 		ctx.setVariable("offer",offerData);
-		
+		ctx.setVariable("freeLearningUrl", Url.SHOP.path(WebPath.FREE_OFFER.getPath()));
 		html = template.process("mail.html", ctx);
 		
 		//System.out.println(html);
