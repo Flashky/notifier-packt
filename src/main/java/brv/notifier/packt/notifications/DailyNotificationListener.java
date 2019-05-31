@@ -1,8 +1,8 @@
-package brv.notifier.packt.services;
+package brv.notifier.packt.notifications;
 
 import brv.notifier.packt.dto.PacktFreeOffer;
 
-public interface NotificationListener {
+public interface DailyNotificationListener {
 
 	void notify(PacktFreeOffer offerData);
 }

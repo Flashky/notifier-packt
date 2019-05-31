@@ -18,12 +18,12 @@ import org.thymeleaf.context.Context;
 import brv.notifier.packt.dto.PacktFreeOffer;
 import brv.notifier.packt.enums.Url;
 import brv.notifier.packt.enums.WebPath;
-import brv.notifier.packt.services.NotificationListener;
+import brv.notifier.packt.notifications.DailyNotificationListener;
 import brv.notifier.packt.util.MessageHelper;
 
 @Service
 @Import(SimpleJavaMailSpringSupport.class)
-public class EmailService implements NotificationListener {
+public class EmailService implements DailyNotificationListener {
 
 	@Autowired 
 	private Mailer mailer;

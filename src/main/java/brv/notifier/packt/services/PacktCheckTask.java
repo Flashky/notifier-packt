@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import brv.notifier.packt.dto.PacktFreeOffer;
+import brv.notifier.packt.notifications.DailyNotificationListener;
 import brv.notifier.packt.util.MessageHelper;
 
 @Service
@@ -34,7 +35,7 @@ public class PacktCheckTask {
 
 	private PacktFreeOffer previousOffer;
 	
-	private List<NotificationListener> listeners = new LinkedList<>();
+	private List<DailyNotificationListener> listeners = new LinkedList<>();
 	
 	//@Scheduled(cron = "${service.cron}")
 	@Scheduled(fixedRateString = "5000")
@@ -63,7 +64,7 @@ public class PacktCheckTask {
 		
 		Object[] messageParameters = new Object[] { offer.getTitle() };	
 		LOGGER.info(messageHelper.getMessage("offer.detected", messageParameters));
-		for(NotificationListener listener : listeners) {
+		for(DailyNotificationListener listener : listeners) {
 			listener.notify(offer);
 		}
 	}
@@ -75,7 +76,7 @@ public class PacktCheckTask {
 	 * </p>
 	 * @param listener - the listener to register.
 	 */
-	public void addNotificationListener(NotificationListener listener) {
+	public void addNotificationListener(DailyNotificationListener listener) {
 		if(listener != null)
 			this.listeners.add(listener);
 	}
@@ -84,7 +85,7 @@ public class PacktCheckTask {
 	 * Removes a listener from the registered listeners.
 	 * @param listener - the listener to remove.
 	 */
-	public void removeNotificationListener(NotificationListener listener) {
+	public void removeNotificationListener(DailyNotificationListener listener) {
 
 			listeners.remove(listener);
 	}
