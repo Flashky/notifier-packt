@@ -20,10 +20,10 @@ import org.springframework.web.client.RestTemplate;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 import brv.notifier.packt.notifications.DailyNotificationListener;
+import brv.notifier.packt.notifications.EmailNotificationListener;
 import brv.notifier.packt.properties.PacktProperties;
 import brv.notifier.packt.properties.ProxyProperty;
 import brv.notifier.packt.services.PacktCheckTask;
-import brv.notifier.packt.services.mailing.EmailService;
 import brv.notifier.packt.util.MessageHelper;
 
 @SpringBootApplication
@@ -41,12 +41,12 @@ public class NotifierPacktApplication {
 	}
 	
 	@Bean 
-	public EmailService getEmailService(PacktCheckTask service) {
+	public EmailNotificationListener getEmailService(PacktCheckTask service) {
 		
-		DailyNotificationListener listener = new EmailService();
+		DailyNotificationListener listener = new EmailNotificationListener();
 		service.addNotificationListener(listener);
 		
-		return (EmailService) listener;
+		return (EmailNotificationListener) listener;
 	}
 	
 	@Bean
