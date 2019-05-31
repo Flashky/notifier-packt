@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import brv.notifier.packt.model.json.JsonOffer;
+import brv.notifier.packt.model.offers.JsonOffer;
 
 public interface OffersRepository {
 

@@ -10,15 +10,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import brv.notifier.packt.dto.PacktFreeOffer;
 import brv.notifier.packt.notifications.DailyNotificationListener;
+import brv.notifier.packt.services.offers.OffersService;
+import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 import brv.notifier.packt.util.MessageHelper;
 
 @Service
 public class PacktCheckTask {
 
 	@Autowired
-	private CheckoutService checkoutService;
+	private OffersService checkoutService;
 
 	@Autowired
 	@Qualifier("messages-app")

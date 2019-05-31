@@ -1,6 +1,6 @@
 package brv.notifier.packt.notifications;
 
-import brv.notifier.packt.dto.PacktFreeOffer;
+import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 
 public interface DailyNotificationListener {
 

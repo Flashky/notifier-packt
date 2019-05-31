@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
-import brv.notifier.packt.model.json.JsonOffer;
-import brv.notifier.packt.model.json.JsonOffers;
+import brv.notifier.packt.model.offers.JsonOffer;
+import brv.notifier.packt.model.offers.JsonOffers;
 import brv.notifier.packt.repositories.OffersRepository;
 
 @Repository

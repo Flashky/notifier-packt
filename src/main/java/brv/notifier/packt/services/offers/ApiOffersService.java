@@ -1,17 +1,16 @@
-package brv.notifier.packt.services.checking;
+package brv.notifier.packt.services.offers;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import brv.notifier.packt.dto.PacktFreeOffer;
-import brv.notifier.packt.mappers.PacktFreeOfferMapper;
-import brv.notifier.packt.model.json.JsonOffer;
-import brv.notifier.packt.model.json.JsonSummary;
+import brv.notifier.packt.model.offers.JsonOffer;
+import brv.notifier.packt.model.offers.JsonSummary;
 import brv.notifier.packt.repositories.OffersRepository;
 import brv.notifier.packt.repositories.SummaryRepository;
-import brv.notifier.packt.services.CheckoutService;
+import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
+import brv.notifier.packt.services.offers.mappers.PacktFreeOfferMapper;
 
 /**
  * Implementation of CheckoutService which obtains the Packt offer data through an API.
@@ -19,7 +18,7 @@ import brv.notifier.packt.services.CheckoutService;
  *
  */
 @Service
-public class ApiCheckoutService implements CheckoutService {
+public class ApiOffersService implements OffersService {
 	
 	@Autowired
 	private OffersRepository offersDao;

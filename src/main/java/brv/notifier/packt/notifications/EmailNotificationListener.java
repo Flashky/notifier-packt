@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import brv.notifier.packt.dto.PacktFreeOffer;
 import brv.notifier.packt.enums.Url;
 import brv.notifier.packt.enums.WebPath;
 import brv.notifier.packt.services.mailing.EmailData;
 import brv.notifier.packt.services.mailing.EmailService;
+import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 import brv.notifier.packt.util.MessageHelper;
 
 @Service

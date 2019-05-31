@@ -2,7 +2,7 @@ package brv.notifier.packt.repositories;
 
 import java.util.Optional;
 
-import brv.notifier.packt.model.json.JsonSummary;
+import brv.notifier.packt.model.offers.JsonSummary;
 
 public interface SummaryRepository {
 

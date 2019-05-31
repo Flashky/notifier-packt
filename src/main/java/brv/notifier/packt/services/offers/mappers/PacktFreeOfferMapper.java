@@ -1,13 +1,13 @@
-package brv.notifier.packt.mappers;
+package brv.notifier.packt.services.offers.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import brv.notifier.packt.dto.PacktFreeOffer;
 import brv.notifier.packt.enums.Url;
-import brv.notifier.packt.model.json.JsonSummary;
+import brv.notifier.packt.model.offers.JsonSummary;
+import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 
 @Mapper(componentModel = "spring")
 public abstract class PacktFreeOfferMapper {

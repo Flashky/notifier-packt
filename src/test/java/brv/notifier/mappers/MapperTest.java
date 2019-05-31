@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.mapstruct.factory.Mappers;
 
-import brv.notifier.packt.dto.PacktFreeOffer;
-import brv.notifier.packt.mappers.PacktFreeOfferMapper;
-import brv.notifier.packt.model.json.JsonSummary;
+import brv.notifier.packt.model.offers.JsonSummary;
+import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
+import brv.notifier.packt.services.offers.mappers.PacktFreeOfferMapper;
 
 public class MapperTest {
 

@@ -1,4 +1,4 @@
-package brv.notifier.packt.dto;
+package brv.notifier.packt.services.offers.dto;
 
 import java.io.Serializable;
 

@@ -1,8 +1,8 @@
-package brv.notifier.packt.services;
+package brv.notifier.packt.services.offers;
 
-import brv.notifier.packt.dto.PacktFreeOffer;
+import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 
-public interface CheckoutService {
+public interface OffersService {
 
 	/**
 	 * Obtains the summary for the free offer of the day.
