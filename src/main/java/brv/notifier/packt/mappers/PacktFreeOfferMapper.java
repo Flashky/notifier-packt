@@ -6,7 +6,7 @@ import org.mapstruct.Named;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import brv.notifier.packt.dto.PacktFreeOffer;
-import brv.notifier.packt.model.enums.Url;
+import brv.notifier.packt.enums.Url;
 import brv.notifier.packt.model.json.JsonSummary;
 
 @Mapper(componentModel = "spring")

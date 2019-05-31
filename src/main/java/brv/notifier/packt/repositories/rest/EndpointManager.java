@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import brv.notifier.packt.model.enums.ApiPath;
-import brv.notifier.packt.model.enums.Url;
+import brv.notifier.packt.enums.ApiPath;
+import brv.notifier.packt.enums.Url;
 
 @Component	
 public class EndpointManager {
