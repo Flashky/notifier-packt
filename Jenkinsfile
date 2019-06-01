@@ -4,20 +4,12 @@ pipeline {
 		maven 'M3_Jenkins' 
 	}
 	stages {
-		
-		stage('Clone Repository') {
-			steps {
-				// Get some code from a GitHub repository
-				git 'https://github.com/Flashky/notifier-packt.git'
-			}
-
-		}
 
 		stage('Build') {
 			steps {
-				// Remove previous jars
-				//sh 'rm -f target/notifier-packt*.jar'
-				//sh 'rm -f *.jar'
+			
+				// Get some code from a GitHub repository
+				git 'https://github.com/Flashky/notifier-packt.git'
 				
 				// Build
 				sh 'mvn -f pom.xml clean install'
@@ -26,12 +18,14 @@ pipeline {
 		}
 		
 		stage('Report tests results') {
-			environment {
-				CODACY_PROJECT_TOKEN = "${env.CODACY_PROJECT_TOKEN_NOTIFIER_PACKT}"
-			}
+			//environment {
+			//	CODACY_PROJECT_TOKEN = "${env.CODACY_PROJECT_TOKEN_NOTIFIER_PACKT}"
+			//}
 			steps {
-				sh 'curl -Ls -o codacy-coverage-reporter-assembly.jar "https://dl.bintray.com/codacy/Binaries/6.0.0/codacy-coverage-reporter-assembly.jar"'
-				sh 'java -jar codacy-coverage-reporter-assembly.jar report -l Java -r target/site/jacoco/jacoco.xml'
+				withEnv(["CODACY_PROJECT_TOKEN= ${env.CODACY_PROJECT_TOKEN_NOTIFIER_PACKT}"]) {
+					sh 'curl -Ls -o codacy-coverage-reporter-assembly.jar "https://dl.bintray.com/codacy/Binaries/6.0.0/codacy-coverage-reporter-assembly.jar"'
+					sh 'java -jar codacy-coverage-reporter-assembly.jar report -l Java -r target/site/jacoco/jacoco.xml'
+				}
 			}
 		}
 		
