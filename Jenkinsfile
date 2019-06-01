@@ -32,7 +32,7 @@ pipeline {
 			steps {
 				echo env.CODACY_PROJECT_TOKEN
 				sh 'curl -Ls -o codacy-coverage-reporter-assembly.jar "https://dl.bintray.com/codacy/Binaries/6.0.0/codacy-coverage-reporter-assembly.jar"'
-				sh 'java -jar codacy-coverage-reporter-assembly.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml'
+				sh 'java -jar codacy-coverage-reporter-assembly.jar report -l Java -r target/site/jacoco/jacoco.xml'
 			}
 		}
 		
