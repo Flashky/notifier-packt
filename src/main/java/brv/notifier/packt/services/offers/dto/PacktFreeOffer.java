@@ -91,24 +91,7 @@ public class PacktFreeOffer implements Serializable {
 	public void setFeatures(String features) {
 		this.features = features;
 	}
-	@Override
-	public int hashCode() {
-		
-		HashCodeBuilder builder = new HashCodeBuilder();
-		
-		builder.append(coverImage)
-		.append(title)
-		.append(readUrl)
-		.append(shopUrl)
-		.append(readUrl)
-		.append(oneLiner)
-		.append(about)
-		.append(learn)
-		.append(features);
-		
-		return builder.toHashCode();
-	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		
@@ -133,25 +116,5 @@ public class PacktFreeOffer implements Serializable {
 		
 		return builder.isEquals();
 	}
-
-	@Override
-	public String toString() {
-		
-		ToStringBuilder builder = new ToStringBuilder(this);
-		
-		builder.append(coverImage)
-		.append(title)
-		.append(readUrl)
-		.append(shopUrl)
-		.append(readUrl)
-		.append(oneLiner)
-		.append(about)
-		.append(learn)
-		.append(features);
-		
-		return builder.toString();
-	}
-	
-	
 	
 }
