@@ -1,5 +1,6 @@
 package brv.notifier.packt.repositories;
 
+import java.net.URI;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class SummaryRestRepository implements SummaryRepository {
 	public Optional<JsonSummary> findById(Long productId) {
 		
 		String endpoint = endpointManager.getSummaryEndpoint(productId);
-		JsonSummary offerSummary = restTemplate.getForObject(endpoint, JsonSummary.class);
+		JsonSummary offerSummary = restTemplate.getForObject(URI.create(endpoint), JsonSummary.class);
 		
 		return Optional.ofNullable(offerSummary);
 	}
