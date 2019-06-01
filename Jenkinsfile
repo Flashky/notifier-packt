@@ -16,8 +16,8 @@ pipeline {
 		stage('Build') {
 			steps {
 				// Remove previous jars
-				sh 'rm notifier-packt/target/notifier-packt*.jar'
-				sh 'rm *.jar'
+				sh 'rm -f notifier-packt/target/notifier-packt*.jar'
+				sh 'rm -f *.jar'
 				
 				// Build
 				sh 'mvn -f notifier-packt/pom.xml install -DskipTests'
