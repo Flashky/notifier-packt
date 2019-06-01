@@ -1,6 +1,9 @@
 package brv.notifier.packt.services.checking;
 
+import static org.junit.Assert.assertEquals;
+
 import java.time.LocalDate;
+import java.time.Month;
 
 import org.junit.Test;
 
@@ -8,20 +11,23 @@ import brv.notifier.packt.repositories.EndpointManager;
 
 public class EndpointManagerTest {
  
+	private EndpointManager manager = new EndpointManager();
+	private LocalDate testDate = LocalDate.of(2019, Month.JUNE, 01);
+	
 	@Test
-	public void test() {
-		EndpointManager manager = new EndpointManager();
-		String endpoint = manager.getOffersEndpoint(LocalDate.now());
+	public void testEndpointDateFrom() {
+
+		String endpoint = manager.getOffersEndpoint(testDate);
+		assertEquals("https://services.packtpub.com/free-learning-v1/offers?dateFrom=2019-06-01", endpoint);
 		
-		System.out.println(endpoint);
 	}
 	
 	@Test
-	public void testBetween() {
-		EndpointManager manager = new EndpointManager();
-		String endpoint = manager.getOffersEndpoint(LocalDate.now(), LocalDate.now().plusDays(1));
-		
-		System.out.println(endpoint);
+	public void testEndpointDateFromDateTo() {
+
+		String endpoint = manager.getOffersEndpoint(testDate, testDate.plusDays(1));
+		assertEquals("https://services.packtpub.com/free-learning-v1/offers?dateFrom=2019-06-01&dateTo=2019-06-02", endpoint);
+
 	}
 
 }
