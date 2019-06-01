@@ -23,46 +23,5 @@ public class JsonOffers implements Serializable {
 	public void setData(List<JsonOffer> data) {
 		this.data = data;
 	}
-
-	@Override
-	public int hashCode() {
-		HashCodeBuilder builder = new HashCodeBuilder();
-		
-		builder.append(data);
-		
-		return builder.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		
-		// I could use instanceof, but this code fragment is much more generic
-		// and reusable, as it is class agnostic.
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		
-		final JsonOffers other = (JsonOffers) obj;
-		EqualsBuilder builder = new EqualsBuilder();
-		
-		builder.append(data, other.data);
-		
-		return builder.isEquals();
-	}
-
-	@Override
-	public String toString() {
-		ToStringBuilder builder = new ToStringBuilder(this);
-		
-		builder.append(data);
-		
-		return builder.toString();
-	}
-	
-	
-	
 	
 }
