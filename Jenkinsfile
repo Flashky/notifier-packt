@@ -27,6 +27,7 @@ pipeline {
 		
 		stage('Report tests results') {
 			steps {
+				echo env.CODACY_PROJECT_TOKEN_NOTIFIER_PACKT
 				sh 'CODACY_PROJECT_TOKEN=env.CODACY_PROJECT_TOKEN_NOTIFIER_PACKT'
 				sh 'Token: ${CODACY_PROJECT_TOKEN}'
 				sh 'curl -Ls -o codacy-coverage-reporter-assembly.jar "https://dl.bintray.com/codacy/Binaries/6.0.0/codacy-coverage-reporter-assembly.jar"'
