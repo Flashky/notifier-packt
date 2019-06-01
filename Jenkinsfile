@@ -15,11 +15,12 @@ pipeline {
 		}
 		
 		stage('Report tests results') {
+			environment {
+				CODACY_PROJECT_TOKEN = " ${env.CODACY_PROJECT_TOKEN_NOTIFIER_PACKT}" 
+			}
 			steps {
-				withEnv(["CODACY_PROJECT_TOKEN= ${env.CODACY_PROJECT_TOKEN_NOTIFIER_PACKT}"]) {
-					sh 'curl -Ls -o codacy-coverage-reporter-assembly.jar "https://dl.bintray.com/codacy/Binaries/6.0.0/codacy-coverage-reporter-assembly.jar"'
-					sh 'java -jar codacy-coverage-reporter-assembly.jar report -l Java -r target/site/jacoco/jacoco.xml'
-				}
+				sh 'curl -Ls -o codacy-coverage-reporter-assembly.jar "https://dl.bintray.com/codacy/Binaries/6.0.0/codacy-coverage-reporter-assembly.jar"'
+				sh 'java -jar codacy-coverage-reporter-assembly.jar report -l Java -r target/site/jacoco/jacoco.xml'
 			}
 		}
 		
