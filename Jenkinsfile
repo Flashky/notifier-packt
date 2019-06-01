@@ -27,9 +27,10 @@ pipeline {
 		
 		stage('Report tests results') {
 			steps {
-				sh 'LATEST_VERSION="$(curl -Ls https://api.bintray.com/packages/codacy/Binaries/codacy-coverage-reporter/versions/_latest | jq -r .name)"'
-				sh 'curl -Ls -o codacy-coverage-reporter-assembly.jar "https://dl.bintray.com/codacy/Binaries/${LATEST_VERSION}/codacy-coverage-reporter-assembly.jar"'
-				//sh 'java -jar codacy-coverage-reporter-assembly.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml'
+				sh 'CODACY_PROJECT_TOKEN=env.CODACY_PROJECT_TOKEN_NOTIFIER_PACKT'
+				sh 'Token: ${CODACY_PROJECT_TOKEN}'
+				sh 'curl -Ls -o codacy-coverage-reporter-assembly.jar "https://dl.bintray.com/codacy/Binaries/6.0.0/codacy-coverage-reporter-assembly.jar"'
+				sh 'java -jar codacy-coverage-reporter-assembly.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml'
 			}
 		}
 		
