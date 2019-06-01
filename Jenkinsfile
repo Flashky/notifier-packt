@@ -1,3 +1,5 @@
+#!groovy
+​
 pipeline {
 	agent any
 	tools {
@@ -7,9 +9,6 @@ pipeline {
 
 		stage('Build') {
 			steps {
-			
-				// Get some code from a GitHub repository
-				git 'https://github.com/Flashky/notifier-packt.git'
 				
 				// Build
 				sh 'mvn -f pom.xml clean install'
@@ -18,9 +17,6 @@ pipeline {
 		}
 		
 		stage('Report tests results') {
-			//environment {
-			//	CODACY_PROJECT_TOKEN = "${env.CODACY_PROJECT_TOKEN_NOTIFIER_PACKT}"
-			//}
 			steps {
 				withEnv(["CODACY_PROJECT_TOKEN= ${env.CODACY_PROJECT_TOKEN_NOTIFIER_PACKT}"]) {
 					sh 'curl -Ls -o codacy-coverage-reporter-assembly.jar "https://dl.bintray.com/codacy/Binaries/6.0.0/codacy-coverage-reporter-assembly.jar"'
