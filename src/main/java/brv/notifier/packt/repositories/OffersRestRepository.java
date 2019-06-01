@@ -24,21 +24,13 @@ public class OffersRestRepository implements OffersRepository {
 	
 	private static final Integer SINGLE_RESULT = 0;
 	private static final int MIN_NUMBER_DAYS = 1;
-	
-	@Override
-	public Optional<JsonOffer> getTodayOffer() {
-		
-		return getOffer(LocalDate.now());
-		
-	}
-	
 
 	@Override
-	public Optional<JsonOffer> getOffer(LocalDate dateFrom) {
+	public Optional<JsonOffer> getOffer(LocalDate date) {
 		
-		LocalDate dateTo = dateFrom.plusDays(MIN_NUMBER_DAYS);
+		LocalDate dateTo = date.plusDays(MIN_NUMBER_DAYS);
 		
-		String endpoint = endpointManager.getOffersEndpoint(dateFrom, dateTo);
+		String endpoint = endpointManager.getOffersEndpoint(date, dateTo);
 		List<JsonOffer> offers = getOffers(endpoint);
 
 		Optional<JsonOffer> result = Optional.empty();
@@ -53,16 +45,16 @@ public class OffersRestRepository implements OffersRepository {
 	
 
 	@Override
-	public List<JsonOffer> getOffers(LocalDate dateFrom) {
+	public List<JsonOffer> getOffers(LocalDate startDate) {
 		
-		String endpoint = endpointManager.getOffersEndpoint(dateFrom);
+		String endpoint = endpointManager.getOffersEndpoint(startDate);
 		return getOffers(endpoint);
 	}
 
 	@Override
-	public List<JsonOffer> getOffers(LocalDate dateFrom, LocalDate dateTo) {
+	public List<JsonOffer> getOffers(LocalDate startDate, LocalDate endDate) {
 		
-		String endpoint = endpointManager.getOffersEndpoint(dateFrom, dateTo);
+		String endpoint = endpointManager.getOffersEndpoint(startDate, endDate);
 		return getOffers(endpoint);
 	}
 

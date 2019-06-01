@@ -7,12 +7,6 @@ import java.util.Optional;
 import brv.notifier.packt.model.offers.JsonOffer;
 
 public interface OffersRepository {
-
-	/**
-	 * Obtains today free offer.
-	 * @return An object containing todays free offer.
-	 */
-	Optional<JsonOffer> getTodayOffer();
 	
 	/**
 	 * Obtains a single day free offer.
@@ -22,17 +16,17 @@ public interface OffersRepository {
 	Optional<JsonOffer> getOffer(LocalDate date);
 	
 	/**
-	 * Obtains all free offers from today onwards.
-	 * @param dateFrom starting date to look up for free offers.
+	 * Obtains all free offers from the selected date onwards.
+	 * @param startDate starting date to look up for free offers.
 	 * @return A list containing offers from today onwards.
 	 */
-	List<JsonOffer> getOffers(LocalDate dateFrom);
+	List<JsonOffer> getOffers(LocalDate startDate);
 	
 	/**
-	 * Obtains all free offers between two dates-
-	 * @param dateFrom starting date to look up for free offers.
-	 * @param dateTo ending date to look up for free offers.
+	 * Obtains all free offers between two dates.
+	 * @param startDate starting date to look up for free offers.
+	 * @param endDate ending date to look up for free offers.
 	 * @return A list containing all free offers between both dates.
 	 */
-	List<JsonOffer> getOffers(LocalDate dateFrom, LocalDate dateTo);
+	List<JsonOffer> getOffers(LocalDate startDate, LocalDate endDate);
 }

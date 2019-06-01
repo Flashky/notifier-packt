@@ -1,5 +1,6 @@
 package brv.notifier.packt.services;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class PacktCheckTask {
 	@Scheduled(fixedRateString = "5000")
 	public void checkPacktDailyOffer() {
 
-		PacktFreeOffer offer = checkoutService.getPacktOffer();
+		PacktFreeOffer offer = checkoutService.getPacktOffer(LocalDate.now());
 		
 		if(offer == null) {
 			LOGGER.info(messageHelper.getMessage("offer.missing"));

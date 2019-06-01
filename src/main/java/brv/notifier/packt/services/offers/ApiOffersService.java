@@ -1,5 +1,6 @@
 package brv.notifier.packt.services.offers;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,11 +68,11 @@ public class ApiOffersService implements OffersService {
 	private PacktFreeOfferMapper mapper;
 	
 	@Override
-	public PacktFreeOffer getPacktOffer() {
+	public PacktFreeOffer getPacktOffer(LocalDate date) {
 
 		PacktFreeOffer result = null;
 		
-		Optional<JsonOffer> offer = offersDao.getTodayOffer();
+		Optional<JsonOffer> offer = offersDao.getOffer(date);
 		
 		if(offer.isPresent()) {
 			
