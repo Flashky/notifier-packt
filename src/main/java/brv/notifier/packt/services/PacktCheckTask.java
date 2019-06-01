@@ -39,8 +39,8 @@ public class PacktCheckTask {
 	
 	private List<DailyNotificationListener> listeners = new LinkedList<>();
 	
-	//@Scheduled(cron = "${service.cron}")
-	@Scheduled(fixedRateString = "5000")
+	@Scheduled(cron = "${service.cron}")
+	//@Scheduled(fixedRateString = "5000")
 	public void checkPacktDailyOffer() {
 
 		PacktFreeOffer offer = checkoutService.getPacktOffer(LocalDate.now());
