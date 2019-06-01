@@ -11,6 +11,7 @@
 	<name>notifier-packt</name>
 	<description>Notifier for Packt free offers</description>
 	
+	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
