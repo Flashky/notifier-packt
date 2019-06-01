@@ -16,15 +16,15 @@ pipeline {
 		stage('Build') {
 			steps {
 				// Remove previous jars
-				sh 'rm -f notifier-packt/target/notifier-packt*.jar'
+				sh 'rm -f target/notifier-packt*.jar'
 				sh 'rm -f *.jar'
 				
 				// Build
-				sh 'mvn -f notifier-packt/pom.xml install -DskipTests'
+				sh 'mvn -f pom.xml install -DskipTests'
 				
 				// TODO figure out how to call readMavenPom() without needing to copy to parent directory.
-				sh 'cp notifier-packt/pom.xml .'
-				sh 'cp notifier-packt/target/notifier-packt*.jar .'
+				//sh 'cp notifier-packt/pom.xml .'
+				//sh 'cp notifier-packt/target/notifier-packt*.jar .'
 			}
 		}
 		
