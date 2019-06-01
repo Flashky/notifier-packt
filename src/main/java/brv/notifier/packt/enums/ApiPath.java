@@ -31,7 +31,15 @@ public enum ApiPath {
 	 * This endpoint provides information about a specific product (usually, a book)
 	 * </p>
 	 */
-	SUMMARY("/products/{productId}/summary");
+	SUMMARY("/products/{productId}/summary"),
+	
+	/**
+	 * Endpoint: <pre>/authors/{authorId}</pre>
+	 * <p>
+	 * This endpoint provices information about a specific author.
+	 * </p>
+	 */
+	AUTHOR("/authors/{authorId}");
 	
 	private String path;
 	
