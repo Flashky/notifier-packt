@@ -20,21 +20,18 @@ pipeline {
 				sh 'rm -f *.jar'
 				
 				// Build
-				sh 'mvn -f pom.xml install -DskipTests'
+				sh 'mvn -f pom.xml install'
 				
-				// TODO figure out how to call readMavenPom() without needing to copy to parent directory.
-				//sh 'cp notifier-packt/pom.xml .'
-				//sh 'cp notifier-packt/target/notifier-packt*.jar .'
 			}
 		}
 		
-		// TODO Add Nexus deployment in a future
-		// will need to add the target repository at the pom file
-		//stage('Nexus deploy') {
-		//	steps {
-		//		sh 'mvn -f notifier-packt/pom.xml deploy'
-		//	}
-		//}
+		stage('Report tests results') {
+			steps {
+				sh 'LATEST_VERSION="$(curl -Ls https://api.bintray.com/packages/codacy/Binaries/codacy-coverage-reporter/versions/_latest | jq -r .name)"'
+				sh 'curl -Ls -o codacy-coverage-reporter-assembly.jar "https://dl.bintray.com/codacy/Binaries/${LATEST_VERSION}/codacy-coverage-reporter-assembly.jar"'
+				//sh 'java -jar codacy-coverage-reporter-assembly.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml'
+			}
+		}
 		
 		stage('Docker image build') {
 			environment {
