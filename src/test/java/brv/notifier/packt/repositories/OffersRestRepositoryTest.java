@@ -22,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 
 import brv.notifier.packt.model.offers.JsonOffer;
 import brv.notifier.packt.model.offers.JsonOffers;
-import brv.test.util.dummies.DummyJsonOffer;
+import brv.test.util.dummies.DummyJsonOffers;
 
 @RunWith(MockitoJUnitRunner.class)
 public class OffersRestRepositoryTest {
@@ -38,17 +38,6 @@ public class OffersRestRepositoryTest {
 	
 	private LocalDate today = LocalDate.now();
 	private LocalDate tomorrow = today.plusDays(1);
-	
-	
-	private JsonOffers getJsonOffers() {
-		JsonOffers offers = new JsonOffers();
-		
-		List<JsonOffer> data = new ArrayList<>();
-		data.add(DummyJsonOffer.get());
-		offers.setData(data);
-		
-		return offers;
-	}
 	
 	@Before
 	public void setUp() {
@@ -67,7 +56,7 @@ public class OffersRestRepositoryTest {
 
 
 		Mockito.when(restTemplate.getForObject(ArgumentMatchers.any(), ArgumentMatchers.<Class<JsonOffers>>any()))
-				.thenReturn(getJsonOffers());
+				.thenReturn(DummyJsonOffers.get());
 		
 		Optional<JsonOffer> offer = offersRepository.getOffer(today);
 		
@@ -94,7 +83,7 @@ public class OffersRestRepositoryTest {
 	@Test
 	public void testGetOfferEmpty() {
 
-		JsonOffers jsonOffers = getJsonOffers();
+		JsonOffers jsonOffers = DummyJsonOffers.get();
 		jsonOffers.setData(new ArrayList<>());
 		
 		Mockito.when(restTemplate.getForObject(ArgumentMatchers.any(), ArgumentMatchers.<Class<JsonOffers>>any()))
@@ -111,7 +100,7 @@ public class OffersRestRepositoryTest {
 	public void testGetOffersStartDate() {
 	
 		Mockito.when(restTemplate.getForObject(ArgumentMatchers.any(), ArgumentMatchers.<Class<JsonOffers>>any()))
-				.thenReturn(getJsonOffers());	
+				.thenReturn(DummyJsonOffers.get());	
 		
 		List<JsonOffer> offers = offersRepository.getOffers(today);
 		
@@ -126,7 +115,7 @@ public class OffersRestRepositoryTest {
 	public void testGetOffersStartEndDate() {
 		
 		Mockito.when(restTemplate.getForObject(ArgumentMatchers.any(), ArgumentMatchers.<Class<JsonOffers>>any()))
-				.thenReturn(getJsonOffers());	
+				.thenReturn(DummyJsonOffers.get());	
 		
 		List<JsonOffer> offers = offersRepository.getOffers(today,tomorrow);
 		
