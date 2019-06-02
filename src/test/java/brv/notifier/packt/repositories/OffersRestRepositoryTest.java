@@ -42,12 +42,13 @@ public class OffersRestRepositoryTest {
 	@Before
 	public void setUp() {
 		
-		Mockito.when(endpointManager.getOffersEndpoint(ArgumentMatchers.any()))
-		.thenReturn("http://test-url");
-		
-		Mockito.when(endpointManager.getOffersEndpoint(ArgumentMatchers.any(), 
-														ArgumentMatchers.any()))
-		.thenReturn("http://test-url");
+		Mockito.doCallRealMethod()
+			.when(endpointManager)
+			.getOffersEndpoint(ArgumentMatchers.any());
+
+		Mockito.doCallRealMethod()
+			.when(endpointManager)
+			.getOffersEndpoint(ArgumentMatchers.any(), ArgumentMatchers.any());
 		
 	}
 	

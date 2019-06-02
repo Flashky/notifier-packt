@@ -37,8 +37,9 @@ public class SummaryRestRepositoryTest {
 	@Before
 	public void setUp() {
 		
-		Mockito.when(endpointManager.getSummaryEndpoint(ArgumentMatchers.any()))
-		.thenReturn("http://test-url");
+		Mockito.doCallRealMethod()
+			.when(endpointManager)
+			.getSummaryEndpoint(ArgumentMatchers.any());
 		
 	}
 	
