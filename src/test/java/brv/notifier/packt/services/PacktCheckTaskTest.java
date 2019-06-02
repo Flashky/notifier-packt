@@ -36,6 +36,10 @@ public class PacktCheckTaskTest {
 		// Add a dummy listener
 		service.addNotificationListener(new DummyDailyNotificationListener());
 		
+		// Add a null listener
+		// it should be ignored - otherwise we'll see a NullPointerException and get an error on test
+		service.addNotificationListener(null);
+		
 	}
 	@Test
 	public void testNewOffer() {
