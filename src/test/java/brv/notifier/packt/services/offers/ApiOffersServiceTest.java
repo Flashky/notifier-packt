@@ -9,32 +9,32 @@ import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import brv.notifier.packt.repositories.OffersRepository;
 import brv.notifier.packt.repositories.SummaryRepository;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
+import brv.notifier.packt.services.offers.mappers.PacktFreeOfferMapperImpl;
 import brv.test.util.dummies.DummyJsonOffer;
 import brv.test.util.dummies.DummyJsonSummary;
 
-@SpringBootTest 
-@RunWith(SpringRunner.class)
-@ActiveProfiles("test")
+@RunWith(MockitoJUnitRunner.class)
 public class ApiOffersServiceTest {
 
-	@Autowired
-	private ApiOffersService offersService;
+	@InjectMocks
+	private ApiOffersService offersService = new ApiOffersService();
 	
-	@MockBean
+	@Mock
 	private OffersRepository offersDao;
 	
-	@MockBean
+	@Mock
 	private SummaryRepository summaryDao;
+	
+	@Mock
+	private PacktFreeOfferMapperImpl mapper;
 	
 	@Test
 	public void testGetPacktOffer() {
@@ -50,6 +50,11 @@ public class ApiOffersServiceTest {
 		Mockito.doReturn(Optional.of(DummyJsonSummary.get()))
 		.when(summaryDao)
 		.findById(ArgumentMatchers.any());
+		
+		// Execute real mapping
+		Mockito.doCallRealMethod()
+		.when(mapper)
+		.jsonToModel(ArgumentMatchers.any());
 		
 		PacktFreeOffer offer = offersService.getPacktOffer(today);
 		
