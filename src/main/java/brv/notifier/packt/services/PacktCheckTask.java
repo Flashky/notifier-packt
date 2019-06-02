@@ -79,16 +79,9 @@ public class PacktCheckTask {
 	 * @param listener - the listener to register.
 	 */
 	public void addNotificationListener(DailyNotificationListener listener) {
-		if(listener != null)
+		if(listener != null) {
 			this.listeners.add(listener);
+		}
 	}
 
-	/**
-	 * Removes a listener from the registered listeners.
-	 * @param listener - the listener to remove.
-	 */
-	public void removeNotificationListener(DailyNotificationListener listener) {
-
-			listeners.remove(listener);
-	}
 } 
