@@ -22,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 
 import brv.notifier.packt.model.offers.JsonOffer;
 import brv.notifier.packt.model.offers.JsonOffers;
+import brv.test.util.dummies.DummyJsonOffer;
 
 @RunWith(MockitoJUnitRunner.class)
 public class OffersRestRepositoryTest {
@@ -43,19 +44,10 @@ public class OffersRestRepositoryTest {
 		JsonOffers offers = new JsonOffers();
 		
 		List<JsonOffer> data = new ArrayList<>();
-		data.add(getJsonOffer());
+		data.add(DummyJsonOffer.get());
 		offers.setData(data);
 		
 		return offers;
-	}
-	private JsonOffer getJsonOffer() {
-		JsonOffer offer = new JsonOffer();
-		
-		offer.setProductId(5L);
-		offer.setAvailableFrom(today);
-		offer.setExpiresAt(tomorrow);
-	
-		return offer;
 	}
 	
 	@Before
