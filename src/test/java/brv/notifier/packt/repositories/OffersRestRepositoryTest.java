@@ -59,7 +59,7 @@ public class OffersRestRepositoryTest {
 	}
 	
 	@Before
-	public void setup() {
+	public void setUp() {
 		
 		Mockito.when(endpointManager.getOffersEndpoint(ArgumentMatchers.any()))
 		.thenReturn("http://test-url");

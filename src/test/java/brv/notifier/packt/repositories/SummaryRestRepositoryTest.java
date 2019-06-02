@@ -34,7 +34,7 @@ public class SummaryRestRepositoryTest {
 	private final static Long PRODUCT_ID = 1234L;
 	
 	@Before
-	public void setup() {
+	public void setUp() {
 		
 		Mockito.when(endpointManager.getSummaryEndpoint(ArgumentMatchers.any()))
 		.thenReturn("http://test-url");
