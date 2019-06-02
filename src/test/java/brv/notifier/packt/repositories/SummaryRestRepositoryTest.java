@@ -18,6 +18,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.client.RestTemplate;
 
 import brv.notifier.packt.model.offers.JsonSummary;
+import brv.test.util.dummies.DummyJsonSummary;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SummaryRestRepositoryTest {
@@ -31,7 +32,7 @@ public class SummaryRestRepositoryTest {
 	@Mock
 	private RestTemplate restTemplate;
 	
-	private final static Long PRODUCT_ID = 1234L;
+	private final static Long PRODUCT_ID = 5L;
 	
 	@Before
 	public void setUp() {
@@ -41,27 +42,11 @@ public class SummaryRestRepositoryTest {
 		
 	}
 	
-	private JsonSummary getJsonSummary() {
-		JsonSummary summary = new JsonSummary();
-		
-		summary.setAbout("about");
-		summary.setCoverImage("http://image.png");
-		summary.setFeatures("features");
-		summary.setLearn("learn");
-		summary.setOneLiner("oneLiner");
-		summary.setProductId(PRODUCT_ID);
-		summary.setReadUrl("http://read-url");
-		summary.setShopUrl("http://shop-url");
-		summary.setTitle("title");
-		
-		return summary;
-	}
-	
 	@Test
 	public void testFindById() {
 		
 		Mockito.when(restTemplate.getForObject(ArgumentMatchers.any(), ArgumentMatchers.<Class<JsonSummary>>any()))
-		.thenReturn(getJsonSummary());
+		.thenReturn(DummyJsonSummary.get());
 		
 		Optional<JsonSummary> summary = summaryRestRepository.findById(PRODUCT_ID);
 		
