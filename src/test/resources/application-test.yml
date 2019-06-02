@@ -19,8 +19,8 @@ simplejavamail:
   smtp:
     host: smtp.gmail.com
     port: 587
-    username: mevengar@gmail.com
-    password: ${MAIL_PASSWORD}
+    username: anything@gmail.com
+    password: anything
   defaults:
     from: 
       name: Packt Notifier
