@@ -1,6 +1,7 @@
-package brv.notifier.mappers;
+package brv.notifier.packt.services.offers.mappers;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 import org.mapstruct.factory.Mappers;
@@ -9,9 +10,9 @@ import brv.notifier.packt.model.offers.JsonSummary;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 import brv.notifier.packt.services.offers.mappers.PacktFreeOfferMapper;
 
-public class MapperTest {
+public class PacktFreeOfferMapperTest {
 
-	
+	private PacktFreeOfferMapper mapper = Mappers.getMapper( PacktFreeOfferMapper.class );
 	@Test
 	public void test() {
 
@@ -25,7 +26,6 @@ public class MapperTest {
 		jsonSummary.setLearn("learn");
 		jsonSummary.setFeatures("features");
 
-		PacktFreeOfferMapper mapper = Mappers.getMapper( PacktFreeOfferMapper.class );
 
 		PacktFreeOffer offerMapStruct = mapper.jsonToModel(jsonSummary);
 		
@@ -38,6 +38,12 @@ public class MapperTest {
 		assertEquals("features", offerMapStruct.getFeatures());
 		
 		
+	}
+	
+	@Test
+	public void testNull() {
+		
+		assertNull(mapper.jsonToModel(null));
 	}
 
 }

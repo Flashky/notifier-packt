@@ -1,5 +1,6 @@
 package brv.notifier.packt.repositories;
 
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class OffersRestRepository implements OffersRepository {
 	private EndpointManager endpointManager;
 	
 	private static final Integer SINGLE_RESULT = 0;
-	private static final int MIN_NUMBER_DAYS = 1;
+	private static final Integer MIN_NUMBER_DAYS = 1;
 
 	@Override
 	public Optional<JsonOffer> getOffer(LocalDate date) {
@@ -67,8 +68,8 @@ public class OffersRestRepository implements OffersRepository {
 	private List<JsonOffer> getOffers(String endpoint) {
 		
 		List<JsonOffer> result = new ArrayList<>();
-		
-		JsonOffers offers = restTemplate.getForObject(endpoint, JsonOffers.class);
+
+		JsonOffers offers = restTemplate.getForObject(URI.create(endpoint), JsonOffers.class);
 		
 		if( (offers != null) && (!CollectionUtils.isEmpty(offers.getData())) ) {
 			result = offers.getData();

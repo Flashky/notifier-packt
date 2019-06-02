@@ -6,14 +6,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.context.Context;
 
 @Service
 public class ThymeleafTemplateService implements TemplateService {
 
 	@Autowired
-	private TemplateEngine templateEngine;
+	private ITemplateEngine templateEngine;
 	
 	@Override
 	public String process(String template) {

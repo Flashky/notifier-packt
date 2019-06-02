@@ -3,10 +3,6 @@ package brv.notifier.packt.model.offers;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 public class JsonOffer implements Serializable {
 	/**
 	 * 
@@ -35,51 +31,5 @@ public class JsonOffer implements Serializable {
 	public void setExpiresAt(LocalDate expiresAt) {
 		this.expiresAt = expiresAt;
 	}
-	
-	@Override
-	public int hashCode() {
-		HashCodeBuilder builder = new HashCodeBuilder();
-		
-		builder.append(productId)
-		.append(availableFrom)
-		.append(expiresAt);
-		
-		return builder.toHashCode();
-	}
-	@Override
-	public boolean equals(Object obj) {
-
-		// I could use instanceof, but this code fragment is much more generic
-		// and reusable, as it is class agnostic.
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		
-		final JsonOffer other = (JsonOffer) obj;
-		EqualsBuilder builder = new EqualsBuilder();
-		
-		builder.append(productId, other.productId)
-		.append(availableFrom, other.availableFrom)
-		.append(expiresAt, other.expiresAt);
-		
-		return builder.isEquals();
-	}
-	
-	@Override
-	public String toString() {
-		ToStringBuilder builder = new ToStringBuilder(this);
-		
-		builder.append(productId)
-		.append(availableFrom)
-		.append(expiresAt);
-		
-		return builder.toString();
-	}
-	
-	
-	
 	
 }
