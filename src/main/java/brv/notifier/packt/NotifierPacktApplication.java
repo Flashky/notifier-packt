@@ -20,12 +20,13 @@ import org.springframework.web.client.RestTemplate;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 import brv.notifier.packt.notifications.DailyNotificationListener;
-import brv.notifier.packt.notifications.EmailNotificationListener;
+import brv.notifier.packt.notifications.TwitterNotificationListener;
 import brv.notifier.packt.properties.PacktProperties;
 import brv.notifier.packt.properties.ProxyProperty;
 import brv.notifier.packt.services.PacktCheckTask;
 import brv.notifier.packt.util.MessageHelper;
 
+//@EnableTwitter
 @SpringBootApplication
 @EnableScheduling
 @EnableEncryptableProperties
@@ -40,13 +41,22 @@ public class NotifierPacktApplication {
 		SpringApplication.run(NotifierPacktApplication.class, args);
 	}
 	
-	@Bean 
+	/*
+	@Bean 	
 	public EmailNotificationListener getEmailService(PacktCheckTask service) {
 		
 		DailyNotificationListener listener = new EmailNotificationListener();
 		service.addNotificationListener(listener);
 		
 		return (EmailNotificationListener) listener;
+	}*/
+	
+	@Bean
+	public TwitterNotificationListener getTwitterService(PacktCheckTask service) {
+		DailyNotificationListener listener = new TwitterNotificationListener();
+		service.addNotificationListener(listener);
+		
+		return (TwitterNotificationListener) listener;
 	}
 	
 	@Bean
@@ -88,9 +98,12 @@ public class NotifierPacktApplication {
 
 	@Bean
 	public RestTemplate getRestTemplate() {
-	
+
+		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+		requestFactory.setOutputStreaming(false);
 		RestTemplate restTemplate = new RestTemplate();
-				
+		restTemplate.setRequestFactory(requestFactory);
+		
 		ProxyProperty proxyProps = packtProperties.getProxy();
 		
 		if(proxyProps != null) {

@@ -58,6 +58,12 @@
 			<optional>true</optional>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.simplejavamail/simple-java-mail -->
 		<dependency>
 		    <groupId>org.simplejavamail</groupId>
@@ -76,7 +82,13 @@
         	<artifactId>mapstruct</artifactId>
        		<version>${org.mapstruct.version}</version>
    	 	</dependency>
-		
+
+		<dependency>
+		    <groupId>org.twitter4j</groupId>
+		    <artifactId>twitter4j-core</artifactId>
+		    <version>4.0.7</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
