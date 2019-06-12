@@ -8,8 +8,11 @@ import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
+import brv.notifier.packt.util.MessageHelper;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -22,17 +25,22 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 	private static final String NEWLINE = "\n";
 	private static final String HASHTAG = "#";
 	
+	@Autowired
+	@Qualifier("messages-mail")
+	private MessageHelper messageHelper;
+	
 	@Override
 	public void notify(PacktFreeOffer offerData) {
 		
 
-		LOGGER.info("Twitter4J sending start");
+		LOGGER.info("Sending tweet...");
 		InputStream in = null;
 		Twitter twitter = TwitterFactory.getSingleton();
 	    try {
 	    	
 	    	StringBuilder tweet = new StringBuilder();
 	    	tweet.append(formatOneliner(offerData));
+	    	tweet.append(NEWLINE);
 	    	tweet.append(NEWLINE);
 	    	tweet.append("Grab it only today! ");
 	    	tweet.append("https://www.packtpub.com/free-learning");
