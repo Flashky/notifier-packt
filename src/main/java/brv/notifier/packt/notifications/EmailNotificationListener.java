@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import brv.notifier.packt.enums.Url;
+import brv.notifier.packt.enums.Host;
 import brv.notifier.packt.enums.WebPath;
 import brv.notifier.packt.services.mailing.EmailData;
 import brv.notifier.packt.services.mailing.EmailService;
@@ -30,7 +30,7 @@ public class EmailNotificationListener implements DailyNotificationListener {
 		emailData.setSubject(messageHelper.getMessage("mail.subject", new Object[] {offerData.getTitle()}));
 		emailData.setTemplate("mail.html");
 		emailData.getVariables().put("offer", offerData);		
-		emailData.getVariables().put("freeLearningUrl", Url.SHOP.path(WebPath.FREE_OFFER.getPath()));
+		emailData.getVariables().put("freeLearningUrl", Host.SHOP.path(WebPath.FREE_OFFER.getPath()));
 		
 		service.send(emailData);
 

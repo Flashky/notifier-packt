@@ -10,6 +10,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import brv.notifier.packt.enums.Host;
+import brv.notifier.packt.enums.WebPath;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
@@ -19,6 +21,7 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 	private static final Logger LOGGER = LogManager.getLogger(TwitterNotificationListener.class.getName());
 	
 	private static final String NEWLINE = "\n";
+	private static final String PARAGRAPH = NEWLINE + NEWLINE;
 	private static final String HASHTAG = "#";
 	
 	@Autowired
@@ -33,20 +36,21 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 
 	    try {
 	    	
-	    	StringBuilder tweet = new StringBuilder();
-	    	tweet.append(formatOneliner(offerData));
-	    	tweet.append(NEWLINE);
-	    	tweet.append(NEWLINE);
-	    	tweet.append("Grab it only today! ");
-	    	tweet.append("https://www.packtpub.com/free-learning");
-	    	tweet.append(NEWLINE);
-	    	tweet.append(NEWLINE);
-	    	tweet.append("#packt #free #ebook");
+	    	StringBuilder tweet = new StringBuilder()
+	    			.append("Free ebook: ")
+	    			.append(offerData.getTitle())
+	    			.append(PARAGRAPH)
+	    			.append(formatOneliner(offerData))
+	    			.append(PARAGRAPH)
+	    			.append("Grab it only today! ")
+	    			.append(Host.SHOP.path(WebPath.FREE_OFFER.getPath()))
+	    			.append(PARAGRAPH)
+	    			.append("#packt #free #ebook");
 	    	
 	    	StatusUpdate status = new StatusUpdate(tweet.toString());
 	    	
 	    	in = new URL(offerData.getCoverImage()).openStream();
-	    	status.setMedia("Pactk Free Learn - Cover", in);
+	    	status.setMedia("Cover - " + offerData.getTitle(), in);
 
 	    	twitter.updateStatus(status);
 	    	LOGGER.info("Tweet has been sent.");
