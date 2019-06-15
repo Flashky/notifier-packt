@@ -18,7 +18,7 @@ public class MessageHelper {
 		return messages.getMessage(code, null, locale);		
 	}
 	
-	public String getMessage(String code, Object[] messageParameters) {
+	public String getMessage(String code, Object... messageParameters) {
 		return messages.getMessage(code, messageParameters, locale);
 	}
 

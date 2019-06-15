@@ -1,7 +1,6 @@
 package brv.notifier.packt.notifications;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import brv.notifier.packt.enums.Host;
@@ -18,7 +17,6 @@ public class EmailNotificationListener implements DailyNotificationListener {
 	private EmailService service;
 	
 	@Autowired
-	@Qualifier("messages-mail")
 	private MessageHelper messageHelper;
 	
 	@Override
@@ -27,7 +25,7 @@ public class EmailNotificationListener implements DailyNotificationListener {
 		// Adapter pattern to communicate with the EmailService.
 		// The input data is wrapped into an EmailData.
 		EmailData emailData = new EmailData();
-		emailData.setSubject(messageHelper.getMessage("mail.subject", new Object[] {offerData.getTitle()}));
+		emailData.setSubject(messageHelper.getMessage("mail.subject", offerData.getTitle()));
 		emailData.setTemplate("mail.html");
 		emailData.getVariables().put("offer", offerData);		
 		emailData.getVariables().put("freeLearningUrl", Host.SHOP.path(WebPath.FREE_OFFER.getPath()));

@@ -15,10 +15,13 @@ public class ThymeleafTemplateService implements TemplateService {
 	@Autowired
 	private ITemplateEngine templateEngine;
 	
+	@Autowired
+	private Locale locale;
+	
 	@Override
 	public String process(String template) {
 		
-		Context ctx = new Context(new Locale("es","ES"));
+		Context ctx = new Context(locale);
 
 		return templateEngine.process(template, ctx);
 	}
@@ -26,7 +29,7 @@ public class ThymeleafTemplateService implements TemplateService {
 	@Override
 	public String process(String template, Map<String, Object> variables) {
 		
-		Context ctx = new Context(new Locale("es","ES"));
+		Context ctx = new Context(locale);
 		
 		if(!CollectionUtils.isEmpty(variables)) {
 			ctx.setVariables(variables);
