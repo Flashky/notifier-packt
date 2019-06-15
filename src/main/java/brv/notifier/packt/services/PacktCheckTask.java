@@ -7,7 +7,6 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,6 @@ public class PacktCheckTask {
 	private OffersService checkoutService;
 
 	@Autowired
-	@Qualifier("messages-app")
 	private MessageHelper  messageHelper;
 
 	private static final Logger LOGGER = LogManager.getLogger(PacktCheckTask.class.getName());
@@ -39,8 +37,8 @@ public class PacktCheckTask {
 	
 	private List<DailyNotificationListener> listeners = new LinkedList<>();
 	
-	@Scheduled(cron = "${service.cron}")
-	//@Scheduled(fixedRateString = "5000")
+	//@Scheduled(cron = "${service.cron}")
+	@Scheduled(fixedRateString = "5000")
 	public void checkPacktDailyOffer() {
 
 		PacktFreeOffer offer = checkoutService.getPacktOffer(LocalDate.now());
@@ -64,8 +62,7 @@ public class PacktCheckTask {
 
 	private void notifyListeners(PacktFreeOffer offer) {
 		
-		Object[] messageParameters = new Object[] { offer.getTitle() };	
-		LOGGER.info(messageHelper.getMessage("offer.detected", messageParameters));
+		LOGGER.info(messageHelper.getMessage("offer.detected", offer.getTitle()));
 		for(DailyNotificationListener listener : listeners) {
 			listener.notify(offer);
 		}

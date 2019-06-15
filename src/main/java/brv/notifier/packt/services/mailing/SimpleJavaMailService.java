@@ -16,6 +16,9 @@ import brv.notifier.packt.util.MessageHelper;
 @Import(SimpleJavaMailSpringSupport.class)
 public class SimpleJavaMailService implements EmailService {
 
+	
+	private static final Logger LOGGER = LogManager.getLogger(SimpleJavaMailService.class.getName());
+	
 	@Autowired 
 	private Mailer mailer;
 	
@@ -24,8 +27,6 @@ public class SimpleJavaMailService implements EmailService {
 	
 	@Autowired
 	private MessageHelper messageHelper;
-	
-	private static final Logger LOGGER = LogManager.getLogger(SimpleJavaMailService.class.getName());
 	
 	@Override
 	public void send(EmailData emailData) {

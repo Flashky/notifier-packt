@@ -13,50 +13,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import brv.notifier.packt.enums.Host;
 import brv.notifier.packt.enums.WebPath;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
+import brv.notifier.packt.util.MessageHelper;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 
 public class TwitterNotificationListener implements DailyNotificationListener {
 
 	private static final Logger LOGGER = LogManager.getLogger(TwitterNotificationListener.class.getName());
-	
-	private static final String NEWLINE = "\n";
-	private static final String PARAGRAPH = NEWLINE + NEWLINE;
 	private static final String HASHTAG = "#";
 	
 	@Autowired
 	private Twitter twitter;
 	
+	@Autowired
+	private MessageHelper messageHelper;
+	
 	@Override
 	public void notify(PacktFreeOffer offerData) {
 		
 
-		LOGGER.info("Sending tweet...");
+		LOGGER.info(messageHelper.getMessage("twitter.sending.start"));
 		InputStream in = null;
 
 	    try {
 	    	
-	    	StringBuilder tweet = new StringBuilder()
-	    			.append("Free ebook: ")
-	    			.append(offerData.getTitle())
-	    			.append(PARAGRAPH)
-	    			.append(formatOneliner(offerData))
-	    			.append(PARAGRAPH)
-	    			.append("Grab it only today! ")
-	    			.append(Host.SHOP.path(WebPath.FREE_OFFER.getPath()))
-	    			.append(PARAGRAPH)
-	    			.append("#packt #free #ebook");
+	    	String tweet = messageHelper.getMessage("twitter.status.template",
+	    											offerData.getTitle(),
+	    											formatOneliner(offerData),
+	    											Host.SHOP.path(WebPath.FREE_OFFER.getPath()));
 	    	
-	    	StatusUpdate status = new StatusUpdate(tweet.toString());
+	    	StatusUpdate status = new StatusUpdate(tweet);
 	    	
 	    	in = new URL(offerData.getCoverImage()).openStream();
 	    	status.setMedia("Cover - " + offerData.getTitle(), in);
 
 	    	twitter.updateStatus(status);
-	    	LOGGER.info("Tweet has been sent.");
+	    	LOGGER.info(messageHelper.getMessage("twitter.sending.sucessful"));
 	    	
 		} catch (Exception e) {
-			LOGGER.error("Tweet sending has failed.");
+			LOGGER.error(messageHelper.getMessage("twitter.sending.unsucessful"));
 			LOGGER.error(e.getMessage());
 		} finally {
 			close(in);
@@ -88,12 +83,12 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 		if(input != null) {
 			try {
 				
-				LOGGER.debug("Closing input stream");
+				LOGGER.debug(messageHelper.getMessage("inputstream.closing.start"));
 				input.close();
-				LOGGER.debug("Input stream has been closed.");
+				LOGGER.debug(messageHelper.getMessage("inputstream.closing.sucessful"));
 				
 			} catch (IOException e) {
-				LOGGER.error("Couldn't close input stream.", e);
+				LOGGER.error(messageHelper.getMessage("inputstream.closing.unsucessful"), e);
 			}
 		}
 	}
