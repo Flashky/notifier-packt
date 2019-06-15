@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.thymeleaf.exceptions.TemplateInputException;
 
@@ -20,12 +19,10 @@ import brv.test.util.FileUtil;
 
 @SpringBootTest 
 @RunWith(SpringRunner.class)
-//@TestPropertySource(properties = {"MAIL_PASSWORD = anything"})
-@ActiveProfiles("test")
 public class ThymeleafTemplateServiceTest {
 
 	@Autowired
-	private TemplateService templateService;
+	private ThymeleafTemplateService templateService;
 	
 	private FileUtil fileUtil = new FileUtil();
 	private static final String FILE_SIMPLE_MAIL = "mail-test";
