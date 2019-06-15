@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
@@ -20,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 import brv.notifier.packt.notifications.DailyNotificationListener;
-import brv.notifier.packt.notifications.TwitterNotificationListener;
+import brv.notifier.packt.notifications.EmailNotificationListener;
 import brv.notifier.packt.properties.PacktProperties;
 import brv.notifier.packt.properties.ProxyProperty;
 import brv.notifier.packt.services.PacktCheckTask;
@@ -30,34 +32,31 @@ import brv.notifier.packt.util.MessageHelper;
 @SpringBootApplication
 @EnableScheduling
 @EnableEncryptableProperties
-@EnableConfigurationProperties(PacktProperties.class)
+@EnableConfigurationProperties({PacktProperties.class})
+@Import(TwitterConfiguration.class)
 public class NotifierPacktApplication {
 
 
 	@Autowired
 	private PacktProperties packtProperties;
+
 	
 	public static void main(String[] args) {
 		SpringApplication.run(NotifierPacktApplication.class, args);
 	}
 	
-	/*
+	
 	@Bean 	
+	@ConditionalOnProperty(value="notifications.email.enabled", havingValue = "true", matchIfMissing = true)
 	public EmailNotificationListener getEmailService(PacktCheckTask service) {
 		
 		DailyNotificationListener listener = new EmailNotificationListener();
 		service.addNotificationListener(listener);
 		
 		return (EmailNotificationListener) listener;
-	}*/
-	
-	@Bean
-	public TwitterNotificationListener getTwitterService(PacktCheckTask service) {
-		DailyNotificationListener listener = new TwitterNotificationListener();
-		service.addNotificationListener(listener);
-		
-		return (TwitterNotificationListener) listener;
 	}
+	
+
 	
 	@Bean
 	public Locale getLocale() {
@@ -129,4 +128,5 @@ public class NotifierPacktApplication {
 		
 		return restTemplate;
 	}
+	
 }

@@ -1,3 +1,9 @@
+app:
+  disable-default-exception-handling: false
+error:
+  whitelabel:
+    enabled: true
+
 # Property encryption configuration
 jasypt:
   encryptor:
@@ -19,8 +25,22 @@ simplejavamail:
     to:
       # Additional addresses can be added using semicolon (;)
       address: mevengar@gmail.com
+
+# Notifications enabled/disabled configuration
+notifications:
+  email:
+   enabled: false
+  twitter:
+   enabled: true
    
-    
+
+twitter:
+  accessSecret: ${twitter.accessSecret}
+  accessToken: ${twitter.accessToken}
+  consumerKey:  ${twitter.consumerKey}
+  consumerSecret: ${twitter.consumerSecret}
+
+  
 # Service confguration
 service:
   cron: 0 0 4 * * ?
