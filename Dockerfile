@@ -7,8 +7,12 @@ COPY target/notifier-packt-*.jar /app/notifier-packt.jar
 COPY application.yml /app/application.yml
 
 # Establish environment variables
-ENV ENCRYPT_MASTER_PASSWORD ""
-ENV MAIL_PASSWORD ""
+ENV ENCRYPT_MASTER_PASSWORD
+ENV MAIL_PASSWORD
+ENV twitter.accessSecret
+ENV twitter.accessToken
+ENV twitter.consumerKey
+ENV twitter.consumerSecret
 
 # specify default command
 CMD ["java", "-jar", "/app/notifier-packt.jar"]
