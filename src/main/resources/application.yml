@@ -33,7 +33,6 @@ twitter:
   accessToken: ${twitter.accessToken}
   consumerKey:  ${twitter.consumerKey}
   consumerSecret: ${twitter.consumerSecret}
-
   
 # Service confguration
 service:
