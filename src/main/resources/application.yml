@@ -1,9 +1,3 @@
-app:
-  disable-default-exception-handling: false
-error:
-  whitelabel:
-    enabled: true
-
 # Property encryption configuration
 jasypt:
   encryptor:
@@ -33,7 +27,7 @@ notifications:
   twitter:
    enabled: true
    
-
+# Twitter OAuth configuration
 twitter:
   accessSecret: ${twitter.accessSecret}
   accessToken: ${twitter.accessToken}
