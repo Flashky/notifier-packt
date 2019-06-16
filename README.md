@@ -2,6 +2,7 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4f44adffbcc347e4a50774dd89084a41)](https://app.codacy.com/app/Flashky/notifier-packt?utm_source=github.com&utm_medium=referral&utm_content=Flashky/notifier-packt&utm_campaign=Badge_Grade_Dashboard)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/08c6235b955540038929f66cccfb616e)](https://www.codacy.com/app/Flashky/notifier-packt?utm_source=github.com&utm_medium=referral&utm_content=Flashky/notifier-packt&utm_campaign=Badge_Coverage)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Spring Boot scheduled  service to check for free packt daily offers.
 
