@@ -10,7 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @author Flashky
  *
  */
-public enum Url {
+public enum Host {
 
 	/** Url:  <pre>https://www.packtpub.com</pre> 
 	 * <p>Packt main Website.</p>
@@ -35,7 +35,7 @@ public enum Url {
 	private Protocol protocol;
 	private String host;
 
-	private Url(Protocol protocol, String host) {
+	private Host(Protocol protocol, String host) {
 		this.protocol = protocol;
 		this.host = host;
 	}
@@ -62,8 +62,8 @@ public enum Url {
 	 * Url.SHOP.getUriComponentsBuilder().build().toString();
 	 * </pre>
 	 * @return The url String representation of the selected enum value.
-	 * @see Url#path(String)
-	 * @see Url#getUriComponentsBuilder()
+	 * @see Host#path(String)
+	 * @see Host#getUriComponentsBuilder()
 	 */
 	public String build() {
 		return getUriComponentsBuilder()
@@ -85,8 +85,8 @@ public enum Url {
 	 * </pre>
 	 * @param path - the path add to the url
 	 * @return The url String representation of the selected enum value concatenated with the path.
-	 * @see Url#build()
-	 * @see Url#getUriComponentsBuilder()
+	 * @see Host#build()
+	 * @see Host#getUriComponentsBuilder()
 	 */
 	public String path(String path) {
 		return getUriComponentsBuilder()
@@ -98,11 +98,11 @@ public enum Url {
 	/**
 	 * Initializes a {@link UriComponentsBuilder} using the enum values to build complexes URLs.
 	 * <p>
-	 * Use this method if you need to do anything not covered by {@link Url#build()} or {@link Url#path(String)}.
+	 * Use this method if you need to do anything not covered by {@link Host#build()} or {@link Host#path(String)}.
 	 * </p>
 	 * @return UriComponentsBuilder
-	 * @see Url#build()
-	 * @see Url#path(String)
+	 * @see Host#build()
+	 * @see Host#path(String)
 	 */
 	public UriComponentsBuilder getUriComponentsBuilder() {
 		return UriComponentsBuilder

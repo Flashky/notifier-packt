@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import brv.notifier.packt.enums.Url;
+import brv.notifier.packt.enums.Host;
 import brv.notifier.packt.model.offers.JsonSummary;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 
@@ -24,12 +24,12 @@ public abstract class PacktFreeOfferMapper {
 	
 	@Named("shopUrl")
 	protected String mapShopUrl(String shopUrl) {
-		return Url.SHOP.path(shopUrl);
+		return Host.SHOP.path(shopUrl);
 	}
 	
 	@Named("readUrl")
 	protected String mapReadUrl(String path) {
-		return Url.SUBSCRIBE.path(path);
+		return Host.SUBSCRIBE.path(path);
 	}
 	
 	

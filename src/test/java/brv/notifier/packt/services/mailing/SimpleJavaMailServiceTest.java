@@ -10,13 +10,13 @@ import org.simplejavamail.mailer.Mailer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import brv.notifier.packt.util.MessageHelper;
 
 
 @SpringBootTest 
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
 public class SimpleJavaMailServiceTest {
 
 	@Autowired
@@ -24,6 +24,9 @@ public class SimpleJavaMailServiceTest {
 	
 	@MockBean
 	private Mailer mailer;
+	
+	@MockBean
+	private MessageHelper messageHelper;
 	
 	private static final String FILE_SIMPLE_MAIL = "mail-test";
 	

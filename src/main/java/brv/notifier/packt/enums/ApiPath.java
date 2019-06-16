@@ -3,10 +3,10 @@ package brv.notifier.packt.enums;
 /**
  * Enumeration of useful API paths.
  * <p>
- * Does not contain any absolute paths. Use of {@link Url#getUrl(String)} enumeration is recommended to build the full qualified URL using the path.
+ * Does not contain any absolute paths. Use of {@link Host#getUrl(String)} enumeration is recommended to build the full qualified URL using the path.
  * </p>
  * @author Flashky
- * @see Url
+ * @see Host
  */
 public enum ApiPath {
 	

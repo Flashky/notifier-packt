@@ -7,7 +7,6 @@ import org.simplejavamail.email.EmailBuilder;
 import org.simplejavamail.mailer.Mailer;
 import org.simplejavamail.springsupport.SimpleJavaMailSpringSupport;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +16,9 @@ import brv.notifier.packt.util.MessageHelper;
 @Import(SimpleJavaMailSpringSupport.class)
 public class SimpleJavaMailService implements EmailService {
 
+	
+	private static final Logger LOGGER = LogManager.getLogger(SimpleJavaMailService.class.getName());
+	
 	@Autowired 
 	private Mailer mailer;
 	
@@ -24,10 +26,7 @@ public class SimpleJavaMailService implements EmailService {
 	private TemplateService templateService;
 	
 	@Autowired
-	@Qualifier("messages-mail")
 	private MessageHelper messageHelper;
-	
-	private static final Logger LOGGER = LogManager.getLogger(SimpleJavaMailService.class.getName());
 	
 	@Override
 	public void send(EmailData emailData) {

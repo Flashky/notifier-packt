@@ -6,7 +6,7 @@
 	
 	<groupId>brv.notifier</groupId>
 	<artifactId>notifier-packt</artifactId>
-	<version>2.1.4</version>
+	<version>2.2.0</version>
 	<packaging>jar</packaging>
 	<name>notifier-packt</name>
 	<description>Notifier for Packt free offers</description>
@@ -58,6 +58,12 @@
 			<optional>true</optional>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.simplejavamail/simple-java-mail -->
 		<dependency>
 		    <groupId>org.simplejavamail</groupId>
@@ -76,7 +82,18 @@
         	<artifactId>mapstruct</artifactId>
        		<version>${org.mapstruct.version}</version>
    	 	</dependency>
-		
+
+		<dependency>
+		    <groupId>org.twitter4j</groupId>
+		    <artifactId>twitter4j-core</artifactId>
+		    <version>4.0.7</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.vdurmont</groupId>
+		  <artifactId>emoji-java</artifactId>
+		  <version>4.0.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

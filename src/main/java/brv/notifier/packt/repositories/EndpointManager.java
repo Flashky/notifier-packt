@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Component;
 
 import brv.notifier.packt.enums.ApiPath;
-import brv.notifier.packt.enums.Url;
+import brv.notifier.packt.enums.Host;
 
 @Component	
 public class EndpointManager {
@@ -16,7 +16,7 @@ public class EndpointManager {
 	
 	public String getOffersEndpoint(LocalDate dateFrom) {
 		
-		return Url.SERVICES.getUriComponentsBuilder()
+		return Host.SERVICES.getUriComponentsBuilder()
 		.path(ApiPath.OFFERS.getPath())
 		.queryParam(QUERY_DATE_FROM, dateFrom)
 		.build().toString();
@@ -25,7 +25,7 @@ public class EndpointManager {
 	
 	public String getOffersEndpoint(LocalDate dateFrom, LocalDate dateTo) {
 		
-		return Url.SERVICES.getUriComponentsBuilder()
+		return Host.SERVICES.getUriComponentsBuilder()
 		.path(ApiPath.OFFERS.getPath())
 		.queryParam(QUERY_DATE_FROM, dateFrom)
 		.queryParam(QUERY_DATE_TO, dateTo)
@@ -51,7 +51,7 @@ public class EndpointManager {
 	 */
 	public String getSummaryEndpoint(Long productId) {
 		
-		return Url.STATIC.getUriComponentsBuilder()
+		return Host.STATIC.getUriComponentsBuilder()
 				.path(ApiPath.SUMMARY.getPath())
 				.buildAndExpand(productId).toString();
 		
