@@ -10,6 +10,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vdurmont.emoji.Emoji;
+import com.vdurmont.emoji.EmojiManager;
+
 import brv.notifier.packt.enums.Host;
 import brv.notifier.packt.enums.WebPath;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
@@ -21,7 +24,8 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 
 	private static final Logger LOGGER = LogManager.getLogger(TwitterNotificationListener.class.getName());
 	private static final String HASHTAG = "#";
-	
+	private static final String EMOJI_BOOK = "open_book";
+		
 	@Autowired
 	private Twitter twitter;
 	
@@ -37,7 +41,9 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 
 	    try {
 	    	
+	    	Emoji emoji = EmojiManager.getForAlias(EMOJI_BOOK);
 	    	String tweet = messageHelper.getMessage("twitter.status.template",
+	    											emoji.getUnicode(),
 	    											offerData.getTitle(),
 	    											formatOneliner(offerData),
 	    											Host.SHOP.path(WebPath.FREE_OFFER.getPath()));
