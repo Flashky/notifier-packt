@@ -104,4 +104,4 @@ Notifier Packt is Open Source software released under the Apache 2.0 license.
 ## Third Party Licenses
 -   Icons by Icons8 (<https://icons8.com> | [License](https://icons8.com/license))
 -   SimpleJavaMail (<http://www.simplejavamail.org> | [License](https://github.com/bbottema/simple-java-mail/blob/develop/LICENSE-2.0.txt) | [Notice](https://github.com/bbottema/simple-java-mail/blob/develop/NOTICE.txt))
--   Emoji-Java (https://github.com/vdurmont/emoji-java) | [License](https://github.com/vdurmont/emoji-java/blob/master/LICENSE.md)
+-   Emoji-Java (<https://github.com/vdurmont/emoji-java> | [License](https://github.com/vdurmont/emoji-java/blob/master/LICENSE.md))
