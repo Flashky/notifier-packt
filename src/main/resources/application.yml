@@ -37,13 +37,3 @@ twitter:
 # Service confguration
 service:
   cron: 0 0 4 * * ?
-  #cron: 0 * * * * * # For testing purposes
-  #proxy:
-    # Do not add with 'http://' at the beginning!
-    #host:
-    #port:
-    
-
-api-config:
-  max-number-days: 3
-
