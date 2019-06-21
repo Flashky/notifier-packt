@@ -23,7 +23,7 @@ simplejavamail:
 # Notifications enabled/disabled configuration
 notifications:
   email:
-   enabled: false
+   enabled: true
   twitter:
    enabled: true
    
