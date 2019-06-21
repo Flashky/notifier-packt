@@ -10,17 +10,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.client.RestTemplate;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
+import brv.notifier.packt.configuration.EmailConfiguration;
 import brv.notifier.packt.configuration.TwitterConfiguration;
 import brv.notifier.packt.util.MessageHelper;
 
 @SpringBootApplication
 @EnableScheduling
 @EnableEncryptableProperties
-@Import(TwitterConfiguration.class)
+@Import({TwitterConfiguration.class, EmailConfiguration.class})
 public class NotifierPacktApplication {
 
 	
