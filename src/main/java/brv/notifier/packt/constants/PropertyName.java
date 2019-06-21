@@ -10,4 +10,5 @@ public final class PropertyName {
 	public static final String TWITTER = "app.notifications.twitter";
 	public static final String EMAIL_ENABLED = EMAIL + ENABLED;
 	public static final String TWITTER_ENABLED = TWITTER + ENABLED;
+	
 }
