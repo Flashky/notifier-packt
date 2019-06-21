@@ -1,4 +1,4 @@
-package brv.notifier.packt;
+package brv.notifier.packt.configuration;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

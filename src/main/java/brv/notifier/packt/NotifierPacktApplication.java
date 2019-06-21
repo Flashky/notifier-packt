@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
+import brv.notifier.packt.configuration.TwitterConfiguration;
 import brv.notifier.packt.notifications.DailyNotificationListener;
 import brv.notifier.packt.notifications.EmailNotificationListener;
 import brv.notifier.packt.services.PacktCheckTask;
