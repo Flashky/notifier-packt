@@ -1,3 +1,18 @@
+# General app configuration
+app:
+  lang: en
+  schedule: 0 0 4 * * ?
+  notifications:
+    twitter:
+      enabled: true
+      accessSecret: ${twitter.accessSecret}
+      accessToken: ${twitter.accessToken}
+      consumerKey:  ${twitter.consumerKey}
+      consumerSecret: ${twitter.consumerSecret}
+    email:
+      enabled: true
+    
+    
 # Property encryption configuration
 jasypt:
   encryptor:
@@ -20,20 +35,3 @@ simplejavamail:
       # Additional addresses can be added using semicolon (;)
       address: mevengar@gmail.com
 
-# Notifications enabled/disabled configuration
-notifications:
-  email:
-   enabled: true
-  twitter:
-   enabled: true
-   
-# Twitter OAuth configuration
-twitter:
-  accessSecret: ${twitter.accessSecret}
-  accessToken: ${twitter.accessToken}
-  consumerKey:  ${twitter.consumerKey}
-  consumerSecret: ${twitter.consumerSecret}
-  
-# Service confguration
-service:
-  cron: 0 0 4 * * ?

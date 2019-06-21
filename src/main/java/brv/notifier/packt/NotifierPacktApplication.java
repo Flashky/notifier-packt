@@ -3,6 +3,7 @@ package brv.notifier.packt;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.MessageSource;
@@ -10,13 +11,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.client.RestTemplate;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 import brv.notifier.packt.configuration.EmailConfiguration;
 import brv.notifier.packt.configuration.TwitterConfiguration;
+import brv.notifier.packt.constants.PlaceholderValue;
 import brv.notifier.packt.util.MessageHelper;
 
 @SpringBootApplication
@@ -31,8 +32,8 @@ public class NotifierPacktApplication {
 	}
 	
 	@Bean
-	public Locale getLocale() {
-		return new Locale("en");
+	public Locale getLocale(@Value(PlaceholderValue.LANG) String lang) {
+		return new Locale(lang);
 	}
 	
 	

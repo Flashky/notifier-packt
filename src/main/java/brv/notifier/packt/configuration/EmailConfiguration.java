@@ -4,12 +4,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import brv.notifier.packt.constants.PropertyName;
 import brv.notifier.packt.notifications.DailyNotificationListener;
 import brv.notifier.packt.notifications.EmailNotificationListener;
 import brv.notifier.packt.services.PacktCheckTask;
 
 @Configuration
-@ConditionalOnProperty(value="notifications.email.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(value = PropertyName.EMAIL_ENABLED, havingValue = "true", matchIfMissing = true)
 public class EmailConfiguration {
 	
 	

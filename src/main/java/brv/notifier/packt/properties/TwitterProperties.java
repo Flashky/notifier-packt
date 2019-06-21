@@ -3,8 +3,10 @@ package brv.notifier.packt.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import brv.notifier.packt.constants.PropertyName;
+
 @Component
-@ConfigurationProperties(prefix="twitter")
+@ConfigurationProperties(prefix = PropertyName.TWITTER)
 public class TwitterProperties {
 	
 	private String consumerKey;
