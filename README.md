@@ -23,7 +23,7 @@ Notifier Packt is fully configurable. You can do it in three different ways:
 | Property                            | Values            | Default        | Description                                                  |
 |-------------------------------------|-------------------|----------------|--------------------------------------------------------------|
 | `app.lang`                          | `en`/`es`         | `en`           | Sets the language of the application                         |
-| `service.cron`                      | (cron expression) | `0 0 4 * * ?`  | Sets the time on which the app will look for new free offers |
+| `app.cron`                      | (cron expression) | `0 0 4 * * ?`  | Sets the time on which the app will look for new free offers |
 | `app.notifications.twitter.enabled` | `true`/`false `   | `true`         | Enables or disables the twitter notifications                |
 | `app.notifications.email.enabled`   |  `true`/`false`   | `true`         | Enables or disables email notifications                      |
 
