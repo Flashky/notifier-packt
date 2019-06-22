@@ -1,7 +1,6 @@
 # General app configuration
 app:
   lang: en
-  schedule: 0 0 4 * * ?
   notifications:
     twitter:
       enabled: true
@@ -11,8 +10,10 @@ app:
       consumerSecret: ${twitter.consumerSecret}
     email:
       enabled: true
-    
-    
+
+service:
+  cron: 0 0 4 * * ?
+  
 # Property encryption configuration
 jasypt:
   encryptor:
