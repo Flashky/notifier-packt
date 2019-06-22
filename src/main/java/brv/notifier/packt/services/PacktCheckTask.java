@@ -38,7 +38,7 @@ public class PacktCheckTask {
 	
 	private List<DailyNotificationListener> listeners = new LinkedList<>();
 	
-	@Scheduled(cron = PlaceholderValue.SCHEDULE)
+	@Scheduled(cron = PlaceholderValue.CRON_EXPRESSION)
 	//@Scheduled(fixedRateString = "5000")
 	public void checkPacktDailyOffer() {
 
