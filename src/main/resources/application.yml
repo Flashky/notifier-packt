@@ -1,6 +1,7 @@
 # General app configuration
 app:
   lang: en
+  cron: 0 0 4 * * ?
   notifications:
     twitter:
       enabled: true
@@ -11,9 +12,6 @@ app:
     email:
       enabled: true
 
-service:
-  cron: 0 0 4 * * ?
-  
 # Property encryption configuration
 jasypt:
   encryptor:

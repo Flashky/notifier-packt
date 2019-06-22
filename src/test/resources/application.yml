@@ -1,7 +1,21 @@
+# General app configuration
+app:
+  lang: en
+  cron: 0 0 4 * * ?
+  notifications:
+    twitter:
+      enabled: true
+      accessSecret: placeholder
+      accessToken: placeholder
+      consumerKey: placeholder
+      consumerSecret: placeholder
+    email:
+      enabled: true
+  
 # Property encryption configuration
 jasypt:
   encryptor:
-    password: encryptPasswordPlaceHolder
+    password: placeholder
 
 # Mailing configuration - SimpleJavaMail
 # http://www.simplejavamail.org/#/configuration
@@ -11,7 +25,7 @@ simplejavamail:
     host: smtp.gmail.com
     port: 587
     username: mevengar@gmail.com
-    password: mailPasswordPlaceHolder
+    password: placeholder
   defaults:
     from: 
       name: Packt Notifier
@@ -19,32 +33,4 @@ simplejavamail:
     to:
       # Additional addresses can be added using semicolon (;)
       address: mevengar@gmail.com
-
-# Notifications enabled/disabled configuration
-notifications:
-  email:
-   enabled: false
-  twitter:
-   enabled: true
-   
-# Twitter OAuth configuration
-twitter:
-  accessSecret: accessSecretPlaceHolder
-  accessToken: accessTokenPlaceHolder
-  consumerKey:  consumerKeyPlaceholder
-  consumerSecret: consumerSecretPlaceholder
-
-  
-# Service confguration
-service:
-  cron: 0 0 4 * * ?
-  #cron: 0 * * * * * # For testing purposes
-  #proxy:
-    # Do not add with 'http://' at the beginning!
-    #host:
-    #port:
-    
-
-api-config:
-  max-number-days: 3
 
