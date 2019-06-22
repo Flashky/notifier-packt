@@ -1,9 +1,10 @@
-package brv.notifier.packt;
+package brv.notifier.packt.configuration;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import brv.notifier.packt.constants.PropertyName;
 import brv.notifier.packt.notifications.DailyNotificationListener;
 import brv.notifier.packt.notifications.TwitterNotificationListener;
 import brv.notifier.packt.properties.TwitterProperties;
@@ -13,7 +14,7 @@ import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
 @Configuration
-@ConditionalOnProperty(value="notifications.twitter.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(value = PropertyName.TWITTER_ENABLED, havingValue = "true", matchIfMissing = true)
 public class TwitterConfiguration {
 	
 	@Bean

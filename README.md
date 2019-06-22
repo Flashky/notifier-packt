@@ -6,75 +6,54 @@
 
 Spring Boot scheduled  service to check for free packt daily offers.
 
-## Download
-Download the latest version of the notifier-pack application:
+## Cloning and importing the project
 
-PENDING
+1. Execute `git clone` to download the repository.
+2. Once you have downloaded it, import it in your favourite IDE.
+3. *OPTIONAL* Compile the code and obtain the executable jar.
 
-After you download it, you will see two files:
--   The notifier-pack jar file.
--   The application.yml configuration file.
+## Configuration
+Notifier Packt is fully configurable. You can do it in three different ways:
 
-## Customizing configuration
-Notifier Packt is fully configurable by editing the external application.yaml file.
+- Editing the external `application.yaml` file.
+- Overriding properties via environment variables.
+- Overriding properties via program arguments.
 
-### Customizing SimpleJavaMail configuration
-Notifier Packt uses SimpleJavaMail for sending the email notifications.
+### General properties
+| Property                            | Values            | Default        | Description                                                  |
+|-------------------------------------|-------------------|----------------|--------------------------------------------------------------|
+| `app.lang`                          | `en`/`es`         | `en`           | Sets the language of the application                         |
+| `app.schedule`                      | (cron expression) | `0 0 4 * * ?`  | Sets the time on which the app will look for new free offers |
+| `app.notifications.twitter.enabled` | `true`/`false `   | `true`         | Enables or disables the twitter notifications                |
+| `app.notifications.email.enabled`   |  `true`/`false`   | `true`         | Enables or disables email notifications                      |
 
-You can modify any of the SimpleJavaMail properties as you need:
+#### Twitter specific properties
+If twitter notifications are enabled, you will also have to configure the following properties:
+
+|  Property                                  | Values               | Description                                   |
+|--------------------------------------------|----------------------|-----------------------------------------------|
+| `app.notifications.twitter.accessSecret`   | `<access_secret>`    | Enables or disables the twitter notifications |
+| `app.notifications.twitter.accessKey`      | `<access_key>`       | Enables or disables email notifications       |
+| `app.notifications.twitter.consumerKey`    | `<consumer_key>`     | Sets the master password for encryption       |
+| `app.notifications.twitter.consumerSecret` | `<consumer_secret>`  | Sets the master password for encryption       |
+
+#### Mail specific properties
+If email notifications are enabled, you will need to configure the following `SimpleJavaMail` properties as well:
 
 <http://www.simplejavamail.org/#section-available-properties>
 
-#### Customize encryption configuration
+#### Encryption specific properties
+You can use `Jasypt` to encrypt any password you want to secure. Then, you can set the encryption master password using the following property:
 
-As exposing passwords in a properties file is unsecure, Notifier Packt provides an optional encryption mechanism using Jaspyt.
+| Property                    | Values              | Description                             |
+|-----------------------------|---------------------|-----------------------------------------|
+| `jasypt.encryptor.password` | `<master_password>` | Sets the master password for encryption |
 
-First, you will need to download the Jaspyt encrypt command line tool:
--   <http://www.jasypt.org/cli.html>
--   <http://www.jasypt.org/download.html>
+Any encrypted property password must follow the format: 
+`ENC(encrypted_password)`
 
-Encrypt your email password using the command line tool
-
-```bash
-# For windows:
-encrypt.bat input=<password_to_encrypt> password=<master_password_for_encryption>
-
-# For unix:
-./encrypt.sh input=<password_to_encrypt> password=<master_password_for_encryption>
-```
-
-Now add the master password to the external configuration file:
-```yaml
-jasypt:
-  encryptor:
-    password: master_password_for_encryption
-```
-
-You could also add it as an environment variable, and just refer to it:
-```yaml
-jasypt:
-  encryptor:
-    password: ${MASTER_PASSWORD_ENVIRONMENT_VARIABLE}
-```
-
-And finally, add the encrypted password to the SimpleJavaMail configuration inside ENC():
-
-```yaml
-simplejavamail:
-  ...
-  smtp:
-    ...
-    password: ENC(your_encrypted_password)
-    ...
-```
-### Customize crontab
-
-Finally, you can customize at which time should the process be executed, just add the following property:
-
-```yaml
-service:
-  cron: 0 0 4 * * ?
-```
+Example:
+`app.notifications.twitter.accessSecret = ENC(my-encrypted-password)`
 
 ## How to execute
 
@@ -103,6 +82,6 @@ docker container run -d flashk/notifier-packt:<version>
 Notifier Packt is Open Source software released under the Apache 2.0 license.
 
 ## Third Party Licenses
--   Icons by Icons8 (<https://icons8.com> | [License](https://icons8.com/license))
--   SimpleJavaMail (<http://www.simplejavamail.org> | [License](https://github.com/bbottema/simple-java-mail/blob/develop/LICENSE-2.0.txt) | [Notice](https://github.com/bbottema/simple-java-mail/blob/develop/NOTICE.txt))
--   Emoji-Java (<https://github.com/vdurmont/emoji-java> | [License](https://github.com/vdurmont/emoji-java/blob/master/LICENSE.md))
+- Icons by Icons8 (<https://icons8.com> | [License](https://icons8.com/license))
+- SimpleJavaMail (<http://www.simplejavamail.org> | [License](https://github.com/bbottema/simple-java-mail/blob/develop/LICENSE-2.0.txt) | [Notice](https://github.com/bbottema/simple-java-mail/blob/develop/NOTICE.txt))
+- Emoji-Java (<https://github.com/vdurmont/emoji-java> | [License](https://github.com/vdurmont/emoji-java/blob/master/LICENSE.md))
