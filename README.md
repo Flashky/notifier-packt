@@ -10,7 +10,7 @@ Spring Boot scheduled  service to check for free packt daily offers.
 ## Cloning and importing the project
 1.  Execute `git clone` to download the repository.
 2.  Once you have downloaded it, import it in your favourite IDE.
-3. *OPTIONAL - * Compile the code and obtain the executable jar.
+3.  *OPTIONAL* Compile the code and obtain the executable jar.
 
 ## Configuration
 Notifier Packt is fully configurable. You can do it in three different ways:
@@ -31,11 +31,11 @@ Notifier Packt is fully configurable. You can do it in three different ways:
 If twitter notifications are enabled, you will also have to configure the following properties:
 
 |  Property  | Values   | Description  |
-|---|---|---|
-| `app.notifications.twitter.accessSecret`  | `<access_secret>` | Enables or disables the twitter notifications  |
-| `app.notifications.twitter.accessKey`  |  `<access_key>`| Enables or disables email notifications  |
-| `app.notifications.twitter.consumerKey`  |  `<consumer_key>` | Sets the master password for encryption  |
-| `app.notifications.twitter.consumerSecret`  |  `<consumer_secret>` | Sets the master password for encryption  |
+|--------------------------------------------|----------------------|-----------------------------------------------|
+| `app.notifications.twitter.accessSecret`   | `<access_secret>`    | Enables or disables the twitter notifications |
+| `app.notifications.twitter.accessKey`      | `<access_key>`       | Enables or disables email notifications       |
+| `app.notifications.twitter.consumerKey`    | `<consumer_key>`     | Sets the master password for encryption       |
+| `app.notifications.twitter.consumerSecret` | `<consumer_secret>`  | Sets the master password for encryption       |
 
 #### Mail specific properties
 If email notifications are enabled, you will need to configure the following `SimpleJavaMail` properties as well:
@@ -45,9 +45,9 @@ If email notifications are enabled, you will need to configure the following `Si
 #### Encryption specific properties
 You can use `Jasypt` to encrypt any password you want to secure. Then, you can set the encryption master password using the following property:
 
-|  Property  | Values   | Description  |
-|---|---|---|
-| `jasypt.encryptor.password`  |  `<master_password>` | Sets the master password for encryption  |
+|  Property                   | Values              | Description                             |
+|-----------------------------|---------------------|-----------------------------------------|
+| `jasypt.encryptor.password` | `<master_password>` | Sets the master password for encryption |
 
 Any encrypted property password must follow the format: 
 `ENC(encrypted_password)`
@@ -82,6 +82,6 @@ docker container run -d flashk/notifier-packt:<version>
 Notifier Packt is Open Source software released under the Apache 2.0 license.
 
 ## Third Party Licenses
- -   Icons by Icons8 (<https://icons8.com> | [License](https://icons8.com/license))
- -   SimpleJavaMail (<http://www.simplejavamail.org> | [License](https://github.com/bbottema/simple-java-mail/blob/develop/LICENSE-2.0.txt) | [Notice](https://github.com/bbottema/simple-java-mail/blob/develop/NOTICE.txt))
- -   Emoji-Java (<https://github.com/vdurmont/emoji-java> | [License](https://github.com/vdurmont/emoji-java/blob/master/LICENSE.md))
+-  Icons by Icons8 (<https://icons8.com> | [License](https://icons8.com/license))
+-  SimpleJavaMail (<http://www.simplejavamail.org> | [License](https://github.com/bbottema/simple-java-mail/blob/develop/LICENSE-2.0.txt) | [Notice](https://github.com/bbottema/simple-java-mail/blob/develop/NOTICE.txt))
+-  Emoji-Java (<https://github.com/vdurmont/emoji-java> | [License](https://github.com/vdurmont/emoji-java/blob/master/LICENSE.md))
