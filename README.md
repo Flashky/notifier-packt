@@ -8,9 +8,9 @@ Spring Boot scheduled  service to check for free packt daily offers.
 
 ## Cloning and importing the project
 
-  1. Execute `git clone` to download the repository.
-  2. Once you have downloaded it, import it in your favourite IDE.
-  3. *OPTIONAL* Compile the code and obtain the executable jar.
+ 1.  Execute `git clone` to download the repository.
+ 2.  Once you have downloaded it, import it in your favourite IDE.
+ 3.  *OPTIONAL* Compile the code and obtain the executable jar.
 
 ## Configuration
 Notifier Packt is fully configurable. You can do it in three different ways:
@@ -30,7 +30,7 @@ Notifier Packt is fully configurable. You can do it in three different ways:
 #### Twitter specific properties
 If twitter notifications are enabled, you will also have to configure the following properties:
 
-|  Property  | Values   | Description  |
+|  Property                                  | Values               | Description                                   |
 |--------------------------------------------|----------------------|-----------------------------------------------|
 | `app.notifications.twitter.accessSecret`   | `<access_secret>`    | Enables or disables the twitter notifications |
 | `app.notifications.twitter.accessKey`      | `<access_key>`       | Enables or disables email notifications       |
