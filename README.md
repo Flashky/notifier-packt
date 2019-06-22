@@ -8,21 +8,21 @@
 Spring Boot scheduled  service to check for free packt daily offers.
 
 ## Cloning and importing the project
- 1. Execute `git clone` to download the repository.
- 2. Once you have downloaded it, import it in your favourite IDE.
- 3. *OPTIONAL - * Compile the code and obtain the executable jar.
+1.  Execute `git clone` to download the repository.
+2.  Once you have downloaded it, import it in your favourite IDE.
+3. *OPTIONAL - * Compile the code and obtain the executable jar.
 
 ## Configuration
 Notifier Packt is fully configurable. You can do it in three different ways:
- - Editing the external `application.yaml` file.
- - Overriding properties via environment variables.
- - Overriding properties via program arguments.
+-  Editing the external `application.yaml` file.
+-  Overriding properties via environment variables.
+-  Overriding properties via program arguments.
 
 ### General properties
 |  Property                           |  Values           | Default        | Description                                                  |
 |-------------------------------------|-------------------|----------------|--------------------------------------------------------------|
-|`app.lang`                           | `en`/`es`         | `en`           | Sets the language of the application                         |
-|`app.schedule`                       | (cron expression) | `0 0 4 * * ?`  | Sets the time on which the app will look for new free offers |
+| `app.lang`                          | `en`/`es`         | `en`           | Sets the language of the application                         |
+| `app.schedule`                      | (cron expression) | `0 0 4 * * ?`  | Sets the time on which the app will look for new free offers |
 | `app.notifications.twitter.enabled` | `true`/`false `   | `true`         | Enables or disables the twitter notifications                |
 | `app.notifications.email.enabled`   |  `true`/`false`   | `true`         | Enables or disables email notifications                      |
 
