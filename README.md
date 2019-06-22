@@ -15,9 +15,9 @@ Spring Boot scheduled  service to check for free packt daily offers.
 ## Configuration
 Notifier Packt is fully configurable. You can do it in three different ways:
 
-  - Editing the external `application.yaml` file.
-  - Overriding properties via environment variables.
-  - Overriding properties via program arguments.
+ - Editing the external `application.yaml` file.
+ - Overriding properties via environment variables.
+ - Overriding properties via program arguments.
 
 ### General properties
 | Property                            | Values            | Default        | Description                                                  |
@@ -82,6 +82,6 @@ docker container run -d flashk/notifier-packt:<version>
 Notifier Packt is Open Source software released under the Apache 2.0 license.
 
 ## Third Party Licenses
-  - Icons by Icons8 (<https://icons8.com> | [License](https://icons8.com/license))
-  - SimpleJavaMail (<http://www.simplejavamail.org> | [License](https://github.com/bbottema/simple-java-mail/blob/develop/LICENSE-2.0.txt) | [Notice](https://github.com/bbottema/simple-java-mail/blob/develop/NOTICE.txt))
-  - Emoji-Java (<https://github.com/vdurmont/emoji-java> | [License](https://github.com/vdurmont/emoji-java/blob/master/LICENSE.md))
+ - Icons by Icons8 (<https://icons8.com> | [License](https://icons8.com/license))
+ - SimpleJavaMail (<http://www.simplejavamail.org> | [License](https://github.com/bbottema/simple-java-mail/blob/develop/LICENSE-2.0.txt) | [Notice](https://github.com/bbottema/simple-java-mail/blob/develop/NOTICE.txt))
+ - Emoji-Java (<https://github.com/vdurmont/emoji-java> | [License](https://github.com/vdurmont/emoji-java/blob/master/LICENSE.md))
