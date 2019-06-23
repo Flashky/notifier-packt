@@ -7,8 +7,8 @@ public class JsonSummary implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2608866765763128611L;
-	
+	private static final long serialVersionUID = 2813412320349332525L;
+
 	/**
 	 * Unique product identifier.
 	 */
@@ -50,6 +50,10 @@ public class JsonSummary implements Serializable {
 	 */
 	private String learn;
 	
+	/**
+	 * The type of free offer: books / videos
+	 */
+	private String type;
 	
 	/**
 	 * Main topics related to the book.
@@ -128,5 +132,14 @@ public class JsonSummary implements Serializable {
 	public void setFeatures(String features) {
 		this.features = features;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	
 }

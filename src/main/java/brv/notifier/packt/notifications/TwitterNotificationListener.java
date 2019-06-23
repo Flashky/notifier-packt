@@ -26,6 +26,10 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 	private static final Logger LOGGER = LogManager.getLogger(TwitterNotificationListener.class.getName());
 	
 	private static final String EMOJI_BOOK = "open_book";
+	private static final String EMOJI_VIDEO = "tv";
+	
+	// Type selecting
+	private static final String VIDEO_OFFER = "videos";
 	
 	// Oneliner formatting
 	private static final String HASHTAG = "#";
@@ -48,7 +52,13 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 
 	    try {
 	    	
-	    	Emoji emoji = EmojiManager.getForAlias(EMOJI_BOOK);
+	    	Emoji emoji;
+	    	if(VIDEO_OFFER.equals(offerData.getType())) {
+	    		emoji = EmojiManager.getForAlias(EMOJI_VIDEO);
+	    	} else {
+	    		emoji = EmojiManager.getForAlias(EMOJI_BOOK);
+	    	}
+
 	    	String tweet = messageHelper.getMessage("twitter.status.template",
 	    											emoji.getUnicode(),
 	    											offerData.getTitle(),

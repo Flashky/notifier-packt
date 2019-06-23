@@ -63,6 +63,7 @@ public class SummaryRestRepositoryTest {
 		assertEquals("http://read-url", summary.get().getReadUrl());
 		assertEquals("http://shop-url", summary.get().getShopUrl());
 		assertEquals("title", summary.get().getTitle());
+		assertEquals("type", summary.get().getType());
 		
 	}
 	
