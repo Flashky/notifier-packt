@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
@@ -49,11 +50,14 @@ public class NotifierPacktApplication {
 		return new MessageHelper(messageSource, locale);
 	}
 	
-	 
+	
 	@Bean
-	public RestTemplate getRestTemplate() {
+	public RestTemplate getRestTemplate(ResponseErrorHandler errorHandler) {
 
-		return new RestTemplate();
+		RestTemplate rt = new RestTemplate();
+		rt.setErrorHandler(errorHandler);
+		
+		return rt;
 		
 	}
 	

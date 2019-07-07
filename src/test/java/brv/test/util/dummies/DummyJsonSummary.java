@@ -19,6 +19,7 @@ public class DummyJsonSummary {
 		summary.setReadUrl("http://read-url");
 		summary.setShopUrl("http://shop-url");
 		summary.setTitle("title");
+		summary.setType("type");
 		
 		return summary;
 	}
