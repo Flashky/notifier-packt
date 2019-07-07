@@ -64,7 +64,7 @@ After you have configured any properties and environment variables, just launch 
 java -jar notifier-packt.jar
 ```
 
-In the case you want to override a property via program argument you can do it as well:
+To override a property via program argument, just do it as it follows:
 
 ```sh
 java -jar notifier-packt.jar --app.lang=en
