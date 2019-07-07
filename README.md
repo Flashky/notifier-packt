@@ -64,6 +64,12 @@ After you have configured any properties and environment variables, just launch 
 java -jar notifier-packt.jar
 ```
 
+In the case you want to override a property via program argument you can do it as well:
+
+```sh
+java -jar notifier-packt.jar --app.lang=en
+```
+
 ### Docker execution
 A Dockerfile is provided to run Notifier Packt as a Docker container.
 
