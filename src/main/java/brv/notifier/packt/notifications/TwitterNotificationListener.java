@@ -16,10 +16,12 @@ import com.vdurmont.emoji.EmojiManager;
 
 import brv.notifier.packt.enums.Host;
 import brv.notifier.packt.enums.WebPath;
+import brv.notifier.packt.properties.HashtagProperties;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 import brv.notifier.packt.util.MessageHelper;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
+import twitter4j.util.CharacterUtil;
 
 public class TwitterNotificationListener implements DailyNotificationListener {
 
@@ -34,7 +36,6 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 	// Oneliner formatting
 	private static final String HASHTAG = "#";
 	private static final int MINIMUM_LENGTH = 2;
-	private static final int NO_MATCH = -1;
 	private static final String REGEX_WHITESPACES = "\\s+";
 	
 	@Autowired
@@ -42,6 +43,9 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 	
 	@Autowired
 	private MessageHelper messageHelper;
+	
+	@Autowired
+	private HashtagProperties hashtags;
 	
 	@Override
 	public void notify(PacktFreeOffer offerData) {
@@ -52,19 +56,7 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 
 	    try {
 	    	
-	    	Emoji emoji;
-	    	if(VIDEO_OFFER.equals(offerData.getType())) {
-	    		emoji = EmojiManager.getForAlias(EMOJI_VIDEO);
-	    	} else {
-	    		emoji = EmojiManager.getForAlias(EMOJI_BOOK);
-	    	}
-
-	    	String tweet = messageHelper.getMessage("twitter.status.template",
-	    											emoji.getUnicode(),
-	    											offerData.getTitle(),
-	    											formatOneliner(offerData),
-	    											Host.SHOP.path(WebPath.FREE_OFFER.getPath()));
-	    	
+	    	String tweet = prepareTweet(offerData);
 	    	StatusUpdate status = new StatusUpdate(tweet);
 	    	
 	    	in = new URL(offerData.getCoverImage()).openStream();
@@ -83,6 +75,38 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 		
 	}
 
+	private String prepareTweet(PacktFreeOffer offerData) {
+		
+		// Calculate emoji for header line
+    	Emoji emoji;
+    	if(VIDEO_OFFER.equals(offerData.getType())) {
+    		emoji = EmojiManager.getForAlias(EMOJI_VIDEO);
+    	} else {
+    		emoji = EmojiManager.getForAlias(EMOJI_BOOK);
+    	}
+    	
+    	// Build the tweet status part by part
+    	String title = messageHelper.getMessage("twitter.status.title", emoji.getUnicode(), offerData.getTitle());
+    	String content = formatOneliner(offerData);
+    	String footer = messageHelper.getMessage("twitter.status.footer", Host.SHOP.path(WebPath.FREE_OFFER.getPath()));
+    	
+    	
+    	// Check tweet length and abbreviate if needed
+    	int totalLength = title.length() + content.length() + footer.length();
+    	
+    	if(totalLength > CharacterUtil.MAX_TWEET_LENGTH) {
+    		content = StringUtils.abbreviate(content, CharacterUtil.MAX_TWEET_LENGTH - title.length() - footer.length());
+    	}
+    	
+    	StringBuilder tweetBuilder = new StringBuilder(title)
+    			.append(content)
+    			.append(footer);
+    	
+    	return tweetBuilder.toString();
+    	
+	}
+	
+	
 	private String formatOneliner(PacktFreeOffer offerData) {
 		
 		String[] titleWords = offerData.getTitle().split(REGEX_WHITESPACES);
@@ -91,11 +115,12 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 		
 		StringBuilder onelinerBuilder = new StringBuilder(oneliner);
 		
+		// Strategy 1
 		for(String word : titleWords) {
 			if((!matches.contains(word)) && (word.length() > MINIMUM_LENGTH)) {
 				
 				int position = StringUtils.indexOfIgnoreCase(oneliner, word);
-				if(position != NO_MATCH) {
+				if(position != StringUtils.INDEX_NOT_FOUND) {
 					
 					// Append the hashtag before the character
 					onelinerBuilder.insert(position, HASHTAG);
@@ -107,6 +132,24 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 				
 			}
 		}
+		
+		// Strategy 2
+		for(String word : hashtags.getHashtags()) {
+			if(!matches.contains(word)) {
+				
+				int position = StringUtils.indexOfIgnoreCase(oneliner, word);
+				if(position != StringUtils.INDEX_NOT_FOUND) {
+					
+					// Append the hashtag before the character
+					onelinerBuilder.insert(position,  HASHTAG);
+					oneliner = onelinerBuilder.toString();
+					
+					// Add the word to the set so I don't repeat hashtags
+					matches.add(word);
+				}
+			}
+		}
+		
 		
 		return oneliner;
 	} 

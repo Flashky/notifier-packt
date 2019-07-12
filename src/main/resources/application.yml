@@ -34,3 +34,16 @@ simplejavamail:
       # Additional addresses can be added using semicolon (;)
       address: mevengar@gmail.com
 
+hashtags: !!set
+  ? .NET
+  ? C++
+  ? Docker
+  ? Drupal
+  ? Java
+  ? Javascript
+  ? jQuery
+  ? Node.js
+  ? MongoDB
+  ? MySQL
+  ? Unity
+  
