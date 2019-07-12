@@ -16,6 +16,7 @@ import com.vdurmont.emoji.EmojiManager;
 
 import brv.notifier.packt.enums.Host;
 import brv.notifier.packt.enums.WebPath;
+import brv.notifier.packt.properties.HashtagProperties;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 import brv.notifier.packt.util.MessageHelper;
 import twitter4j.StatusUpdate;
@@ -35,7 +36,6 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 	// Oneliner formatting
 	private static final String HASHTAG = "#";
 	private static final int MINIMUM_LENGTH = 2;
-	private static final int NO_MATCH = -1;
 	private static final String REGEX_WHITESPACES = "\\s+";
 	
 	@Autowired
@@ -43,6 +43,9 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 	
 	@Autowired
 	private MessageHelper messageHelper;
+	
+	@Autowired
+	private HashtagProperties hashtags;
 	
 	@Override
 	public void notify(PacktFreeOffer offerData) {
@@ -112,11 +115,12 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 		
 		StringBuilder onelinerBuilder = new StringBuilder(oneliner);
 		
+		// Strategy 1
 		for(String word : titleWords) {
 			if((!matches.contains(word)) && (word.length() > MINIMUM_LENGTH)) {
 				
 				int position = StringUtils.indexOfIgnoreCase(oneliner, word);
-				if(position != NO_MATCH) {
+				if(position != StringUtils.INDEX_NOT_FOUND) {
 					
 					// Append the hashtag before the character
 					onelinerBuilder.insert(position, HASHTAG);
@@ -128,6 +132,24 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 				
 			}
 		}
+		
+		// Strategy 2
+		for(String word : hashtags.getHashtags()) {
+			if(!matches.contains(word)) {
+				
+				int position = StringUtils.indexOfIgnoreCase(oneliner, word);
+				if(position != StringUtils.INDEX_NOT_FOUND) {
+					
+					// Append the hashtag before the character
+					onelinerBuilder.insert(position,  HASHTAG);
+					oneliner = onelinerBuilder.toString();
+					
+					// Add the word to the set so I don't repeat hashtags
+					matches.add(word);
+				}
+			}
+		}
+		
 		
 		return oneliner;
 	} 
