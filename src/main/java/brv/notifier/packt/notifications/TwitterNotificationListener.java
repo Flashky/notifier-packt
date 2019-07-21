@@ -6,10 +6,13 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 
 import com.vdurmont.emoji.Emoji;
 import com.vdurmont.emoji.EmojiManager;
@@ -52,6 +55,8 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 		
 
 		LOGGER.info(messageHelper.getMessage("twitter.sending.start"));
+		
+		HttpsURLConnection urlConnection = null;
 		InputStream in = null;
 
 	    try {
@@ -59,8 +64,11 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 	    	String tweet = prepareTweet(offerData);
 	    	StatusUpdate status = new StatusUpdate(tweet);
 	    	
-	    	in = new URL(offerData.getCoverImage()).openStream();
-	    	status.setMedia("Cover - " + offerData.getTitle(), in);
+	    	// Obtain image from URL
+	    	urlConnection = (HttpsURLConnection) new URL(offerData.getCoverImage()).openConnection();
+	    	urlConnection.setRequestProperty(HttpHeaders.ACCEPT_ENCODING, "gzip, deflate, br");
+	    	
+	    	status.setMedia("Cover - " + offerData.getTitle(), urlConnection.getInputStream());
 
 	    	twitter.updateStatus(status);
 	    	LOGGER.info(messageHelper.getMessage("twitter.sending.sucessful"));
@@ -70,6 +78,9 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 			LOGGER.error(e.getMessage());
 		} finally {
 			close(in);
+			if(urlConnection != null) {
+				urlConnection.disconnect();
+			}
 		}
 		
 		
