@@ -1,17 +1,18 @@
 package brv.notifier.packt.services.offers.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.Arrays;
 
 public class PacktFreeOffer implements Serializable {
-
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3253201491308498766L;
+	private static final long serialVersionUID = -7044969747287734366L;
 	
 	private String title;
 	private String coverImage;
+	private byte[] coverImageBytes;
 	private String shopUrl;
 	private String readUrl;
 	private String oneLiner;
@@ -95,12 +96,28 @@ public class PacktFreeOffer implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+	public byte[] getCoverImageBytes() {
+		return coverImageBytes;
+	}
+	public void setCoverImageBytes(byte[] coverImageBytes) {
+		this.coverImageBytes = coverImageBytes;
+	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(about, coverImage, features, learn, oneLiner, readUrl, shopUrl, title, type);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((about == null) ? 0 : about.hashCode());
+		result = prime * result + ((coverImage == null) ? 0 : coverImage.hashCode());
+		result = prime * result + Arrays.hashCode(coverImageBytes);
+		result = prime * result + ((features == null) ? 0 : features.hashCode());
+		result = prime * result + ((learn == null) ? 0 : learn.hashCode());
+		result = prime * result + ((oneLiner == null) ? 0 : oneLiner.hashCode());
+		result = prime * result + ((readUrl == null) ? 0 : readUrl.hashCode());
+		result = prime * result + ((shopUrl == null) ? 0 : shopUrl.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -110,12 +127,58 @@ public class PacktFreeOffer implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		PacktFreeOffer other = (PacktFreeOffer) obj;
-		return Objects.equals(about, other.about) && Objects.equals(coverImage, other.coverImage)
-				&& Objects.equals(features, other.features) && Objects.equals(learn, other.learn)
-				&& Objects.equals(oneLiner, other.oneLiner) && Objects.equals(readUrl, other.readUrl)
-				&& Objects.equals(shopUrl, other.shopUrl) && Objects.equals(title, other.title)
-				&& Objects.equals(type, other.type);
+		if (about == null) {
+			if (other.about != null)
+				return false;
+		} else if (!about.equals(other.about))
+			return false;
+		if (coverImage == null) {
+			if (other.coverImage != null)
+				return false;
+		} else if (!coverImage.equals(other.coverImage))
+			return false;
+		if (!Arrays.equals(coverImageBytes, other.coverImageBytes))
+			return false;
+		if (features == null) {
+			if (other.features != null)
+				return false;
+		} else if (!features.equals(other.features))
+			return false;
+		if (learn == null) {
+			if (other.learn != null)
+				return false;
+		} else if (!learn.equals(other.learn))
+			return false;
+		if (oneLiner == null) {
+			if (other.oneLiner != null)
+				return false;
+		} else if (!oneLiner.equals(other.oneLiner))
+			return false;
+		if (readUrl == null) {
+			if (other.readUrl != null)
+				return false;
+		} else if (!readUrl.equals(other.readUrl))
+			return false;
+		if (shopUrl == null) {
+			if (other.shopUrl != null)
+				return false;
+		} else if (!shopUrl.equals(other.shopUrl))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		return true;
 	}
+	
+	
+
 	
 
 	
