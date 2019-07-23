@@ -2,6 +2,9 @@ package brv.notifier.packt;
 
 import java.util.Locale;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +13,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
@@ -54,10 +58,12 @@ public class NotifierPacktApplication {
 	@Bean
 	public RestTemplate getRestTemplate(ResponseErrorHandler errorHandler) {
 
-		RestTemplate rt = new RestTemplate();
-		rt.setErrorHandler(errorHandler);
+		HttpClient httpClient = HttpClientBuilder.create().disableRedirectHandling().build();
 		
-		return rt;
+        HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory();
+        clientHttpRequestFactory.setHttpClient(httpClient);
+        
+		return new RestTemplate(clientHttpRequestFactory);
 		
 	}
 	
