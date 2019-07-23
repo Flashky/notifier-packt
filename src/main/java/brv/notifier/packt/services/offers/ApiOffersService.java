@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import brv.notifier.packt.model.offers.JsonOffer;
 import brv.notifier.packt.model.offers.JsonSummary;
+import brv.notifier.packt.repositories.ImageRepository;
 import brv.notifier.packt.repositories.OffersRepository;
 import brv.notifier.packt.repositories.SummaryRepository;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
@@ -65,6 +66,9 @@ public class ApiOffersService implements OffersService {
 	private SummaryRepository summaryDao;
 	
 	@Autowired
+	private ImageRepository imageDao;
+	
+	@Autowired
 	private PacktFreeOfferMapper mapper;
 	
 	@Override
@@ -72,20 +76,39 @@ public class ApiOffersService implements OffersService {
 
 		PacktFreeOffer result = null;
 		
+		// Obtain the productId of the deal of the day
 		Optional<JsonOffer> offer = offersDao.getOffer(date);
 		
-		if(offer.isPresent()) {
-			
-			// Obtain the productId and retrieve the data for that ebook
-			Optional<JsonSummary> summary = summaryDao.findById(offer.get().getProductId());
-					
-			if(summary.isPresent()) {
-				result = mapper.jsonToModel(summary.get());
-			}
+		if(offer.isPresent()) {			
+			result = getSummary(offer.get());
 		}
 
 		return result;
 	}
+	
+	private PacktFreeOffer getSummary(JsonOffer offer) {
+		
+		PacktFreeOffer result = null;
+		
+		// Retrieve the data for the ebook offer
+		Optional<JsonSummary> summary = summaryDao.findById(offer.getProductId());
+		
+		if(summary.isPresent()) {
+			JsonSummary jsonSummary = summary.get();
+			result = mapper.jsonToModel(jsonSummary);
+
+			// Retrieve cover image as bytes if possible.
+			Optional<byte[]> image = imageDao.getFromUrl(result.getCoverImage());
+			
+			if(image.isPresent()) {
+				result.setCoverImageBytes(image.get());
+			}
+		}
+		
+		return result;
+				
+	}
+
 
 
 }

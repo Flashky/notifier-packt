@@ -1,18 +1,13 @@
 package brv.notifier.packt.notifications;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import java.io.ByteArrayInputStream;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 
 import com.vdurmont.emoji.Emoji;
 import com.vdurmont.emoji.EmojiManager;
@@ -22,8 +17,10 @@ import brv.notifier.packt.enums.WebPath;
 import brv.notifier.packt.properties.HashtagProperties;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 import brv.notifier.packt.util.MessageHelper;
+import twitter4j.RateLimitStatus;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
+import twitter4j.TwitterException;
 import twitter4j.util.CharacterUtil;
 
 public class TwitterNotificationListener implements DailyNotificationListener {
@@ -55,32 +52,34 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 		
 
 		LOGGER.info(messageHelper.getMessage("twitter.sending.start"));
-		
-		HttpsURLConnection urlConnection = null;
-		InputStream in = null;
 
 	    try {
 	    	
 	    	String tweet = prepareTweet(offerData);
 	    	StatusUpdate status = new StatusUpdate(tweet);
 	    	
-	    	// Obtain image from URL
-	    	urlConnection = (HttpsURLConnection) new URL(offerData.getCoverImage()).openConnection();
-	    	urlConnection.setRequestProperty(HttpHeaders.ACCEPT_ENCODING, "gzip, deflate, br");
+	    	// Assign book cover image to the tweet
+	    	if(offerData.getCoverImageBytes() != null) {
+	    		status.setMedia("cover-image", new ByteArrayInputStream(offerData.getCoverImageBytes()));
+	    	}
 	    	
-	    	status.setMedia("Cover - " + offerData.getTitle(), urlConnection.getInputStream());
-
 	    	twitter.updateStatus(status);
 	    	LOGGER.info(messageHelper.getMessage("twitter.sending.sucessful"));
 	    	
-		} catch (Exception e) {
+		} catch (TwitterException e){
+			
 			LOGGER.error(messageHelper.getMessage("twitter.sending.unsucessful"));
 			LOGGER.error(e.getMessage());
-		} finally {
-			close(in);
-			if(urlConnection != null) {
-				urlConnection.disconnect();
+			
+			if(e.getRateLimitStatus() != null) {
+				RateLimitStatus rateLimitStatus = e.getRateLimitStatus();
+				LOGGER.error("Exceeded attempt number: " + rateLimitStatus.getRemaining());
 			}
+			
+		}catch (Exception e) {
+			LOGGER.error("Uncontrolled exception:");
+			LOGGER.error(messageHelper.getMessage("twitter.sending.unsucessful"));
+			LOGGER.error(e.getMessage());
 		}
 		
 		
@@ -164,18 +163,5 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 		
 		return oneliner;
 	} 
-	
-	private void close(InputStream input) {
-		if(input != null) {
-			try {
-				
-				LOGGER.debug(messageHelper.getMessage("inputstream.closing.start"));
-				input.close();
-				LOGGER.debug(messageHelper.getMessage("inputstream.closing.sucessful"));
-				
-			} catch (IOException e) {
-				LOGGER.error(messageHelper.getMessage("inputstream.closing.unsucessful"), e);
-			}
-		}
-	}
+
 }
