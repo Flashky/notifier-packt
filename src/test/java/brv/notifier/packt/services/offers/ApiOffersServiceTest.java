@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import brv.notifier.packt.repositories.ImageRepository;
 import brv.notifier.packt.repositories.OffersRepository;
 import brv.notifier.packt.repositories.SummaryRepository;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
@@ -36,6 +37,9 @@ public class ApiOffersServiceTest {
 	@Mock
 	private PacktFreeOfferMapperImpl mapper;
 	
+	@Mock
+	private ImageRepository imageDao;
+	
 	@Test
 	public void testGetPacktOffer() {
 		
@@ -55,6 +59,10 @@ public class ApiOffersServiceTest {
 		Mockito.doCallRealMethod()
 		.when(mapper)
 		.jsonToModel(ArgumentMatchers.any());
+		
+		Mockito.doReturn(Optional.empty()) 
+		.when(imageDao)
+		.getFromUrl(ArgumentMatchers.any());
 		
 		PacktFreeOffer offer = offersService.getPacktOffer(today);
 		
