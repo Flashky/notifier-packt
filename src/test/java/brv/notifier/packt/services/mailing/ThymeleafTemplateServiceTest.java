@@ -40,17 +40,6 @@ public class ThymeleafTemplateServiceTest {
 		assertEquals(expectedHtml, html);
 	}
 	
-	
-	@Test
-	public void testProcessNonExistingTemplate() {
-		try {
-			templateService.process("non-exist");
-			fail("expected exception");
-		} catch(TemplateInputException e) {
-			
-		}
-	}
-	
 	@Test
 	public void testProcessVariables() throws URISyntaxException, IOException {
 

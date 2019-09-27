@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import brv.notifier.packt.constants.PlaceholderValue;
 import brv.notifier.packt.notifications.DailyNotificationListener;
 import brv.notifier.packt.services.offers.OffersService;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
@@ -38,8 +37,8 @@ public class PacktCheckTask {
 	
 	private List<DailyNotificationListener> listeners = new LinkedList<>();
 	
-	@Scheduled(cron = PlaceholderValue.CRON_EXPRESSION)
-	//@Scheduled(fixedRateString = "5000")
+	//@Scheduled(cron = PlaceholderValue.CRON_EXPRESSION)
+	@Scheduled(fixedRateString = "5000")
 	public void checkPacktDailyOffer() {
 
 		PacktFreeOffer offer = checkoutService.getPacktOffer(LocalDate.now());

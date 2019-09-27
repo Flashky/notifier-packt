@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -27,6 +28,7 @@ import brv.notifier.packt.util.MessageHelper;
 @SpringBootApplication
 @EnableScheduling
 @EnableEncryptableProperties
+@EnableFeignClients
 @Import({TwitterConfiguration.class, EmailConfiguration.class})
 public class NotifierPacktApplication {
 

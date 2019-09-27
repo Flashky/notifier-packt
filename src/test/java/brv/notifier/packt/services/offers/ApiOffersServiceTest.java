@@ -14,9 +14,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import brv.notifier.packt.repositories.ImageRepository;
 import brv.notifier.packt.repositories.OffersRepository;
-import brv.notifier.packt.repositories.SummaryRepository;
+import brv.notifier.packt.restclients.ProductsRestClient;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 import brv.notifier.packt.services.offers.mappers.PacktFreeOfferMapperImpl;
 import brv.test.util.dummies.DummyJsonOffer;
@@ -32,13 +31,10 @@ public class ApiOffersServiceTest {
 	private OffersRepository offersDao;
 	
 	@Mock
-	private SummaryRepository summaryDao;
+	private ProductsRestClient productsRestClient;
 	
 	@Mock
 	private PacktFreeOfferMapperImpl mapper;
-	
-	@Mock
-	private ImageRepository imageDao;
 	
 	@Test
 	public void testGetPacktOffer() {
@@ -51,18 +47,14 @@ public class ApiOffersServiceTest {
 				.getOffer(ArgumentMatchers.any());
 
 		// There is a JsonSummaryResponse
-		Mockito.doReturn(Optional.of(DummyJsonSummary.get()))
-		.when(summaryDao)
-		.findById(ArgumentMatchers.any());
+		Mockito.doReturn(DummyJsonSummary.get())
+		.when(productsRestClient)
+		.getProductSummary(ArgumentMatchers.any());
 		
 		// Execute real mapping
 		Mockito.doCallRealMethod()
 		.when(mapper)
 		.jsonToModel(ArgumentMatchers.any());
-		
-		Mockito.doReturn(Optional.empty()) 
-		.when(imageDao)
-		.getFromUrl(ArgumentMatchers.any());
 		
 		PacktFreeOffer offer = offersService.getPacktOffer(today);
 		
@@ -96,9 +88,9 @@ public class ApiOffersServiceTest {
 			.getOffer(ArgumentMatchers.any());
 
 		// There is no JsonSummary response
-		Mockito.doReturn(Optional.empty())
-			.when(summaryDao)
-			.findById(ArgumentMatchers.any());
+		Mockito.doReturn(null)
+			.when(productsRestClient)
+			.getProductSummary(ArgumentMatchers.any());
 		
 		PacktFreeOffer offer = offersService.getPacktOffer(today);
 		assertNull(offer);
