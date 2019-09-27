@@ -20,7 +20,10 @@ app:
 api:
   products: 
     name: products
-    url: https://static.packt-cdn.com/products/
+    url: https://static.packt-cdn.com/products
+  offers:
+    name: offers
+    url: https://services.packtpub.com/free-learning-v1/offers
     
 # Property encryption configuration
 jasypt:
