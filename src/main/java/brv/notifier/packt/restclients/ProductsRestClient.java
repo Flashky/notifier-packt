@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import brv.notifier.packt.model.offers.JsonSummary;
 
-@FeignClient(name = "products", url="https://static.packt-cdn.com/products/")
+@FeignClient(name = "products", url = "https://static.packt-cdn.com/products/")
 public interface ProductsRestClient {
 
 	@GetMapping("/{productId}/summary")
