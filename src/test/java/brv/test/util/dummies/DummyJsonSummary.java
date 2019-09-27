@@ -1,6 +1,6 @@
 package brv.test.util.dummies;
 
-import brv.notifier.packt.model.offers.JsonSummary;
+import brv.notifier.packt.restclients.model.JsonSummary;
 
 public class DummyJsonSummary {
 

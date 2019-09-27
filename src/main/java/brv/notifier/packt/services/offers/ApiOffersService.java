@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import brv.notifier.packt.model.offers.JsonOffer;
-import brv.notifier.packt.model.offers.JsonOffers;
-import brv.notifier.packt.model.offers.JsonSummary;
 import brv.notifier.packt.restclients.OffersRestClient;
 import brv.notifier.packt.restclients.ProductsRestClient;
+import brv.notifier.packt.restclients.model.JsonOffer;
+import brv.notifier.packt.restclients.model.JsonOffers;
+import brv.notifier.packt.restclients.model.JsonSummary;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 import brv.notifier.packt.services.offers.mappers.PacktFreeOfferMapper;
 

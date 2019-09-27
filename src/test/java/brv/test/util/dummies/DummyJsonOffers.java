@@ -3,8 +3,8 @@ package brv.test.util.dummies;
 import java.util.ArrayList;
 import java.util.List;
 
-import brv.notifier.packt.model.offers.JsonOffer;
-import brv.notifier.packt.model.offers.JsonOffers;
+import brv.notifier.packt.restclients.model.JsonOffer;
+import brv.notifier.packt.restclients.model.JsonOffers;
 
 public class DummyJsonOffers {
 	private DummyJsonOffers() { }
