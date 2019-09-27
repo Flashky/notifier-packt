@@ -4,41 +4,41 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
-import org.mockito.InjectMocks;
+import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import brv.notifier.packt.repositories.ImageRepository;
-import brv.notifier.packt.repositories.OffersRepository;
-import brv.notifier.packt.repositories.SummaryRepository;
+import brv.notifier.packt.restclients.OffersRestClient;
+import brv.notifier.packt.restclients.ProductsRestClient;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 import brv.notifier.packt.services.offers.mappers.PacktFreeOfferMapperImpl;
-import brv.test.util.dummies.DummyJsonOffer;
+import brv.test.util.dummies.DummyJsonOffers;
 import brv.test.util.dummies.DummyJsonSummary;
 
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
+@SpringBootTest 
+@RunWith(SpringRunner.class)
 public class ApiOffersServiceTest {
 
-	@InjectMocks
-	private ApiOffersService offersService = new ApiOffersService();
+	@Autowired
+	private ApiOffersService offersService;// = new ApiOffersService();
 	
-	@Mock
-	private OffersRepository offersDao;
+	@MockBean
+	private OffersRestClient offersRestClient;
 	
-	@Mock
-	private SummaryRepository summaryDao;
+	@MockBean
+	private ProductsRestClient productsRestClient;
 	
 	@Mock
 	private PacktFreeOfferMapperImpl mapper;
-	
-	@Mock
-	private ImageRepository imageDao;
 	
 	@Test
 	public void testGetPacktOffer() {
@@ -46,23 +46,23 @@ public class ApiOffersServiceTest {
 		LocalDate today = LocalDate.now();
 		
 		// There is a JsonOffer response
-		Mockito.doReturn(Optional.of(DummyJsonOffer.get()))
-				.when(offersDao)
-				.getOffer(ArgumentMatchers.any());
-
+		BDDMockito.given(offersRestClient.getOffers(BDDMockito.any(), BDDMockito.any()))
+			.willReturn(DummyJsonOffers.getJsonOffers());
+		
 		// There is a JsonSummaryResponse
-		Mockito.doReturn(Optional.of(DummyJsonSummary.get()))
-		.when(summaryDao)
-		.findById(ArgumentMatchers.any());
+		BDDMockito.given(productsRestClient.getProductSummary(BDDMockito.any()))
+			.willReturn(DummyJsonSummary.get());
+		
+		// Mock the image
+		Mockito.doReturn(null)
+			.when(productsRestClient)
+			.getProductImage(ArgumentMatchers.any());
+
 		
 		// Execute real mapping
 		Mockito.doCallRealMethod()
-		.when(mapper)
-		.jsonToModel(ArgumentMatchers.any());
-		
-		Mockito.doReturn(Optional.empty()) 
-		.when(imageDao)
-		.getFromUrl(ArgumentMatchers.any());
+				.when(mapper)
+				.jsonToModel(ArgumentMatchers.any());
 		
 		PacktFreeOffer offer = offersService.getPacktOffer(today);
 		
@@ -77,9 +77,8 @@ public class ApiOffersServiceTest {
 		LocalDate today = LocalDate.now();
 		
 		// There is no JsonOffer response
-		Mockito.doReturn(Optional.empty())
-				.when(offersDao)
-				.getOffer(ArgumentMatchers.any());
+		BDDMockito.given(offersRestClient.getOffers(BDDMockito.any(), BDDMockito.any()))
+				.willReturn(null);
 
 		PacktFreeOffer offer = offersService.getPacktOffer(today);	
 		assertNull(offer);
@@ -91,14 +90,12 @@ public class ApiOffersServiceTest {
 		LocalDate today = LocalDate.now();
 		
 		// There is a JsonOffer response
-		Mockito.doReturn(Optional.of(DummyJsonOffer.get()))
-			.when(offersDao)
-			.getOffer(ArgumentMatchers.any());
-
+		BDDMockito.given(offersRestClient.getOffers(BDDMockito.any(), BDDMockito.any()))
+					.willReturn(DummyJsonOffers.getJsonOffers());
+		
 		// There is no JsonSummary response
-		Mockito.doReturn(Optional.empty())
-			.when(summaryDao)
-			.findById(ArgumentMatchers.any());
+		BDDMockito.given(productsRestClient.getProductSummary(BDDMockito.any()))
+					.willReturn(null);
 		
 		PacktFreeOffer offer = offersService.getPacktOffer(today);
 		assertNull(offer);

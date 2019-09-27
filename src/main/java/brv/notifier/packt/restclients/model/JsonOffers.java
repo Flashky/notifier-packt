@@ -1,4 +1,4 @@
-package brv.notifier.packt.model.offers;
+package brv.notifier.packt.restclients.model;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,4 +1,4 @@
-package brv.notifier.packt.repositories;
+package brv.notifier.packt.handlers;
 
 import java.io.IOException;
 

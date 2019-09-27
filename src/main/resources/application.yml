@@ -1,3 +1,7 @@
+# Spring configuration
+spring:  application:
+    name: notifier-packt
+    
 # General app configuration
 app:
   lang: en
@@ -12,6 +16,14 @@ app:
     email:
       enabled: true
 
+api:
+  products: 
+    name: products
+    url: https://static.packt-cdn.com/products
+  offers:
+    name: offers
+    url: https://services.packtpub.com/free-learning-v1/offers
+  
 # Property encryption configuration
 jasypt:
   encryptor:

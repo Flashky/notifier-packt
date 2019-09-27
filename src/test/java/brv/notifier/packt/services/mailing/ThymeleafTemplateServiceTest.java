@@ -1,7 +1,6 @@
 package brv.notifier.packt.services.mailing;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -13,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.thymeleaf.exceptions.TemplateInputException;
 
 import brv.test.util.FileUtil;
 
@@ -38,17 +36,6 @@ public class ThymeleafTemplateServiceTest {
 		String expectedHtml = fileUtil.getFile(RESULT_PATH + FILE_SIMPLE_MAIL + HTML_EXTENSION);
 		
 		assertEquals(expectedHtml, html);
-	}
-	
-	
-	@Test
-	public void testProcessNonExistingTemplate() {
-		try {
-			templateService.process("non-exist");
-			fail("expected exception");
-		} catch(TemplateInputException e) {
-			
-		}
 	}
 	
 	@Test
@@ -80,18 +67,6 @@ public class ThymeleafTemplateServiceTest {
 		String expectedHtml = fileUtil.getFile(RESULT_PATH + FILE_VARIABLES_UNSET_MAIL + HTML_EXTENSION);
 		
 		assertEquals(expectedHtml, html);
-		
-	}
-	
-	@Test
-	public void testProcessVariablesNonExistingTemplate() {
-		
-		try {
-			templateService.process("non-exist", new HashMap<>());
-			fail("expected exception");
-		} catch(TemplateInputException e) {
-			
-		}
 		
 	}
 
