@@ -20,32 +20,22 @@ public enum Host {
 	/** Url: <pre>https://subscription.packtpub.com</pre> 
 	 * <p>Packt subscription and ebook reading Website.</p>
 	 */
-	SUBSCRIBE(Protocol.HTTPS,	"subscription.packtpub.com"),
-	
-	/** Url: <pre>https://services.packtpub.com</pre> 
-	 * <p>Packt Services API.</p>
-	 * */
-	SERVICES(Protocol.HTTPS,	"services.packtpub.com"),
-	
-	/** Url: <pre>https://static.packt-cdn.com</pre> 
-	 * <p>Packt static content API.</p>
-	 */
-	STATIC(Protocol.HTTPS,		"static.packt-cdn.com");
+	SUBSCRIBE(Protocol.HTTPS,	"subscription.packtpub.com");
 	
 	private Protocol protocol;
-	private String host;
+	private String hostname;
 
-	private Host(Protocol protocol, String host) {
+	private Host(Protocol protocol, String hostname) {
 		this.protocol = protocol;
-		this.host = host;
+		this.hostname = hostname;
 	}
 
 	public Protocol getProtocol() {
 		return protocol;
 	}
 
-	public String getHost() {
-		return host;
+	public String getHostname() {
+		return hostname;
 	}
 	
 	/**
@@ -109,7 +99,7 @@ public enum Host {
 				.newInstance()
 				.encode()
 				.scheme(protocol.getScheme())
-				.host(host);
+				.host(hostname);
 	}
 	
 	
