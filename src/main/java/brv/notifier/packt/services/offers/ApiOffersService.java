@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import brv.notifier.packt.model.offers.JsonOffer;
 import brv.notifier.packt.model.offers.JsonSummary;
@@ -67,6 +69,9 @@ public class ApiOffersService implements OffersService {
 	@Autowired
 	private PacktFreeOfferMapper mapper;
 	
+	@Value("${api.products.url}")
+	private String productsApi;
+	
 	@Override
 	public PacktFreeOffer getPacktOffer(LocalDate date) {
 
@@ -92,6 +97,8 @@ public class ApiOffersService implements OffersService {
 		
 		if(jsonSummary != null) {
 
+			// Override default cover image url
+			jsonSummary.setCoverImage(getCoverImageUrl(jsonSummary));
 			result = mapper.jsonToModel(jsonSummary);
 			result.setCoverImageBytes(coverImage);
 
@@ -99,6 +106,13 @@ public class ApiOffersService implements OffersService {
 		
 		return result;
 				
+	}
+	
+	private String getCoverImageUrl(JsonSummary jsonSummary) {
+		return UriComponentsBuilder.fromHttpUrl(this.productsApi)
+				.pathSegment("{productId}")
+				.pathSegment("cover")
+				.pathSegment("smaller").buildAndExpand(jsonSummary.getProductId()).toString();
 	}
 
 
