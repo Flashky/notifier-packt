@@ -1,3 +1,8 @@
+# Spring configuration
+spring:
+  application:
+    name: notifier-packt-test
+    
 # General app configuration
 app:
   lang: en
@@ -11,7 +16,12 @@ app:
       consumerSecret: placeholder
     email:
       enabled: true
-  
+
+api:
+  products: 
+    name: products
+    url: https://static.packt-cdn.com/products/
+    
 # Property encryption configuration
 jasypt:
   encryptor:
