@@ -6,7 +6,7 @@
 	
 	<groupId>brv.notifier</groupId>
 	<artifactId>notifier-packt</artifactId>
-	<version>2.2.5</version>
+	<version>2.2.6</version>
 	<packaging>jar</packaging>
 	<name>notifier-packt</name>
 	<description>Notifier for Packt free offers</description>
