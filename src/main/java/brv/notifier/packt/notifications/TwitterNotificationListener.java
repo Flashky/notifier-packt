@@ -1,8 +1,6 @@
 package brv.notifier.packt.notifications;
 
 import java.io.ByteArrayInputStream;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +12,7 @@ import com.vdurmont.emoji.EmojiManager;
 
 import brv.notifier.packt.enums.Host;
 import brv.notifier.packt.enums.WebPath;
-import brv.notifier.packt.properties.HashtagProperties;
+import brv.notifier.packt.services.hashtags.HashtagService;
 import brv.notifier.packt.services.offers.dto.PacktFreeOffer;
 import brv.notifier.packt.util.MessageHelper;
 import twitter4j.RateLimitStatus;
@@ -33,11 +31,6 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 	// Type selecting
 	private static final String VIDEO_OFFER = "videos";
 	
-	// Oneliner formatting
-	private static final String HASHTAG = "#";
-	private static final int MINIMUM_LENGTH = 2;
-	private static final String REGEX_WHITESPACES = "\\s+";
-	
 	@Autowired
 	private Twitter twitter;
 	
@@ -45,7 +38,7 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 	private MessageHelper messageHelper;
 	
 	@Autowired
-	private HashtagProperties hashtags;
+	private HashtagService hashtagService;
 	
 	@Override
 	public void notify(PacktFreeOffer offerData) {
@@ -57,6 +50,7 @@ public class TwitterNotificationListener implements DailyNotificationListener {
 	    	
 	    	String tweet = prepareTweet(offerData);
 	    	StatusUpdate status = new StatusUpdate(tweet);
+	    	
 	    	
 	    	// Assign book cover image to the tweet
 	    	if(offerData.getCoverImageBytes() != null) {
@@ -97,7 +91,9 @@ public class TwitterNotificationListener implements DailyNotificationListener {
     	
     	// Build the tweet status part by part
     	String title = messageHelper.getMessage("twitter.status.title", emoji.getUnicode(), offerData.getTitle());
-    	String content = formatOneliner(offerData);
+    	
+    	
+    	String content = hashtagService.getTextHashtag(offerData.getOneLiner(), 2);
     	String footer = messageHelper.getMessage("twitter.status.footer", Host.SHOP.path(WebPath.FREE_OFFER.getPath()));
     	
     	
@@ -116,52 +112,5 @@ public class TwitterNotificationListener implements DailyNotificationListener {
     	
 	}
 	
-	
-	private String formatOneliner(PacktFreeOffer offerData) {
-		
-		String[] titleWords = offerData.getTitle().split(REGEX_WHITESPACES);
-		Set<String> matches = new HashSet<>();
-		String oneliner = offerData.getOneLiner();
-		
-		StringBuilder onelinerBuilder = new StringBuilder(oneliner);
-		
-		// Strategy 1
-		for(String word : titleWords) {
-			if((!matches.contains(word)) && (word.length() > MINIMUM_LENGTH)) {
-				
-				int position = StringUtils.indexOfIgnoreCase(oneliner, word);
-				if(position != StringUtils.INDEX_NOT_FOUND) {
-					
-					// Append the hashtag before the character
-					onelinerBuilder.insert(position, HASHTAG);
-					oneliner = onelinerBuilder.toString();
-					
-					// Add the word to the set so I don't repeat hashtags
-					matches.add(word);
-				}
-				
-			}
-		}
-		
-		// Strategy 2
-		for(String word : hashtags.getHashtags()) {
-			if(!matches.contains(word)) {
-				
-				int position = StringUtils.indexOfIgnoreCase(oneliner, word);
-				if(position != StringUtils.INDEX_NOT_FOUND) {
-					
-					// Append the hashtag before the character
-					onelinerBuilder.insert(position,  HASHTAG);
-					oneliner = onelinerBuilder.toString();
-					
-					// Add the word to the set so I don't repeat hashtags
-					matches.add(word);
-				}
-			}
-		}
-		
-		
-		return oneliner;
-	} 
 
 }
