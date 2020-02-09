@@ -23,7 +23,11 @@ api:
   offers:
     name: offers
     url: https://services.packtpub.com/free-learning-v1/offers
-  
+  hashtags:
+    name: hashtags
+    url: https://api.ritekit.com/v1/stats/
+    clientid: ecd52d048adafd320dad539c291938fd808a3ad0a132
+
 # Property encryption configuration
 jasypt:
   encryptor:
@@ -46,16 +50,3 @@ simplejavamail:
       # Additional addresses can be added using semicolon (;)
       address: mevengar@gmail.com
 
-hashtags: !!set
-  ? .NET
-  ? C++
-  ? Docker
-  ? Drupal
-  ? Java
-  ? Javascript
-  ? jQuery
-  ? Node.js
-  ? MongoDB
-  ? MySQL
-  ? Unity
-  
