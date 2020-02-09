@@ -112,52 +112,5 @@ public class TwitterNotificationListener implements DailyNotificationListener {
     	
 	}
 	
-	/*
-	private String formatOneliner(PacktFreeOffer offerData) {
-		
-		String[] titleWords = offerData.getTitle().split(REGEX_WHITESPACES);
-		Set<String> matches = new HashSet<>();
-		String oneliner = offerData.getOneLiner();
-		
-		StringBuilder onelinerBuilder = new StringBuilder(oneliner);
-		
-		// Strategy 1
-		for(String word : titleWords) {
-			if((!matches.contains(word)) && (word.length() > MINIMUM_LENGTH)) {
-				
-				int position = StringUtils.indexOfIgnoreCase(oneliner, word);
-				if(position != StringUtils.INDEX_NOT_FOUND) {
-					
-					// Append the hashtag before the character
-					onelinerBuilder.insert(position, HASHTAG);
-					oneliner = onelinerBuilder.toString();
-					
-					// Add the word to the set so I don't repeat hashtags
-					matches.add(word);
-				}
-				
-			}
-		}
-		
-		// Strategy 2
-		for(String word : hashtags.getHashtags()) {
-			if(!matches.contains(word)) {
-				
-				int position = StringUtils.indexOfIgnoreCase(oneliner, word);
-				if(position != StringUtils.INDEX_NOT_FOUND) {
-					
-					// Append the hashtag before the character
-					onelinerBuilder.insert(position,  HASHTAG);
-					oneliner = onelinerBuilder.toString();
-					
-					// Add the word to the set so I don't repeat hashtags
-					matches.add(word);
-				}
-			}
-		}
-		
-		
-		return oneliner;
-	} 
-	*/
+
 }
